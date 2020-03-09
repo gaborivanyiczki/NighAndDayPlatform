@@ -45,21 +45,21 @@
 <!-- header start -->
 <header class="header-2">
     <div class="mobile-fix-option"></div>
-    <div class="top-header top-header-dark">
+    <div class="top-header">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="header-contact">
                         <ul>
-                            <li>Welcome to Our store Multikart</li>
-                            <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: 123 - 456 - 7890</li>
+                            <li>Bine ati venit pe Night & Day</li>
+                            <li><i class="fa fa-phone" aria-hidden="true"></i>Relatii cu clientii: 0262 5483</li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-6 text-right">
                     <ul class="header-dropdown">
-                        <li class="mobile-wishlist"><a href="#"><i class="fa fa-heart" aria-hidden="true"></i> wishlist</a></li>
-                        <li class="onhover-dropdown mobile-account"><i class="fa fa-user" aria-hidden="true"></i> My Account
+                        <li class="mobile-wishlist"><a href="#" style="color: #18335B;font-weight:bold;"><i class="fa fa-heart" aria-hidden="true" style="color:#ff0000;"></i> wishlist</a></li>
+                        <li class="onhover-dropdown mobile-account" style="font-weight: bold;"><i class="fa fa-user" aria-hidden="true"></i> My Account
                             <ul class="onhover-show-div">
                                 <li><a href="#" data-lng="en">Login</a></li>
                                 <li><a href="#" data-lng="es">Logout</a></li>
@@ -208,7 +208,7 @@
                         </div>
                     </div>
                     <div class="brand-logo layout2-logo">
-                        <a href="#"><img src="{{ URL::to('/') }}/images/icon/logo/1.png" class="img-fluid blur-up lazyload" alt=""></a>
+                        <a href="#"><img src="{{ URL::to('/') }}/images/logos/logo-nightandday-2.png" class="img-fluid blur-up lazyload" alt=""></a>
                     </div>
                     <div class="menu-right pull-right">
                         <div class="icon-nav">
@@ -307,111 +307,10 @@
                                 <div class="mobile-back text-right">Back<i class="fa fa-angle-right pl-2" aria-hidden="true"></i></div>
                             </li>
                             <li>
-                                <a href="#">Home</a>
-                                <ul>
-                                    <li>
-                                        <a href="#">new demos <span class="new-tag">new</span></a>
-                                        <ul>
-                                            <li><a target="_blank"  href="tools.html">tools</a></li>
-                                            <li><a target="_blank" href="game.html">game</a></li>
-                                            <li><a target="_blank" href="gym-product.html">gym</a></li>
-                                            <li><a target="_blank" href="marijuana.html">marijuana</a></li>
-                                            <li><a target="_blank" href="left_sidebar-demo.html">left sidebar</a></li>
-                                            <li><a target="_blank" href="jewellery.html">jewellery</a></li>
-                                            <li><a target="_blank" href="pets.html">pets</a></li>
-                                            <li><a target="_blank" href="metro.html">metro</a></li>
-                                            <li><a target="_blank" href="video-slider.html">video slider</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">clothing</a>
-                                        <ul>
-                                            <li><a target="_blank" href="index.html">fashion 1</a></li>
-                                            <li><a target="_blank" href="fashion-2.html">fashion 2</a></li>
-                                            <li><a target="_blank" href="fashion-3.html">fashion 3</a></li>
-                                            <li><a target="_blank" href="kids.html">kids</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a target="_blank" href="watch.html">watch</a></li>
-                                    <li><a target="_blank" href="shoes.html">shoes</a></li>
-                                    <li>
-                                        <a href="#">electronics</a>
-                                        <ul>
-                                            <li><a target="_blank" href="electronic-1.html">electronic 1</a></li>
-                                            <li><a target="_blank" href="electronic-2.html">electronic 2</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a target="_blank" href="bags.html">bags</a></li>
-                                    <li><a target="_blank" href="nursery.html">nursery</a></li>
-                                    <li><a target="_blank" href="vegetables.html">vegetable</a></li>
-                                    <li><a target="_blank" href="beauty.html">beauty</a></li>
-                                    <li><a target="_blank" href="light.html">light</a></li>
-                                    <li><a target="_blank" href="furniture.html">furniture</a></li>
-                                    <li><a target="_blank" href="goggles.html">googles</a></li>
-                                    <li>
-                                        <a href="#">basics</a>
-                                        <ul>
-                                            <li><a target="_blank" href="lookbook-demo.html">lookbook</a></li>
-                                            <li><a target="_blank" href="instagram-shop.html">instagram</a></li>
-                                            <li><a target="_blank" href="video.html">video</a></li>
-                                            <li><a target="_blank" href="parallax.html">parallax</a></li>
-                                            <li><a target="_blank" href="full-page.html">full page</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">shop</a>
-                                <ul>
-                                    <li><a href="category-page.html">left sidebar</a></li>
-                                    <li><a href="category-page(right).html">right sidebar</a></li>
-                                    <li><a href="category-page(no-sidebar).html">no sidebar</a></li>
-                                    <li><a href="category-page(sidebar-popup).html">sidebar popup</a></li>
-                                    <li><a href="category-page(metro).html">metro <span class="new-tag">new</span></a></li>
-                                    <li><a href="category-page(full-width).html">full width <span class="new-tag">new</span></a></li>
-                                    <li><a href="category-page(infinite-scroll).html">infinite scroll</a></li>
-                                    <li><a href=category-page(3-grid).html>three grid</a></li>
-                                    <li><a href="category-page(6-grid).html">six grid</a></li>
-                                    <li><a href="category-page(list-view).html">list view</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">product</a>
-                                <ul>
-                                    <li>
-                                        <a href="#">sidebar</a>
-                                        <ul>
-                                            <li><a href="product-page.html">left sidebar</a></li>
-                                            <li><a href="product-page(right-sidebar).html">right sidebar</a></li>
-                                            <li><a href="product-page(no-sidebar).html">no sidebar</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">thumbnail image</a>
-                                        <ul>
-                                            <li><a href="product-page(left-image).html">left image</a></li>
-                                            <li><a href="product-page(right-image).html">right image</a></li>
-                                            <li><a href="product-page(image-outside).html">image outside <span class="new-tag">new</span></a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">three column</a>
-                                        <ul>
-                                            <li><a href="product-page(left-image).html">thumbnail left</a></li>
-                                            <li><a href="product-page(right-image).html">thumbnail right</a></li>
-                                            <li><a href="product-page(image-outside).html">thubnail bottom</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="product-page(4-image).html">four image <span class="new-tag">new</span></a></li>
-                                    <li><a href="product-page(sticky).html">sticky</a></li>
-                                    <li><a href="product-page(accordian).html">accordian</a></li>
-                                    <li><a href="product-page(bundle).html">bundle<span class="new-tag">new</span></a></li>
-                                    <li><a href="product-page(image-swatch).html">image swatch <span class="new-tag">new</span></a></li>
-                                    <li><a href="product-page(vertical-tab).html">vertical tab</a></li>
-                                </ul>
-                            </li>
-                            <li class="mega" id="hover-cls"><a href="#">features
-                                <div class="lable-nav">new</div>
+                                <a href="#" style="color:#E8D056;">Home</a>                               
+                            </li>                            
+                            <li class="mega" id="hover-cls"><a href="#">Produse
+                                <div class="lable-nav">nou</div>
                             </a>
                                 <ul class="mega-menu full-mega-menu">
                                     <li>
@@ -500,6 +399,56 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li>
+                                <a href="#">Tehnologii</a>
+                                <ul>
+                                    <li><a href="category-page.html">left sidebar</a></li>
+                                    <li><a href="category-page(right).html">right sidebar</a></li>
+                                    <li><a href="category-page(no-sidebar).html">no sidebar</a></li>
+                                    <li><a href="category-page(sidebar-popup).html">sidebar popup</a></li>
+                                    <li><a href="category-page(metro).html">metro <span class="new-tag">new</span></a></li>
+                                    <li><a href="category-page(full-width).html">full width <span class="new-tag">new</span></a></li>
+                                    <li><a href="category-page(infinite-scroll).html">infinite scroll</a></li>
+                                    <li><a href=category-page(3-grid).html>three grid</a></li>
+                                    <li><a href="category-page(6-grid).html">six grid</a></li>
+                                    <li><a href="category-page(list-view).html">list view</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Produse</a>
+                                <ul>
+                                    <li>
+                                        <a href="#">sidebar</a>
+                                        <ul>
+                                            <li><a href="product-page.html">left sidebar</a></li>
+                                            <li><a href="product-page(right-sidebar).html">right sidebar</a></li>
+                                            <li><a href="product-page(no-sidebar).html">no sidebar</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">thumbnail image</a>
+                                        <ul>
+                                            <li><a href="product-page(left-image).html">left image</a></li>
+                                            <li><a href="product-page(right-image).html">right image</a></li>
+                                            <li><a href="product-page(image-outside).html">image outside <span class="new-tag">new</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">three column</a>
+                                        <ul>
+                                            <li><a href="product-page(left-image).html">thumbnail left</a></li>
+                                            <li><a href="product-page(right-image).html">thumbnail right</a></li>
+                                            <li><a href="product-page(image-outside).html">thubnail bottom</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="product-page(4-image).html">four image <span class="new-tag">new</span></a></li>
+                                    <li><a href="product-page(sticky).html">sticky</a></li>
+                                    <li><a href="product-page(accordian).html">accordian</a></li>
+                                    <li><a href="product-page(bundle).html">bundle<span class="new-tag">new</span></a></li>
+                                    <li><a href="product-page(image-swatch).html">image swatch <span class="new-tag">new</span></a></li>
+                                    <li><a href="product-page(vertical-tab).html">vertical tab</a></li>
+                                </ul>
+                            </li>
                             <li><a href="#">pages</a>
                                 <ul>
                                     <li>
@@ -539,13 +488,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">blog</a>
-                                <ul>
-                                    <li><a href="blog-page.html">left sidebar</a></li>
-                                    <li><a href="blog(right-sidebar).html">right sidebar</a></li>
-                                    <li><a href="blog(no-sidebar).html">no sidebar</a></li>
-                                    <li><a href="blog-details.html">blog details</a></li>
-                                </ul>
+                                <a href="#">make your own</a>
                             </li>
                         </ul>
                     </nav>
@@ -597,7 +540,7 @@
                         <h4>about</h4>
                     </div>
                     <div class="footer-contant">
-                        <div class="footer-logo"><img src="{{ URL::to('/') }}/images/icon/logo/1.png" alt=""></div>
+                        <div class="footer-logo"><img src="{{ URL::to('/') }}/images/logos/logo-nightandday-2.png" alt=""></div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
                         <div class="footer-social">
                             <ul>
@@ -665,7 +608,7 @@
             <div class="row">
                 <div class="col-xl-6 col-md-6 col-sm-12">
                     <div class="footer-end">
-                        <p><i class="fa fa-copyright" aria-hidden="true"></i> 2017-18 themeforest powered by pixelstrap</p>
+                        <p style="color:#18335B;font-weight:bold;"><i class="fa fa-copyright" aria-hidden="true"></i> 2020 Copyright Night&Day. Website powered by YesAgency</p>
                     </div>
                 </div>
                 <div class="col-xl-6 col-md-6 col-sm-12">
