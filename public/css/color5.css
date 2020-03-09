@@ -1098,7 +1098,7 @@ header {
     top: 50px;
     position: absolute;
     z-index: 10;
-    background-color: #ffffff;
+    background-color: #f8f8f8;
     -webkit-transition: all linear 0.3s;
     transition: all linear 0.3s;
     min-width: 160px;
