@@ -212,16 +212,16 @@
                                                 <div class="col mega-box">
                                                     <div class="link-section">
                                                         <div class="menu-title">
-                                                            <h5>portfolio</h5></div>
+                                                            <h5>Saltele</h5></div>
                                                         <div class="menu-content">
                                                             <ul>
-                                                                <li><a href="grid-2-col.html">portfolio grid 2</a></li>
-                                                                <li><a href="grid-3-col.html">portfolio grid 3</a></li>
-                                                                <li><a href="grid-4-col.html">portfolio grid 4</a></li>
-                                                                <li><a href="masonary-2-grid.html">mesonary grid 2</a></li>
-                                                                <li><a href="masonary-3-grid.html">mesonary grid 3</a></li>
-                                                                <li><a href="masonary-4-grid.html">mesonary grid 4</a></li>
-                                                                <li><a href="masonary-fullwidth.html">mesonary full width</a></li>
+                                                                <li><a href="#">Saltea tip 1</a></li>
+                                                                <li><a href="#">Saltea tip 2</a></li>
+                                                                <li><a href="#">Saltea tip 3</a></li>
+                                                                <li><a href="#">Saltea tip 4</a></li>
+                                                                <li><a href="#">Saltea tip 5</a></li>
+                                                                <li><a href="#">Saltea tip 6</a></li>
+                                                                <li><a href="#">Saltea tip 7</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -229,15 +229,15 @@
                                                 <div class="col mega-box">
                                                     <div class="link-section">
                                                         <div class="menu-title">
-                                                            <h5>add to cart</h5></div>
+                                                            <h5>Pilote</h5></div>
                                                         <div class="menu-content">
                                                             <ul>
-                                                                <li><a href="nursery.html">cart modal popup</a></li>
-                                                                <li><a href="vegetables.html">qty. counter <i class="fa fa-bolt icon-trend" aria-hidden="true"></i></a></li>
-                                                                <li><a href="bags.html">cart top</a></li>
-                                                                <li><a href="shoes.html">cart bottom</a></li>
-                                                                <li><a href="watch.html">cart left</a></li>
-                                                                <li><a href="tools.html">cart right</a></li>
+                                                                <li><a href="#">Pilota tip 1</a></li>
+                                                                <li><a href="#">Pilota tip 2 <i class="fa fa-bolt icon-trend" aria-hidden="true"></i></a></li>
+                                                                <li><a href="#">Pilota tip 3</a></li>
+                                                                <li><a href="#">Pilota tip 4</a></li>
+                                                                <li><a href="#">Pilota tip 5</a></li>
+                                                                <li><a href="#">Pilota tip 6</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -245,15 +245,15 @@
                                                 <div class="col mega-box">
                                                     <div class="link-section">
                                                         <div class="menu-title">
-                                                            <h5>theme elements</h5></div>
+                                                            <h5>Perne</h5></div>
                                                         <div class="menu-content">
                                                             <ul>
-                                                                <li><a href="element-title.html">title</a></li>
-                                                                <li><a href="element-banner.html">collection banner</a></li>
-                                                                <li><a href="element-slider.html">home slider</a></li>
-                                                                <li><a href="element-category.html">category</a></li>
-                                                                <li><a href="element-service.html">service</a></li>
-                                                                        <li><a href="element-image-ratio.html">image size ratio <i class="fa fa-bolt icon-trend" aria-hidden="true"></i></a></li>
+                                                                <li><a href="#">Perna tip 1</a></li>
+                                                                <li><a href="#">Perna tip 2</a></li>
+                                                                <li><a href="#">Perna tip 3</a></li>
+                                                                <li><a href="#">Perna tip 4</a></li>
+                                                                <li><a href="#">Perna tip 5</a></li>
+                                                                <li><a href="#">Perna tip 6 <i class="fa fa-bolt icon-trend" aria-hidden="true"></i></a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -261,14 +261,14 @@
                                                 <div class="col mega-box">
                                                     <div class="link-section">
                                                         <div class="menu-title">
-                                                            <h5>product elements</h5></div>
+                                                            <h5>Alte Tipuri Produse</h5></div>
                                                         <div class="menu-content">
                                                             <ul>
-                                                                <li class="up-text"><a href="element-productbox.html">product box<span>10+</span></a></li>
-                                                                <li><a href="element-product-slider.html">product slider</a></li>
-                                                                <li><a href="element-no_slider.html">no slider</a></li>
-                                                                <li><a href="element-mulitiple_slider.html">multi slider</a></li>
-                                                                <li><a href="element-tab.html">tab</a></li>
+                                                                <li class="up-text"><a href="#">Altele</a></li>
+                                                                <li><a href="#">Altele</a></li>
+                                                                <li><a href="#">Altele</a></li>
+                                                                <li><a href="#">Altele</a></li>
+                                                                <li><a href="#">Altele</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -276,13 +276,13 @@
                                                 <div class="col mega-box">
                                                     <div class="link-section">
                                                         <div class="menu-title">
-                                                            <h5>email template   </h5></div>
+                                                            <h5>Alte Tipuri Produse</h5></div>
                                                         <div class="menu-content">
                                                             <ul>
-                                                                <li><a href="email-order-success.html">order success</a></li>
-                                                                <li><a href="email-order-success-two.html">order success 2</a></li>
-                                                                <li><a href="email-template.html">email template</a></li>
-                                                                <li><a href="email-template-two.html">email template 2</a></li>
+                                                                <li><a href="#">Altele</a></li>
+                                                                <li><a href="#">Altele</a></li>
+                                                                <li><a href="#">Altele</a></li>
+                                                                <li><a href="#">Altele</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -295,16 +295,12 @@
                             <li>
                                 <a href="#">Tehnologii</a>
                                 <ul>
-                                    <li><a href="category-page.html">left sidebar</a></li>
-                                    <li><a href="category-page(right).html">right sidebar</a></li>
-                                    <li><a href="category-page(no-sidebar).html">no sidebar</a></li>
-                                    <li><a href="category-page(sidebar-popup).html">sidebar popup</a></li>
-                                    <li><a href="category-page(metro).html">metro <span class="new-tag">new</span></a></li>
-                                    <li><a href="category-page(full-width).html">full width <span class="new-tag">new</span></a></li>
-                                    <li><a href="category-page(infinite-scroll).html">infinite scroll</a></li>
-                                    <li><a href=category-page(3-grid).html>three grid</a></li>
-                                    <li><a href="category-page(6-grid).html">six grid</a></li>
-                                    <li><a href="category-page(list-view).html">list view</a></li>
+                                    <li><a href="#">Tehnologie 1</a></li>
+                                    <li><a href="#">Tehnologie 2</a></li>
+                                    <li><a href="#">Tehnologie 3</a></li>
+                                    <li><a href="#">Tehnologie 4</a></li>
+                                    <li><a href="#">Tehnologie 5 <span class="new-tag">nou</span></a></li>
+                                    <li><a href="#">Tehnologie 6 <span class="new-tag">nou</span></a></li>
                                 </ul>
                             </li>
                             <li>
@@ -343,8 +339,8 @@
                     <div class="col-lg-6">
                         <div class="subscribe">
                             <div>
-                                <h4>KNOW IT ALL FIRST!</h4>
-                                <p>Never Miss Anything From Multikart By Signing Up To Our Newsletter.</p>
+                                <h4>Aboneaza-te la newsletter</h4>
+                                <p>Afli primul detalii despre lansarea produselor noi si ofertele curente.</p>
                             </div>
                         </div>
                     </div>
@@ -352,9 +348,9 @@
                         <form action="https://pixelstrap.us19.list-manage.com/subscribe/post?u=5a128856334b598b395f1fc9b&amp;id=082f74cbda" class="form-inline subscribe-form auth-form needs-validation" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
                               target="_blank">
                             <div class="form-group mx-sm-3">
-                                <input type="text" class="form-control" name="EMAIL" id="mce-EMAIL" placeholder="Enter your email" required="required">
+                                <input type="text" class="form-control" name="EMAIL" id="mce-EMAIL" placeholder="Email" required="required">
                             </div>
-                            <button type="submit" class="btn btn-solid" id="mc-submit">subscribe</button>
+                            <button type="submit" class="btn btn-solid" id="mc-submit">aboneaza-ma</button>
                         </form>
                     </div>
                 </div>
@@ -369,8 +365,8 @@
                         <h4>about</h4>
                     </div>
                     <div class="footer-contant">
-                        <div class="footer-logo"><img src="{{ URL::to('/') }}/images/logos/logo-nightandday-2.png" alt=""></div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+                        <div class="footer-logo" style="text-align: center;"><img src="{{ URL::to('/') }}/images/logos/logo-nightandday-2.png" alt=""></div>
+                        <p>Misiunea firmei este de a găsi o organizaţie profitabilă, avându-se în vedere o îmbunătăţire continuă, fiind deschişi DEZVOLTĂRII şi atenţi la NEVOILE CLIENŢILOR</p>
                         <div class="footer-social">
                             <ul>
                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -385,15 +381,15 @@
                 <div class="col offset-xl-1">
                     <div class="sub-title">
                         <div class="footer-title">
-                            <h4>my account</h4>
+                            <h4>Servicii Clienti</h4>
                         </div>
                         <div class="footer-contant">
                             <ul>
-                                <li><a href="#">mens</a></li>
-                                <li><a href="#">womens</a></li>
-                                <li><a href="#">clothing</a></li>
-                                <li><a href="#">accessories</a></li>
-                                <li><a href="#">featured</a></li>
+                                <li><a href="#">Modalitati de plata</a></li>
+                                <li><a href="#">Conditii retur</a></li>
+                                <li><a href="#">Garantie & Service</a></li>
+                                <li><a href="#">Informatii livrare</a></li>
+                                <li><a href="#">Contact</a></li>
                             </ul>
                         </div>
                     </div>
@@ -401,15 +397,15 @@
                 <div class="col">
                     <div class="sub-title">
                         <div class="footer-title">
-                            <h4>why we choose</h4>
+                            <h4>Informatii legale</h4>
                         </div>
                         <div class="footer-contant">
                             <ul>
-                                <li><a href="#">shipping & return</a></li>
-                                <li><a href="#">secure shopping</a></li>
-                                <li><a href="#">gallary</a></li>
-                                <li><a href="#">affiliates</a></li>
-                                <li><a href="#">contacts</a></li>
+                                <li><a href="#">Termeni & conditii</a></li>
+                                <li><a href="#">Politica cookies</a></li>
+                                <li><a href="#">Protectia datelor cu caracter personal GDPR</a></li>
+                                <li><a href="https://anpc.ro/">ANPC</a></li>
+                                <li><a href="https://ec.europa.eu/consumers/odr/main/index.cfm">ODR</a></li>
                             </ul>
                         </div>
                     </div>
@@ -417,14 +413,14 @@
                 <div class="col">
                     <div class="sub-title">
                         <div class="footer-title">
-                            <h4>store information</h4>
+                            <h4>Informatii Companie</h4>
                         </div>
                         <div class="footer-contant">
                             <ul class="contact-list">
-                                <li><i class="fa fa-map-marker"></i>Multikart Demo Store, Demo store India 345-659</li>
-                                <li><i class="fa fa-phone"></i>Call Us: 123-456-7898</li>
-                                <li><i class="fa fa-envelope-o"></i>Email Us: <a href="#">Support@Fiot.com</a></li>
-                                <li><i class="fa fa-fax"></i>Fax: 123456</li>
+                                <li><i class="fa fa-map-marker"></i>SC 4Brands SRL - Strada Depozitelor, nr. 7, Maramureş, Baia Mare</li>
+                                <li><i class="fa fa-phone"></i>Tel: 0362 730 946</li>
+                                <li><i class="fa fa-envelope-o"></i>Email: <a href="#">info@nighandday.ro</a></li>
+                                <li><i class="fa fa-fax"></i>Fax: 0362 730 946</li>
                             </ul>
                         </div>
                     </div>
