@@ -15,11 +15,15 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->integer('OrderID');
-            $table->integer('InvoiceNumber');
+            $table->bigInteger('OrderID')->unsigned();
+            $table->integer('InvoiceNumber')->unique();
             $table->boolean('Archived');
             $table->boolean('History');
             $table->timestamps();
+
+            $table->foreign('OrderID')
+            ->references('id')->on('orders')
+            ->onDelete('cascade');
         });
     }
 

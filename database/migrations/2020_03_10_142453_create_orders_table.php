@@ -15,19 +15,36 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('User_ID');
-            $table->integer('UserAddress_ID');
-            $table->integer('ShipCharge');
-            $table->integer('OrderStatus_ID');
-            $table->integer('ShipmentStatus_ID');
-            $table->integer('Payment_ID');
+            $table->bigInteger('User_ID')->unsigned();
+            $table->bigInteger('UserAddress_ID')->unsigned();
+            $table->integer('ShipCharge')->default(0);
+            $table->bigInteger('OrderStatus_ID')->unsigned();
+            $table->bigInteger('ShipmentStatus_ID')->unsigned();
+            $table->bigInteger('Payment_ID')->unsigned();
             $table->double('TotalBrut', 8, 2);
             $table->double('TotalNet', 8, 2);
             $table->double('TotalVAT', 8, 2);
             $table->integer('Confirmed');
             $table->integer('Archived');
-            $table->string('AuditUser');
+            $table->string('AuditUser')->nullable();
             $table->timestamps();
+
+            $table->foreign('User_ID')
+            ->references('id')->on('users')
+            ->onDelete('cascade');
+            $table->foreign('UserAddress_ID')
+            ->references('id')->on('user_addresses')
+            ->onDelete('cascade');
+            $table->foreign('OrderStatus_ID')
+            ->references('id')->on('order_statuses')
+            ->onDelete('cascade');
+            $table->foreign('ShipmentStatus_ID')
+            ->references('id')->on('shipment_statuses')
+            ->onDelete('cascade');
+            $table->foreign('Payment_ID')
+            ->references('id')->on('payments')
+            ->onDelete('cascade');
+            
         });
     }
 

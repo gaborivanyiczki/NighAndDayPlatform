@@ -19,15 +19,15 @@ class CreateProductsTable extends Migration
             $table->string('Slug');
             $table->string('Description');
             $table->double('Price', 8, 2);
-            $table->double('DiscountPrice', 8, 2);
-            $table->integer('Discount');
+            $table->double('DiscountPrice', 8, 2)->nullable();
+            $table->integer('Discount')->nullable();
             $table->integer('Quantity');
             $table->integer('Status_ID')->nullable();
             $table->integer('Category_ID')->nullable();
             $table->integer('Brand_ID')->nullable();
             $table->boolean('Active');
             $table->boolean('Favorite');
-            $table->string('CreatedUser');
+            $table->string('CreatedUser')->nullable();
             $table->timestamps();
         });
     }

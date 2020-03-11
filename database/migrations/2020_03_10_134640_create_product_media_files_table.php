@@ -15,13 +15,19 @@ class CreateProductMediaFilesTable extends Migration
     {
         Schema::create('product_media_files', function (Blueprint $table) {
             $table->id();
-            $table->integer('Product_ID');
+            $table->bigInteger('Product_ID')->unsigned();
             $table->string('Path');
             $table->string('Filename');
             $table->string('UploadedBy');
             $table->timestamps();
         });
-    }
+
+        Schema::table('product_media_files', function (Blueprint $table) {                   
+            $table->foreign('Product_ID')
+                ->references('id')->on('products')
+                ->onDelete('cascade');
+        });
+    }    
 
     /**
      * Reverse the migrations.

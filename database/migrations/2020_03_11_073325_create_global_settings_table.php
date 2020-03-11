@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoriesTable extends Migration
+class CreateGlobalSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('global_settings', function (Blueprint $table) {
             $table->id();
-            $table->integer('Parent_ID');
             $table->string('Name');
-            $table->string('Slug');
-            $table->boolean('Active');
-            $table->integer('Order');
-            $table->string('CreatedUser');
+            $table->string('Code');
+            $table->string('Filter');
+            $table->string('Value');
+            $table->string('CreatedUser')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('global_settings');
     }
 }

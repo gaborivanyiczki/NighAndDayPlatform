@@ -15,14 +15,18 @@ class CreateUserCompaniesTable extends Migration
     {
         Schema::create('user_companies', function (Blueprint $table) {
             $table->id();
-            $table->integer('User_ID');
+            $table->bigInteger('User_ID')->unsigned();
             $table->string('CompanyName');
-            $table->string('CIF');
+            $table->string('CIF')->unique();
             $table->string('NrRegCom');
             $table->string('Bank');
             $table->string('IBAN');
             $table->string('Address');
             $table->timestamps();
+
+            $table->foreign('User_ID')
+            ->references('id')->on('users')
+            ->onDelete('cascade');
         });
     }
 
