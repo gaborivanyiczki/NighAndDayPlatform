@@ -24,9 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('partials.header', function($view)
+        view()->composer(['partials.header','partials.footer'], function($view)
         {
-            $view->with('data', GlobalSettings::where('filter','header')->get());
+            $view->with('data', GlobalSettings::where('filter','home')->get());
         });
     }
 }

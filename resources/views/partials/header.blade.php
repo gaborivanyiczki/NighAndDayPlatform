@@ -4,8 +4,8 @@
                 <div class="col-lg-6">
                     <div class="header-contact">
                         <ul>
-                            <li>{!! $data ? $data[0]['Value'] : 'Undefined'  !!}</li>
-                            <li><i class="fa fa-phone" aria-hidden="true"></i>{!! $data ? $data[1]['Value'] : 'Undefined'  !!}</li>
+                            <li>{!! $data ? $data[0]->Value : 'Undefined'  !!}</li>
+                            <li><i class="fa fa-phone" aria-hidden="true"></i>{!! $data ? $data[1]->Value : 'Undefined'  !!}</li>
                         </ul>
                     </div>
                 </div>
