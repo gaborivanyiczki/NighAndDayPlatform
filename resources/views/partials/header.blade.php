@@ -12,15 +12,12 @@
                 <div class="col-lg-6 text-right">
                     <ul class="header-dropdown">
                         <li class="mobile-wishlist"><a href="#" style="color: #18335B;font-weight:bold;"><i class="fa fa-heart" aria-hidden="true" style="color:#ff0000;"></i> wishlist</a></li>
-                        <li class="onhover-dropdown mobile-account" style="font-weight: bold;"><i class="fa fa-user" aria-hidden="true"></i> Contul meu
                         @guest
-                            <ul class="onhover-show-div" style="width: 200px;">
-                                <li><a href="{{ route('login') }}" data-lng="en"><i class="fa fa-sign-in fa-xs" aria-hidden="true"></i> Autentificare</a></li>
-                                <li><a href="{{ route('register') }}" data-lng="en"><i class="fa fa-user-plus fa-xs" aria-hidden="true"></i> Inregistrare</a></li>
-                            </ul>
+                        <li class="mobile-account" style="font-weight: bold;"><a href="{{ route('login') }}" style="color: #18335B;font-weight:bold;"><i class="fa fa-user" aria-hidden="true"></i> Contul meu</a></li>
                         @else
+                        <li class="onhover-dropdown mobile-account" style="font-weight: bold;"><i class="fa fa-user" aria-hidden="true"></i> Contul meu
                             <ul class="onhover-show-div" style="width: 200px;">
-                                <lh><h6>Salut, {{ Auth::user()->name }}<h6></lh>
+                                <lh><h6>Salut, {{ Auth::user()->firstname }} {{Auth::user()->lastname}}<h6></lh>
                                 <li class="divider"></li>
                                 <li><a href="#" data-lng="en"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Comenzile mele</a></li>
                                 <li><a href="#" data-lng="en"><i class="fa fa-gift" aria-hidden="true"></i> Voucherele mele</a></li>
@@ -40,8 +37,8 @@
                                         @csrf
                                     </form></li>
                             </ul>
-                        @endguest
-                        </li>
+                        </li>    
+                        @endguest                        
                     </ul>
                 </div>
             </div>
