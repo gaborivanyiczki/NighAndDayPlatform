@@ -18,8 +18,7 @@ class CreateProductStatusesTable extends Migration
             $table->string('Name');
             $table->boolean('Active');
             $table->integer('MinStockNumber');
-            $table->integer('MaxStockNumber');
-            $table->string('CreatedUser');
+            $table->string('CreatedUser')->nullable();
             $table->timestamps();
         });
     }

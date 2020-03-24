@@ -10,93 +10,42 @@
                                 <div class="mobile-back text-right">Back<i class="fa fa-angle-right pl-2" aria-hidden="true"></i></div>
                             </li>
                             <li>
-                                <a href="#" style="color:#E8D056;">Home</a>                               
-                            </li>                            
-                            <li class="mega" id="hover-cls"><a href="#">Produse
-                                <div class="lable-nav">nou</div>
-                            </a>
+                                <a href="#" style="color:#E8D056;">Home</a>
+                            </li>
+                            <li class="mega" id="hover-cls"><a href="#">Produse <div class="lable-nav">nou</div></a>
                                 <ul class="mega-menu full-mega-menu">
                                     <li>
                                         <div class="container">
                                             <div class="row">
-                                                <div class="col mega-box">
-                                                    <div class="link-section">
-                                                        <div class="menu-title">
-                                                            <h5>Saltele</h5></div>
-                                                        <div class="menu-content">
-                                                            <ul>
-                                                                <li><a href="#">Saltea tip 1</a></li>
-                                                                <li><a href="#">Saltea tip 2</a></li>
-                                                                <li><a href="#">Saltea tip 3</a></li>
-                                                                <li><a href="#">Saltea tip 4</a></li>
-                                                                <li><a href="#">Saltea tip 5</a></li>
-                                                                <li><a href="#">Saltea tip 6</a></li>
-                                                                <li><a href="#">Saltea tip 7</a></li>
-                                                            </ul>
+                                                <!-- Menu items start -->
+
+                                                @if (count($menu) === 0)
+                                                    <div class="col mega-box">
+                                                        <div class="link-section">
+                                                            <div class="menu-title">
+                                                                <h5>Nu exista categorii de produse</h5></div>
+                                                            <div class="menu-content">
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col mega-box">
-                                                    <div class="link-section">
-                                                        <div class="menu-title">
-                                                            <h5>Pilote</h5></div>
-                                                        <div class="menu-content">
-                                                            <ul>
-                                                                <li><a href="#">Pilota tip 1</a></li>
-                                                                <li><a href="#">Pilota tip 2 <i class="fa fa-bolt icon-trend" aria-hidden="true"></i></a></li>
-                                                                <li><a href="#">Pilota tip 3</a></li>
-                                                                <li><a href="#">Pilota tip 4</a></li>
-                                                                <li><a href="#">Pilota tip 5</a></li>
-                                                                <li><a href="#">Pilota tip 6</a></li>
-                                                            </ul>
+                                                @else
+                                                    @foreach ($menu as $item)
+                                                        <div class="col mega-box">
+                                                            <div class="link-section">
+                                                                <div class="menu-title">
+                                                                    <h5>{{ $item->Name }}</h5>
+                                                                </div>
+                                                                <div class="menu-content">
+                                                                    <ul>
+                                                                        @foreach($item->children as $child)
+                                                                        <li><a href="#">{{ $child->Name }}</a></li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col mega-box">
-                                                    <div class="link-section">
-                                                        <div class="menu-title">
-                                                            <h5>Perne</h5></div>
-                                                        <div class="menu-content">
-                                                            <ul>
-                                                                <li><a href="#">Perna tip 1</a></li>
-                                                                <li><a href="#">Perna tip 2</a></li>
-                                                                <li><a href="#">Perna tip 3</a></li>
-                                                                <li><a href="#">Perna tip 4</a></li>
-                                                                <li><a href="#">Perna tip 5</a></li>
-                                                                <li><a href="#">Perna tip 6 <i class="fa fa-bolt icon-trend" aria-hidden="true"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col mega-box">
-                                                    <div class="link-section">
-                                                        <div class="menu-title">
-                                                            <h5>Alte Tipuri Produse</h5></div>
-                                                        <div class="menu-content">
-                                                            <ul>
-                                                                <li class="up-text"><a href="#">Altele</a></li>
-                                                                <li><a href="#">Altele</a></li>
-                                                                <li><a href="#">Altele</a></li>
-                                                                <li><a href="#">Altele</a></li>
-                                                                <li><a href="#">Altele</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col mega-box">
-                                                    <div class="link-section">
-                                                        <div class="menu-title">
-                                                            <h5>Alte Tipuri Produse</h5></div>
-                                                        <div class="menu-content">
-                                                            <ul>
-                                                                <li><a href="#">Altele</a></li>
-                                                                <li><a href="#">Altele</a></li>
-                                                                <li><a href="#">Altele</a></li>
-                                                                <li><a href="#">Altele</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                    @endforeach
+                                                @endif
                                             </div>
                                         </div>
                                     </li>
