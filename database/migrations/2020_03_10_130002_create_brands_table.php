@@ -17,6 +17,8 @@ class CreateBrandsTable extends Migration
             $table->id();
             $table->string('Name');
             $table->string('Description')->nullable();
+            $table->string('Slug')->nullable();
+            $table->boolean('New')->default(0);
             $table->string('Address')->nullable();
             $table->string('LogoPath')->nullable();
             $table->string('LogoFile')->nullable();

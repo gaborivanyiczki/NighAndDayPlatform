@@ -43,5 +43,8 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer(
             'partials.newproducts', 'App\Http\ViewComposers\NewProductsComposer'
         );
+        view()->composer(
+            'contact', 'App\Http\ViewComposers\ContactComposer'
+        );
     }
 }

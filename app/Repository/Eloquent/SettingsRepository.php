@@ -21,4 +21,9 @@ class SettingsRepository extends BaseRepository implements SettingsRepositoryInt
         return $this->model->where('filter','home')->get();
     }
 
+    public function getContactSettings()
+    {
+        return json_encode($this->model->where('filter', 'contact')->select('Name','Value','Icon')->get() , JSON_PRETTY_PRINT);
+    }
+
 }

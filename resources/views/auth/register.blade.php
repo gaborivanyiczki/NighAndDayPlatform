@@ -15,7 +15,7 @@
             <div class="col-sm-6">
                 <nav aria-label="breadcrumb" class="theme-breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Acasa</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Acasa</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Inregistrare cont</li>
                     </ol>
                 </nav>
@@ -77,7 +77,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-row">    
+                        <div class="form-row">
                             <div class="col-md-6">
                                 <label for="password">Parola</label>
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Introduceti parola dorita..." required autocomplete="new-password">
@@ -93,7 +93,7 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirmati parola..." required autocomplete="new-password">
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-solid">Creaza cont</button>  
+                        <button type="submit" class="btn btn-solid">Creaza cont</button>
                     </form>
                 </div>
             </div>

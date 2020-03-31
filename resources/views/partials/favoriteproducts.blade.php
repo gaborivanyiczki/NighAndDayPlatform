@@ -29,7 +29,7 @@
                                                 <div class="lable-block"><span class="lable3">nou</span> <span class="lable4">discount</span></div>
                                                 <div class="front">
                                                     @foreach($value['images'] as $image)
-                                                        <a href="product-page(no-sidebar).html"><img src="{{ URL::to('/') }}/images/uploads/{!! $image['Path'] !!}/{!! $image['Filename'] !!}" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                                        <a href="{{ route('productdetails', ['slug' => $value['Slug']]) }}"><img src="{{ URL::to('/') }}/images/uploads/{!! $image['Path'] !!}/{!! $image['Filename'] !!}" class="img-fluid blur-up lazyload bg-img" alt=""></a>
                                                     @endforeach
                                                 </div>
                                                 <div class="cart-info cart-wrap">
@@ -38,15 +38,10 @@
                                             </div>
                                             <div class="product-detail">
                                                 <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
-                                                <a href="product-page(no-sidebar).html">
+                                                <a href="{{ route('productdetails', ['slug' => $value['Slug']]) }}">
                                                     <h6>{!! $value['Name'] !!}</h6>
                                                 </a>
                                                 <h4>{!! $value['DiscountPrice'] !!} Lei <del>{!! $value['Price'] !!} Lei</del></h4>
-                                                <ul class="color-variant">
-                                                    <li class="bg-light0"></li>
-                                                    <li class="bg-light1"></li>
-                                                    <li class="bg-light2"></li>
-                                                </ul>
                                             </div>
                                         </div>
                                         @else
@@ -54,7 +49,7 @@
                                             <div class="img-wrapper">
                                                 <div class="front">
                                                     @foreach($value['images'] as $image)
-                                                        <a href="product-page(no-sidebar).html"><img src="{{ URL::to('/') }}/images/uploads/{!! $image['Path'] !!}/{!! $image['Filename'] !!}" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                                        <a href="{{ route('productdetails', ['slug' => $value['Slug']]) }}"><img src="{{ URL::to('/') }}/images/uploads/{!! $image['Path'] !!}/{!! $image['Filename'] !!}" class="img-fluid blur-up lazyload bg-img" alt=""></a>
                                                     @endforeach
                                                 </div>
                                                 <div class="cart-info cart-wrap">
@@ -62,15 +57,10 @@
                                             </div>
                                             <div class="product-detail">
                                                 <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
-                                                <a href="product-page(no-sidebar).html">
+                                                <a href="{{ route('productdetails', ['slug' => $value['Slug']]) }}">
                                                     <h6>{!! $value['Name'] !!}</h6>
                                                 </a>
                                                 <h4>{!! $value['Price'] !!} Lei</h4>
-                                                <ul class="color-variant">
-                                                    <li class="bg-light0"></li>
-                                                    <li class="bg-light1"></li>
-                                                    <li class="bg-light2"></li>
-                                                </ul>
                                             </div>
                                         </div>
                                         @endif

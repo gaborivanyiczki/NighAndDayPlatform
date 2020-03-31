@@ -19,6 +19,7 @@ class CreateGlobalSettingsTable extends Migration
             $table->string('Code');
             $table->string('Filter');
             $table->string('Value');
+            $table->string('Icon')->nullable();
             $table->string('CreatedUser')->nullable();
             $table->timestamps();
         });

@@ -10,7 +10,7 @@
                                 <div class="mobile-back text-right">Back<i class="fa fa-angle-right pl-2" aria-hidden="true"></i></div>
                             </li>
                             <li>
-                                <a href="#" style="color:#E8D056;">Home</a>
+                                <a href="{{ route('home') }}" style="color:#E8D056;">Home</a>
                             </li>
                             <li class="mega" id="hover-cls"><a href="#">Produse <div class="lable-nav">nou</div></a>
                                 <ul class="mega-menu full-mega-menu">
@@ -38,7 +38,11 @@
                                                                 <div class="menu-content">
                                                                     <ul>
                                                                         @foreach($item->children as $child)
-                                                                        <li><a href="#">{{ $child->Name }}</a></li>
+                                                                            @if($child->New == 1)
+                                                                                <li><a href="{{ route('categoryproducts', ['slug' => $child->Slug]) }}">{{ $child->Name }} <span class="new-tag">nou</span></a></li>
+                                                                            @else
+                                                                                <li><a href="{{ route('categoryproducts', ['slug' => $child->Slug]) }}">{{ $child->Name }}</a></li>
+                                                                            @endif
                                                                         @endforeach
                                                                     </ul>
                                                                 </div>
@@ -54,22 +58,30 @@
                             <li>
                                 <a href="#">Tehnologii</a>
                                 <ul>
-                                    <li><a href="#">Tehnologie 1</a></li>
-                                    <li><a href="#">Tehnologie 2</a></li>
-                                    <li><a href="#">Tehnologie 3</a></li>
-                                    <li><a href="#">Tehnologie 4</a></li>
-                                    <li><a href="#">Tehnologie 5 <span class="new-tag">nou</span></a></li>
-                                    <li><a href="#">Tehnologie 6 <span class="new-tag">nou</span></a></li>
+                                    @empty($brands)
+                                    <li><a href="#">Nu exista tehnologii</a></li>
+                                    @else
+                                        @foreach (json_decode($brands, true) as $key => $value)
+                                            @if($value['New'] == 1)
+                                            <li><a href="#">{!! $value['Name'] !!} <span class="new-tag">nou</span></a></li>
+                                            @else
+                                            <li><a href="#">{!! $value['Name'] !!}</a></li>
+                                            @endif
+                                        @endforeach
+                                    @endempty
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">noutati</a>
+                                <a href="{{ route('news') }}">noutati</a>
                             </li>
                             <li>
-                                <a href="#">despre noi</a>
+                                <a href="{{ route('about') }}">despre noi</a>
                             </li>
                             <li>
-                                <a href="#">contact</a>
+                                <a href="{{ route('faq') }}">faq</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('contact') }}">contact</a>
                             </li>
                             <li>
                                 <a href="#" style="color: #18335B;font-weight: bold;">make your own</a>

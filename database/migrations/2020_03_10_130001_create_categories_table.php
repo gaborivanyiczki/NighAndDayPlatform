@@ -18,7 +18,9 @@ class CreateCategoriesTable extends Migration
             $table->nestedSet();
             $table->string('Name');
             $table->string('Slug');
-            $table->boolean('Active');
+            $table->longText('Description')->nullable();
+            $table->boolean('Active')->default(1);
+            $table->boolean('New')->default(0);
             $table->string('CreatedUser');
             $table->timestamps();
         });

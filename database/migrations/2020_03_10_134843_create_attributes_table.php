@@ -15,9 +15,16 @@ class CreateAttributesTable extends Migration
     {
         Schema::create('attributes', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('Attribute_Group_ID')->unsigned()->nullable();
             $table->string('Name');
+            $table->boolean('Choosable')->default(0);
             $table->string('Description')->nullable();
             $table->timestamps();
+
+
+            $table->foreign('Attribute_Group_ID')
+            ->references('id')->on('attribute_groups')
+            ->onDelete('set null');
         });
     }
 

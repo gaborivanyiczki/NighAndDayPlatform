@@ -14,7 +14,7 @@
 
                     <div class="product-box product-wrap">
                         <div class="product-info">
-                            <a href="product-page(no-sidebar).html"><h6>Nu exista produse active.</h6></a>
+                            <a href="#"><h6>Nu exista produse active.</h6></a>
                         </div>
                     </div>
 
@@ -28,7 +28,7 @@
                                     <div class="ribbon"><span>nou</span></div>
                                     <div class="front">
                                     @foreach($value['images'] as $image)
-                                        <a href="product-page(no-sidebar).html"><img src="{{ URL::to('/') }}/images/uploads/{!! $image['Path'] !!}/{!! $image['Filename'] !!}" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                        <a href="{{ route('productdetails', ['slug' => $value['Slug']]) }}"><img src="{{ URL::to('/') }}/images/uploads/{!! $image['Path'] !!}/{!! $image['Filename'] !!}" class="img-fluid blur-up lazyload bg-img" alt=""></a>
                                     @endforeach
                                     </div>
                                     <div class="cart-info cart-wrap">
@@ -49,7 +49,7 @@
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                     </div>
-                                    <a href="product-page(no-sidebar).html"><h6>{!! $value['Name'] !!}</h6></a>
+                                    <a href="{{ route('productdetails', ['slug' => $value['Slug']]) }}"><h6>{!! $value['Name'] !!}</h6></a>
                                     <h4>{!! $value['DiscountPrice'] !!} Lei <del>{!! $value['Price'] !!} Lei</del></h4>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                                     <div class="ribbon"><span>nou</span></div>
                                     <div class="front">
                                     @foreach($value['images'] as $image)
-                                        <a href="product-page(no-sidebar).html"><img src="{{ URL::to('/') }}/images/uploads/{!! $image['Path'] !!}/{!! $image['Filename'] !!}" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                        <a href="{{ route('productdetails', ['slug' => $value['Slug']]) }}"><img src="{{ URL::to('/') }}/images/uploads/{!! $image['Path'] !!}/{!! $image['Filename'] !!}" class="img-fluid blur-up lazyload bg-img" alt=""></a>
                                     @endforeach
                                     </div>
                                     <div class="cart-info cart-wrap">
@@ -82,7 +82,7 @@
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                     </div>
-                                    <a href="product-page(no-sidebar).html"><h6>{!! $value['Name'] !!}</h6></a>
+                                    <a href="{{ route('productdetails', ['slug' => $value['Slug']]) }}"><h6>{!! $value['Name'] !!}</h6></a>
                                     <h4>{!! $value['Price'] !!} lei</h4>
                                 </div>
                             </div>

@@ -2,10 +2,10 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="main-menu border-section border-top-0">
-                    <div class="menu-left">                       
+                    <div class="menu-left">
                     </div>
                     <div class="brand-logo layout2-logo">
-                        <a href="#"><img src="{{ URL::to('/') }}/images/logos/logo-nightandday-2.png" class="img-fluid blur-up lazyload" alt=""></a>
+                        <a href="{{ route('home') }}"><img src="{{ URL::to('/') }}/images/logos/logo-nightandday-2.png" class="img-fluid blur-up lazyload" alt=""></a>
                     </div>
                     <div class="menu-right pull-right">
                         <div class="icon-nav">

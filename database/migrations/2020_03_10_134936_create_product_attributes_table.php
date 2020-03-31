@@ -17,6 +17,7 @@ class CreateProductAttributesTable extends Migration
             $table->id();
             $table->bigInteger('Product_ID')->unsigned();
             $table->bigInteger('Attribute_ID')->unsigned();
+            $table->bigInteger('Product_Attribute_Group_ID')->unsigned();
             $table->string('Value');
             $table->string('CreatedUser')->nullable();
             $table->timestamps();
@@ -27,6 +28,10 @@ class CreateProductAttributesTable extends Migration
 
             $table->foreign('Attribute_ID')
             ->references('id')->on('attributes')
+            ->onDelete('cascade');
+
+            $table->foreign('Attribute_Group_ID')
+            ->references('id')->on('products_attributes_groups')
             ->onDelete('cascade');
         });
     }
