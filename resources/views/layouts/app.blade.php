@@ -34,7 +34,7 @@
     <!-- Bootstrap css -->
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css">
 
-    <!-- Theme css -->    
+    <!-- Theme css -->
     <link href="{{ asset('css/color5.css') }}" rel="stylesheet" type="text/css" media="screen" id="color">
 
 </head>
@@ -48,7 +48,7 @@
     @include('partials.header')
 
     @include('partials.header-logo')
-   
+
     @include('partials.nav')
 </header>
 <!-- header end -->
@@ -57,7 +57,7 @@
         @yield('content')
     </main>
 
-        
+
 @include('partials.footer')
 
 <!-- Quick-view modal popup start-->
@@ -240,6 +240,8 @@
 
 <!-- Bootstrap Notification js-->
 <script src="{{ asset('js/bootstrap-notify.min.js') }}" defer></script>
+
+<script src="{{ asset('js/laroute.js') }}"></script>
 
 <!-- Theme js-->
 <script src="{{ asset('js/script.js') }}" defer></script>

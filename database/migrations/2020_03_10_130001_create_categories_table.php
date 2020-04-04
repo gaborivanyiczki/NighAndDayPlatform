@@ -21,6 +21,8 @@ class CreateCategoriesTable extends Migration
             $table->longText('Description')->nullable();
             $table->boolean('Active')->default(1);
             $table->boolean('New')->default(0);
+            $table->string('ImagePath')->nullable();
+            $table->string('ImageName')->nullable();
             $table->string('CreatedUser');
             $table->timestamps();
         });

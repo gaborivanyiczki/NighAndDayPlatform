@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Repository\Eloquent\AttributeGroupsRepository;
 use App\Repository\Eloquent\CategoriesRepository;
 use App\Repository\Eloquent\ProductsRepository;
-use App\Repository\Eloquent\ProductAttributeRepository;
-use App\ViewModels\ProductViewModel;
+use App\Dtos\ProductQuick;
+use App\ViewModels\CategoryPageModel;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -22,8 +21,29 @@ class CategoryController extends Controller
 
     public function products($slug)
     {
-        $products = $this->productRepo->getProductsByCategory($slug);
+        $category = $this->categoryRepo->getCategoryBySlug($slug);
+        $products = json_encode(ProductQuick::buildCollection($this->productRepo->getProductsByCategory($slug)));
+        $products_count = $this->productRepo->getCountProductsByCategory($slug);
 
-        return view('category.category', compact('products'));
+        $categoryPageModel = json_encode(new CategoryPageModel($category, $products, $products_count));
+
+        return view('category.category')->with('categoryModel', json_decode($categoryPageModel, true));
+    }
+
+    public function fetchProducts(Request $request)
+    {
+        if($request->ajax())
+        {
+            $skip = $request->skip;
+            $slug = $request->slug;
+            $take = $request->take;
+            $products = ProductQuick::buildCollection($this->productRepo->getProductsByFilter($slug, $skip, $take));
+
+            return response()->json($products);
+        }
+        else
+        {
+            return response()->json('Access Not Allowed!');
+        }
     }
 }

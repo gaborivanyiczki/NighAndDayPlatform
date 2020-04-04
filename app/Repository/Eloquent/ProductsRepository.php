@@ -18,20 +18,20 @@ class ProductsRepository extends BaseRepository implements ProductsRepositoryInt
 
     public function getFavoriteProducts()
     {
-        return json_encode($this->model->where([ ['Favorite', 1],['Active', 1] ])
+        return $this->model->where([ ['Favorite', 1],['Active', 1] ])
                             ->with(['images' => function($query) { $query->select('Path','Filename','Product_ID')->where('default', 1); }])
                             ->select('Name','Slug','Price','DiscountPrice','id')
                             ->take(8)
-                            ->get(), JSON_PRETTY_PRINT);
+                            ->get()->toArray();
     }
 
     public function getNewProducts()
     {
-        return json_encode($this->model->with(['images' => function($query) { $query->select('Path', 'Filename','Product_ID')->where('default', 1); }])
+        return $this->model->with(['images' => function($query) { $query->select('Path', 'Filename','Product_ID')->where('default', 1); }])
                                         ->select('Name','Slug','Price','DiscountPrice','id')
                                         ->orderBy('created_at', 'desc')
                                         ->take(5)
-                                        ->get() ,JSON_PRETTY_PRINT);
+                                        ->get()->toArray();
     }
 
     public function findProductBySlug($slug)
@@ -45,29 +45,47 @@ class ProductsRepository extends BaseRepository implements ProductsRepositoryInt
 
     public function getSimilarProducts($slug, $category)
     {
-        return json_encode($this->model->where([ ['Slug', '!=', $slug],['Category_ID', $category] ])
+        return $this->model->where([ ['Slug', '!=', $slug],['Category_ID', $category] ])
                             ->with(['images' => function($query) { $query->select('Path', 'Filename','Product_ID')->where('default', 1); }])
                             ->select('Name','Slug','Price','DiscountPrice','id')
                             ->take(6)
-                            ->get() , JSON_PRETTY_PRINT);
+                            ->get()->toArray();
     }
 
     public function getOtherProducts($slug)
     {
-        return json_encode($this->model->where([ ['Slug', '!=', $slug],['Favorite', 1],['Active', 1] ])
+        return $this->model->where([ ['Slug', '!=', $slug],['Favorite', 1],['Active', 1] ])
                             ->with(['images' => function($query) { $query->select('Path','Filename','Product_ID')->where('default', 1); }])
                             ->select('Name','Slug','Price','DiscountPrice','id')
                             ->take(6)
-                            ->get(), JSON_PRETTY_PRINT);
+                            ->get()->toArray();
     }
 
     public function getProductsByCategory($slug)
     {
-        return json_encode($this->model->with(['images' => function($query) { $query->select('Path','Filename','Product_ID')->where('default', 1); }])
+        return $this->model->with(['images' => function($query) { $query->select('Path','Filename','Product_ID')->where('default', 1); }])
                             ->join('categories', 'categories.id', '=', 'Category_ID')
-                            ->where([['products.Active', 1], ['categories.Slug',$slug]])
-                            ->select('products.Name','products.Slug','Price','DiscountPrice','products.id')
-                            ->take(10)
-                            ->get(), JSON_PRETTY_PRINT);
+                            ->where([['products.Active', 1], ['categories.Slug', $slug]])
+                            ->select('products.Name as Name','products.Slug as Slug','Price','DiscountPrice','products.id as id')
+                            ->take(12)
+                            ->get()->toArray();
+    }
+
+    public function getCountProductsByCategory($slug)
+    {
+        return $this->model->join('categories', 'categories.id', '=', 'Category_ID')
+                            ->where([['products.Active', 1], ['categories.Slug', $slug]])
+                            ->count();
+    }
+
+    public function getProductsByFilter($categorySlug, $skip, $take)
+    {
+        return $this->model->with(['images' => function($query) { $query->select('Path','Filename','Product_ID')->where('default', 1); }])
+                            ->join('categories', 'categories.id', '=', 'Category_ID')
+                            ->where([['products.Active', 1], ['categories.Slug', $categorySlug]])
+                            ->select('products.Name as Name','products.Slug as Slug','Price','DiscountPrice','products.id as id')
+                            ->skip($skip)
+                            ->take($take)
+                            ->get()->toArray();
     }
 }

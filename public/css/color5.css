@@ -327,6 +327,7 @@ button {
 
 .btn-solid {
   padding: 13px 29px;
+  border-radius: 5px;
   color: #ffffff;
   letter-spacing: 0.05em;
   border: 2px solid #E8D056;
@@ -2855,6 +2856,8 @@ header {
       top: 7px;
       right: 7px;
       letter-spacing: 0.1em;
+      color: red;
+      font-weight: bold;
       z-index: 1; }
   .product-box .cart-info, .product-box .cart-wrap, .product-wrap .cart-info, .product-wrap .cart-wrap {
     position: absolute;
@@ -6206,7 +6209,7 @@ footer {
   .subscribe-form .form-control {
     padding: 13px;
     width: 345px;
-    border-radius: 0;
+    border-radius: 3px;
     border: 1px solid #eeeeee; }
     .subscribe-form .form-control.name-cls {
       width: 265px; }
@@ -8210,7 +8213,7 @@ footer {
   padding-top: 70px; }
 
 .product-load-more .col-grid-box {
-  display: none; }
+  display: block; }
 
 .load-more-sec {
   margin-top: 40px;
@@ -15240,6 +15243,7 @@ body.dark {
     top: 15px;
     right: 30px; }
   .btn-solid, .btn-outline {
+    border-radius: 5px;
     padding: 7px 15px; }
   .product-box .product-detail .color-variant, .product-box .product-info .color-variant, .product-wrap .product-detail .color-variant, .product-wrap .product-info .color-variant {
     padding-top: 10px; }

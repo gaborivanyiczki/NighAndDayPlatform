@@ -6,6 +6,7 @@ use App\Repository\Eloquent\AttributeGroupsRepository;
 use App\Repository\Eloquent\ProductsRepository;
 use App\Repository\Eloquent\ProductAttributeRepository;
 use App\ViewModels\ProductViewModel;
+use App\Dtos\ProductQuick;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -35,11 +36,10 @@ class ProductController extends Controller
             $attribute->setAttribute('attributeList', $attributes->where('Slug', '!=', $slug));
         }
 
-        $productModel = new ProductViewModel($product, $attributeGroups, $choosableAttributes);
+        $productModel = json_encode(new ProductViewModel($product, $attributeGroups, $choosableAttributes));
+        $similarProducts = json_encode(ProductQuick::buildCollection($this->productRepo->getSimilarProducts($slug, $product->Category_ID)));
+        $otherProducts = json_encode(ProductQuick::buildCollection($this->productRepo->getOtherProducts($slug)));
 
-        $similarProducts = $this->productRepo->getSimilarProducts($slug, $product->Category_ID);
-        $otherProducts = $this->productRepo->getOtherProducts($slug);
-
-        return view('product.product', compact('productModel','similarProducts','otherProducts'));
+        return view('product.product', compact('similarProducts','otherProducts'))->with('productModel', json_decode($productModel, true));
     }
 }

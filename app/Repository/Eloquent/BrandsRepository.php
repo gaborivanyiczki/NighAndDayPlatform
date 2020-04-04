@@ -19,6 +19,6 @@ class BrandsRepository extends BaseRepository implements BrandsRepositoryInterfa
     public function getNavigationBrands()
     {
         return json_encode($this->model->select('Name','Slug','New')
-                            ->get() , JSON_PRETTY_PRINT);
+                            ->get());
     }
 }

@@ -8,7 +8,8 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="page-title">
-                    <h2>{{ $productModel->product->Name }}</h2></div>
+                    <h2>{!! $productModel['product']['name'] !!}</h2>
+                </div>
             </div>
             <div class="col-sm-6">
                 <nav aria-label="breadcrumb" class="theme-breadcrumb">
@@ -32,8 +33,8 @@
                     <div class="row">
                         <div class="col-12 p-0">
                             <div class="slider-right-nav">
-                                @foreach($productModel->product->images as $image)
-                                    <div><img src="{{ URL::to('/') }}/images/uploads/{!! $image['Path'] !!}/{!! $image['Filename'] !!}" alt="" class="img-fluid blur-up lazyload"></div>
+                                @foreach($productModel['product']['images'] as $image)
+                                    <div><img src="{{ URL::to('/') }}/images/uploads/{!! $image['path'] !!}/{!! $image['filename'] !!}" alt="" class="img-fluid blur-up lazyload"></div>
                                 @endforeach
                             </div>
                         </div>
@@ -41,24 +42,24 @@
                 </div>
                 <div class="col-lg-5 col-sm-10 col-xs-12 order-up">
                     <div class="product-right-slick">
-                       @foreach($productModel->product->images as $image)
-                            <div><img src="{{ URL::to('/') }}/images/uploads/{!! $image['Path'] !!}/{!! $image['Filename'] !!}" alt="" class="img-fluid blur-up lazyload image_zoom_cls-0"></div>
+                       @foreach($productModel['product']['images'] as $image)
+                            <div><img src="{{ URL::to('/') }}/images/uploads/{!! $image['path'] !!}/{!! $image['filename'] !!}" alt="" class="img-fluid blur-up lazyload image_zoom_cls-0"></div>
                        @endforeach
                     </div>
                 </div>
                 <div class="col-lg-6 rtl-text">
                     <div class="product-right">
-                        <h2>{{ $productModel->product->Name }}</h2>
-                        @if ($productModel->product->DiscountPrice != null)
-                        <h4><del>{{ $productModel->product->Price }} Lei</del><span>{{ $productModel->product->Discount }}% reducere</span></h4>
-                        <h3>{{ $productModel->product->DiscountPrice }} Lei</h3>
+                        <h2>{!! $productModel['product']['name'] !!}</h2>
+                        @empty ( $productModel['product']['discountPrice'] )
+                            <h3>{!! $productModel['product']['price'] !!} Lei</h3>
                         @else
-                        <h3>{{ $productModel->product->Price }} Lei</h3>
-                        @endif
+                            <h4><del>{!! $productModel['product']['price'] !!} Lei</del><span>{!! $productModel['product']['discount'] !!}% reducere</span></h4>
+                            <h3>{!! $productModel['product']['discountPrice'] !!} Lei</h3>
+                        @endempty
 
-                        @if ($productModel->product->Quantity > 5)
+                        @if ($productModel['product']['quantity'] > 5)
                         <span class="label-instock">In stoc</span>
-                        @elseif($productModel->product->Quantity >= 1 && $productModel->product->Quantity <= 5)
+                        @elseif($productModel['product']['quantity'] >= 1 && $productModel['product']['quantity'] <= 5)
                         <span class="label-limitedstock">Stoc limitat</span>
                         @else
                         <span class="label-outofstock">Stoc epuizat</span>
@@ -66,8 +67,8 @@
 
                         <div class="product-description border-product">
 
-                            @foreach ($productModel->product->choosableList as $item)
-                                <h6 class="product-title size-text">alege {!! $item->AttributeName !!} <span><a href="" data-toggle="modal" data-target="#sizemodal">lista dimensiuni</a></span></h6>
+                            @foreach ($productModel['product']['choosable'] as $item)
+                                <h6 class="product-title size-text">alege {!! $item['attributeName'] !!} <span><a href="" data-toggle="modal" data-target="#sizemodal">lista dimensiuni</a></span></h6>
                                 <div class="modal fade" id="sizemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
@@ -79,15 +80,17 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="size-box" style="max-width: 50%;">
                                     <select class="form-control" size="1">
-                                        <option value="#">{!! $item->Value !!}</option>
-                                        @foreach ($item->attributeList as $attributeItem)
-                                        <option value="{{ route('productdetails', ['slug' => $attributeItem->Slug]) }}">{!! $attributeItem->Value !!}</option>
+                                        <option value="#">{!! $item['value'] !!}</option>
+                                        @foreach ($item['attributeList'] as $attributeItem)
+                                        <option value="{{ route('productdetails', ['slug' => $attributeItem['Slug']]) }}">{!! $attributeItem['Value'] !!}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             @endforeach
+
                             <h6 class="product-title">Cantitate</h6>
                             <div class="qty-box">
                                 <div class="input-group"><span class="input-group-prepend"><button type="button" class="btn quantity-left-minus" data-type="minus" data-field=""><i class="ti-angle-left"></i></button> </span>
@@ -97,12 +100,13 @@
                         <div class="product-buttons"><a href="#" data-toggle="modal" data-target="#addtocart" class="btn btn-solid"><i class="fa fa-shopping-cart"></i> adauga in cos</a><a href="#" data-toggle="modal" data-target="#addtowishlist" class="btn btn-solid gray-btn" style="margin-left:15px;"><i class="fa fa-heart" style="color:red;"></i> adauga in wishlist</a></div>
                         <div class="border-product">
                             <ul>
-                                <li style="display: block;">Cod produs: <b>{{ $productModel->product->ProductCode }}</b></li>
-                                <li style="display: block;">Garantie: <b>{{ $productModel->product->Warranty }} luni</b></li>
-                                <li style="display: block;">Drept retur: <b>{{ $productModel->product->Return }} zile</b></li>
-                                <li style="display: block;">Termen de livrare: <b>{{ $productModel->product->Delivery }} zile lucratoare</b></li>
+                                <li style="display: block;">Cod produs: <b>{{ $productModel['product']['productCode'] }}</b></li>
+                                <li style="display: block;">Garantie: <b>{{ $productModel['product']['warranty'] }} luni</b></li>
+                                <li style="display: block;">Drept retur: <b>{{ $productModel['product']['return'] }} zile</b></li>
+                                <li style="display: block;">Termen de livrare: <b>{{ $productModel['product']['delivery'] }} zile lucratoare</b></li>
                             </ul>
                         </div>
+
                         <div class="border-product">
                             <h6 class="product-title">Facilitati</h6>
                             <div class="payment-card-bottom">
@@ -161,23 +165,24 @@
                         <div class="material-border"></div>
                     </li>
                 </ul>
+
                 <div class="tab-content nav-material" id="top-tabContent">
                     <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
-                       <p> {!! $productModel->product->Description !!} </p>
+                       <p> {!! $productModel['product']['description'] !!} </p>
                     </div>
                     <div class="tab-pane fade" id="top-profile" role="tabpanel" aria-labelledby="profile-top-tab">
                         <div class="single-product-tables">
                             <div class="col-md-12">
 
-                                @foreach ($productModel->attributeGroups as $attributeGroup)
-                                <p class="text-uppercase"><strong>{!! $attributeGroup->Name !!}</strong></p>
+                                @foreach ($productModel['attributeGroups'] as $attributeGroup)
+                                <p class="text-uppercase"><strong>{!! $attributeGroup['attributeGroupName'] !!}</strong></p>
                                 <div class="table-responsive">
                                     <table class="table table-striped">
                                         <tbody>
-                                            @foreach ($attributeGroup->attributeList as $attribute)
+                                            @foreach ($attributeGroup['attributeList'] as $attribute)
                                                 <tr>
-                                                    <td class="col-xs-4 text-muted">{!! $attribute->AttributeName !!}</td>
-                                                    <td class="col-xs-8">{!! $attribute->Value !!}</td>
+                                                    <td class="col-xs-4 text-muted">{!! $attribute['attributeName'] !!}</td>
+                                                    <td class="col-xs-8">{!! $attribute['value'] !!}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

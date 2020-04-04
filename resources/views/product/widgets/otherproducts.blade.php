@@ -15,14 +15,14 @@
             </div>
             @else
                 @foreach(json_decode($otherProducts, true) as $key => $value)
-                    @if($value['DiscountPrice'] != null)
+                    @if($value['discountPrice'] != null)
                     <div class="col-xl-2 col-md-4 col-sm-6">
                         <div class="product-box">
                             <div class="img-wrapper">
                                 <div class="lable-block"><span class="lable4">discount</span></div>
                                 <div class="front">
                                     @foreach($value['images'] as $image)
-                                        <a href="{{ route('productdetails', ['slug' => $value['Slug']]) }}"><img src="{{ URL::to('/') }}/images/uploads/{!! $image['Path'] !!}/{!! $image['Filename'] !!}" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                        <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}"><img src="{{ URL::to('/') }}/images/uploads/{!! $image['path'] !!}/{!! $image['filename'] !!}" class="img-fluid blur-up lazyload bg-img" alt=""></a>
                                     @endforeach
                                 </div>
                                 <div class="cart-info cart-wrap">
@@ -31,10 +31,10 @@
                             <div class="product-detail">
                                 <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
                                 </div>
-                                <a href="{{ route('productdetails', ['slug' => $value['Slug']]) }}">
-                                    <h6>{!! $value['Name'] !!}</h6>
+                                <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}">
+                                    <h6>{!! $value['name'] !!}</h6>
                                 </a>
-                                <h4>{!! $value['DiscountPrice'] !!} Lei <del>{!! $value['Price'] !!} Lei</del></h4>
+                                <h4>{!! $value['discountPrice'] !!} Lei <del>{!! $value['price'] !!} Lei</del></h4>
                             </div>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                             <div class="img-wrapper">
                                 <div class="front">
                                     @foreach($value['images'] as $image)
-                                        <a href="{{ route('productdetails', ['slug' => $value['Slug']]) }}"><img src="{{ URL::to('/') }}/images/uploads/{!! $image['Path'] !!}/{!! $image['Filename'] !!}" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                        <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}"><img src="{{ URL::to('/') }}/images/uploads/{!! $image['path'] !!}/{!! $image['filename'] !!}" class="img-fluid blur-up lazyload bg-img" alt=""></a>
                                     @endforeach
                                 </div>
                                 <div class="cart-info cart-wrap">
@@ -53,10 +53,10 @@
                             <div class="product-detail">
                                 <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
                                 </div>
-                                <a href="{{ route('productdetails', ['slug' => $value['Slug']]) }}">
-                                    <h6>{!! $value['Name'] !!}</h6>
+                                <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}">
+                                    <h6>{!! $value['name'] !!}</h6>
                                 </a>
-                                <h4>{!! $value['Price'] !!} Lei</h4>
+                                <h4>{!! $value['price'] !!} Lei</h4>
                             </div>
                         </div>
                     </div>

@@ -6,4 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 interface CategoriesRepositoryInterface
 {
    public function getNavigationCategories();
+   public function getCategoryBySlug($slug);
 }

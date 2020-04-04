@@ -3,6 +3,7 @@
 namespace App\Http\ViewComposers;
 
 use App\Repository\Eloquent\ProductsRepository;
+use App\Dtos\ProductQuick;
 
 class NewProductsComposer
 {
@@ -15,6 +16,6 @@ class NewProductsComposer
 
     public function compose($view)
     {
-        $view->with('newproducts', $this->products->getNewProducts());
+        $view->with('newproducts', json_encode(ProductQuick::buildCollection($this->products->getNewProducts())));
     }
 }

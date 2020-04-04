@@ -22,23 +22,22 @@
 
                         @foreach(json_decode($newproducts, true) as $key => $value)
 
-                            @if($value['DiscountPrice'] != null)
+                            @if($value['discountPrice'] != null)
                             <div class="product-box product-wrap">
                                 <div class="img-wrapper">
                                     <div class="ribbon"><span>nou</span></div>
                                     <div class="front">
                                     @foreach($value['images'] as $image)
-                                        <a href="{{ route('productdetails', ['slug' => $value['Slug']]) }}"><img src="{{ URL::to('/') }}/images/uploads/{!! $image['Path'] !!}/{!! $image['Filename'] !!}" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                        <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}"><img src="{{ URL::to('/') }}/images/uploads/{!! $image['path'] !!}/{!! $image['filename'] !!}" class="img-fluid blur-up lazyload bg-img" alt=""></a>
                                     @endforeach
                                     </div>
                                     <div class="cart-info cart-wrap">
                                         <a href="javascript:void(0)"  title="Adauga in Wishlist"><i class="fa fa-heart" aria-hidden="true"></i></a>
                                         <button  title="Add to cart" onclick="openCart()"><i class="ti-shopping-cart"></i> Adauga in cos</button>
-                                        <a href="compare.html" title="Compare"><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                                        <a class="mobile-quick-view" href="#" data-toggle="modal" data-target="#quick-view" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a>
+                                        <a class="mobile-quick-view" href="{{ route('productdetails', ['slug' => $value['slug']]) }}" title="Vizualizare"><i class="ti-search" aria-hidden="true"></i></a>
                                     </div>
                                     <div class="quick-view-part">
-                                        <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a>
+                                        <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}" title="Vizualizare"><i class="ti-search" aria-hidden="true"></i></a>
                                     </div>
                                 </div>
                                 <div class="product-info">
@@ -49,8 +48,8 @@
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                     </div>
-                                    <a href="{{ route('productdetails', ['slug' => $value['Slug']]) }}"><h6>{!! $value['Name'] !!}</h6></a>
-                                    <h4>{!! $value['DiscountPrice'] !!} Lei <del>{!! $value['Price'] !!} Lei</del></h4>
+                                    <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}"><h6>{!! $value['name'] !!}</h6></a>
+                                    <h4>{!! $value['discountPrice'] !!} Lei <del>{!! $value['price'] !!} Lei</del></h4>
                                 </div>
                             </div>
 
@@ -61,17 +60,16 @@
                                     <div class="ribbon"><span>nou</span></div>
                                     <div class="front">
                                     @foreach($value['images'] as $image)
-                                        <a href="{{ route('productdetails', ['slug' => $value['Slug']]) }}"><img src="{{ URL::to('/') }}/images/uploads/{!! $image['Path'] !!}/{!! $image['Filename'] !!}" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                        <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}"><img src="{{ URL::to('/') }}/images/uploads/{!! $image['path'] !!}/{!! $image['filename'] !!}" class="img-fluid blur-up lazyload bg-img" alt=""></a>
                                     @endforeach
                                     </div>
                                     <div class="cart-info cart-wrap">
                                         <a href="javascript:void(0)"  title="Adauga in Wishlist"><i class="fa fa-heart" aria-hidden="true"></i></a>
                                         <button  title="Add to cart" onclick="openCart()"><i class="ti-shopping-cart"></i> Adauga in cos</button>
-                                        <a href="compare.html" title="Compare"><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                                        <a class="mobile-quick-view" href="#" data-toggle="modal" data-target="#quick-view" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a>
+                                        <a class="mobile-quick-view" href="{{ route('productdetails', ['slug' => $value['slug']]) }}" title="Vizualizare"><i class="ti-search" aria-hidden="true"></i></a>
                                     </div>
                                     <div class="quick-view-part">
-                                        <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a>
+                                        <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}" title="Vizualizare"><i class="ti-search" aria-hidden="true"></i></a>
                                     </div>
                                 </div>
                                 <div class="product-info">
@@ -82,8 +80,8 @@
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                     </div>
-                                    <a href="{{ route('productdetails', ['slug' => $value['Slug']]) }}"><h6>{!! $value['Name'] !!}</h6></a>
-                                    <h4>{!! $value['Price'] !!} lei</h4>
+                                    <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}"><h6>{!! $value['name'] !!}</h6></a>
+                                    <h4>{!! $value['price'] !!} lei</h4>
                                 </div>
                             </div>
 

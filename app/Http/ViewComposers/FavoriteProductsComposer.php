@@ -3,6 +3,7 @@
 namespace App\Http\ViewComposers;
 
 use App\Repository\Eloquent\ProductsRepository;
+use App\Dtos\ProductQuick;
 
 class FavoriteProductsComposer
 {
@@ -15,6 +16,6 @@ class FavoriteProductsComposer
 
     public function compose($view)
     {
-        $view->with('favoriteproducts', $this->products->getFavoriteProducts());
+        $view->with('favoriteproducts', json_encode(ProductQuick::buildCollection($this->products->getFavoriteProducts())));
     }
 }

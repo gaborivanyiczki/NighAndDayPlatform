@@ -8,14 +8,14 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="page-title">
-                    <h2>Pagina categorie</h2>
+                    <h2>{!! $categoryModel['category']['Name'] !!}</h2>
                 </div>
             </div>
             <div class="col-sm-6">
                 <nav aria-label="breadcrumb" class="theme-breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('home') }}">acasa</a></li>
-                        <li class="breadcrumb-item active">produs</li>
+                        <li class="breadcrumb-item active">{!! $categoryModel['category']['Name'] !!}</li>
                     </ol>
                 </nav>
             </div>
@@ -23,8 +23,6 @@
     </div>
 </div>
 <!-- breadcrumb End -->
-
-
 
 <!-- section start -->
 <section class="section-b-space ratio_asos">
@@ -36,11 +34,10 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="top-banner-wrapper">
-                                    <a href="#"><img src="{{ URL::to('/') }}/images/mega-menu/2.jpg" class="img-fluid blur-up lazyload" alt=""></a>
+                                    <a href="#"><img src="{{ URL::to('/') }}/images/{!! $categoryModel['category']['ImagePath'] !!}/{!! $categoryModel['category']['ImageName'] !!}" class="img-fluid blur-up lazyload" alt=""></a>
                                     <div class="top-banner-content small-section">
-                                        <h4>fashion</h4>
-                                        <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h5>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                        <h4>{!! $categoryModel['category']['Name'] !!}</h4>
+                                        {!! $categoryModel['category']['Description'] !!}
                                     </div>
                                 </div>
                                 <div class="collection-product-wrapper">
@@ -146,10 +143,10 @@
                                                         </ul>
                                                     </div>
                                                     <div class="product-page-per-view">
-                                                        <select>
-                                                            <option value="High to low">24 produse pe pagina</option>
-                                                            <option value="Low to High">50 produse pe pagina</option>
-                                                            <option value="Low to High">100 produse pe pagina</option>
+                                                        <select id="products-shown">
+                                                            <option value="10" selected>12 produse pe pagina</option>
+                                                            <option value="15">18 produse pe pagina</option>
+                                                            <option value="25">32 produse pe pagina</option>
                                                         </select>
                                                     </div>
                                                     <div class="product-page-filter">
@@ -165,100 +162,75 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="product-wrapper-grid">
-                                        <div class="row">
-                                            @empty($products)
-                                            <div class="product-box">
-                                                <div class="product-detail">
-                                                    <a href="product-page(no-sidebar).html">
-                                                        <h6>Nu exista produse favorite</h6>
-                                                    </a>
+                                    <div class="product-wrapper-grid product-load-more">
+                                        <div class="row" id="product-list-collection">
+                                            @if(json_decode($categoryModel['products'], true) == null)
+                                            <div class="col-xl-3 col-md-6 col-grid-box" id="product-item">
+                                                <div class="product-box">
+                                                    <div class="product-detail">
+                                                        <h6>Nu exista produse</h6>
+                                                    </div>
                                                 </div>
                                             </div>
                                             @else
-                                                @foreach(json_decode($products, true) as $key => $value)
-                                                    @if($value['DiscountPrice'] != null)
-                                                    <div class="col-xl-3 col-md-6 col-grid-box">
-                                                        <div class="product-box">
-                                                            <div class="img-wrapper">
-                                                                <div class="lable-block">
-                                                                    <span class="lable4">discount</span>
+                                                @foreach (json_decode($categoryModel['products'], true) as $value)
+                                                    @if($value['discountPrice'] != null)
+                                                        <div class="col-xl-3 col-md-6 col-grid-box" id="product-item">
+                                                            <div class="product-box">
+                                                                <div class="img-wrapper">
+                                                                    <div class="lable-block">
+                                                                        <span class="lable4">discount</span>
+                                                                    </div>
+                                                                    <div class="front">
+                                                                        @foreach($value['images'] as $image)
+                                                                            <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}"><img src="{{ URL::to('/') }}/images/uploads/{!! $image['path'] !!}/{!! $image['filename'] !!}" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                                                        @endforeach
+                                                                    </div>
+                                                                    <div class="cart-info cart-wrap">
+                                                                        <button data-toggle="modal" data-target="#addtocart"  title="Adauga in cos"><i class="ti-shopping-cart" ></i></button> <a href="javascript:void(0)" title="Adauga in Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}" title="Vizualizare"><i class="ti-search" aria-hidden="true"></i></a> </a></div>
                                                                 </div>
-                                                                <div class="front">
-                                                                    @foreach($value['images'] as $image)
-                                                                        <a href="{{ route('productdetails', ['slug' => $value['Slug']]) }}"><img src="{{ URL::to('/') }}/images/uploads/{!! $image['Path'] !!}/{!! $image['Filename'] !!}" class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                                                                    @endforeach
-                                                                </div>
-                                                                <div class="back">
-                                                                    <a href="#"><img src="{{ URL::to('/') }}/images/pro3/36.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                                                                </div>
-                                                                <div class="cart-info cart-wrap">
-                                                                    <button data-toggle="modal" data-target="#addtocart"  title="Add to cart"><i class="ti-shopping-cart" ></i></button> <a href="javascript:void(0)" title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a> <a href="compare.html" title="Compare"><i class="ti-reload" aria-hidden="true"></i></a></div>
-                                                            </div>
-                                                            <div class="product-detail">
-                                                                <div>
-                                                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
-                                                                    <a href="{{ route('productdetails', ['slug' => $value['Slug']]) }}">
-                                                                        <h6>{!! $value['Name'] !!}</h6>
-                                                                    </a>
-                                                                    <h4>{!! $value['DiscountPrice'] !!} Lei <del>{!! $value['Price'] !!} Lei</del></h4>
+                                                                <div class="product-detail">
+                                                                    <div>
+                                                                        <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                                                        <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}">
+                                                                            <h6>{!! $value['name'] !!}</h6>
+                                                                        </a>
+                                                                        <h4>{!! $value['discountPrice'] !!} Lei <del>{!! $value['price'] !!} Lei</del></h4>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-
                                                     @else
-                                                    <div class="col-xl-3 col-md-6 col-grid-box">
-                                                        <div class="product-box">
-                                                            <div class="img-wrapper">
-                                                                <div class="front">
-                                                                    @foreach($value['images'] as $image)
-                                                                        <a href="{{ route('productdetails', ['slug' => $value['Slug']]) }}"><img src="{{ URL::to('/') }}/images/uploads/{!! $image['Path'] !!}/{!! $image['Filename'] !!}" class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                                                                    @endforeach
+                                                        <div class="col-xl-3 col-md-6 col-grid-box" id="product-item">
+                                                            <div class="product-box">
+                                                                <div class="img-wrapper">
+                                                                    <div class="front">
+                                                                        @foreach($value['images'] as $image)
+                                                                            <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}"><img src="{{ URL::to('/') }}/images/uploads/{!! $image['path'] !!}/{!! $image['filename'] !!}" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                                                        @endforeach
+                                                                    </div>
+                                                                    <div class="cart-info cart-wrap">
+                                                                        <button data-toggle="modal" data-target="#addtocart"  title="Adauga in cos"><i class="ti-shopping-cart" ></i></button> <a href="javascript:void(0)" title="Adauga in Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}" title="Vizualizare"><i class="ti-search" aria-hidden="true"></i></a> </div>
                                                                 </div>
-                                                                <div class="back">
-                                                                    <a href="#"><img src="{{ URL::to('/') }}/images/pro3/36.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                                                                </div>
-                                                                <div class="cart-info cart-wrap">
-                                                                    <button data-toggle="modal" data-target="#addtocart"  title="Add to cart"><i class="ti-shopping-cart" ></i></button> <a href="javascript:void(0)" title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a> <a href="compare.html" title="Compare"><i class="ti-reload" aria-hidden="true"></i></a></div>
-                                                            </div>
-                                                            <div class="product-detail">
-                                                                <div>
-                                                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
-                                                                    <a href="{{ route('productdetails', ['slug' => $value['Slug']]) }}">
-                                                                        <h6>{!! $value['Name'] !!}</h6>
-                                                                    </a>
-                                                                    <h4>{!! $value['Price'] !!} Lei</h4>
+                                                                <div class="product-detail">
+                                                                    <div>
+                                                                        <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                                                        <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}">
+                                                                            <h6>{!! $value['name'] !!}</h6>
+                                                                        </a>
+                                                                        <h4>{!! $value['price'] !!} Lei</h4>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
                                                     @endif
                                                 @endforeach
-                                            @endempty
+                                            @endif
                                         </div>
                                     </div>
-                                    <div class="product-pagination">
-                                        <div class="theme-paggination-block">
-                                            <div class="row">
-                                                <div class="col-xl-6 col-md-6 col-sm-12">
-                                                    <nav aria-label="Page navigation">
-                                                        <ul class="pagination">
-                                                            <li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true"><i class="fa fa-chevron-left" aria-hidden="true"></i></span> <span class="sr-only">Previous</span></a></li>
-                                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true"><i class="fa fa-chevron-right" aria-hidden="true"></i></span> <span class="sr-only">Next</span></a></li>
-                                                        </ul>
-                                                    </nav>
-                                                </div>
-                                                <div class="col-xl-6 col-md-6 col-sm-12">
-                                                    <div class="product-search-count-bottom">
-                                                        <h5>Showing Products 1-24 of 10 Result</h5></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @if(json_decode($categoryModel['products'], true) != null)
+                                    <div class="load-more-sec"><button class="load-More btn btn-dark" data-category="{{ $categoryModel['category']['Slug'] }}" data-totalResult="{{ $categoryModel['productsCount'] }}">incarca mai multe</button></div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -269,6 +241,5 @@
     </div>
 </section>
 <!-- section End -->
-
 
 @endsection

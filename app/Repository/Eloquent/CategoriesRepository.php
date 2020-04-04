@@ -20,4 +20,11 @@ class CategoriesRepository extends BaseRepository implements CategoriesRepositor
     {
         return $this->model->get()->toTree();
     }
+
+    public function getCategoryBySlug($slug)
+    {
+        return $this->model->where('Slug', $slug)
+                            ->select('Name','Description','Slug','ImagePath','ImageName')
+                            ->first();
+    }
 }
