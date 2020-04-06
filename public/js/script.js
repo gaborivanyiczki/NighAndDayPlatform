@@ -1405,27 +1405,28 @@ $(window).on('load', function() {
 /*=====================
  26. Category page
  ==========================*/
-
+//LOAD MORE BUTTON ACTION
 $(document).ready(function(){
     $(".load-More").on('click',function(){
+        var _sortValue=$("#products-sort option:selected").val();
         var _totalCurrentResult=$("div #product-item").length;
         var _totalShownSet=$("#products-shown option:selected").val();
         var _categorySlug=$(".load-More").attr('data-category');
         // Ajax Reuqest
         $.ajax({
-            url: laroute.route('loadMore'),
+            url: laroute.route('fetchproducts'),
             type:'get',
             dataType:'json',
             data:{
                 skip:_totalCurrentResult,
                 take:_totalShownSet,
-                slug:_categorySlug
+                slug:_categorySlug,
+                sort:_sortValue
             },
             beforeSend:function(){
                 $(".load-More").html('Se incarca...');
             },
             success:function(response){
-                console.log(response);
                 var _html='';
                 var base_url = window.location.origin;
                 $.each(response,function(index,value){
@@ -1460,16 +1461,76 @@ $(document).ready(function(){
                 var _totalCurrentResult=$("div #product-item").length;
                 var _totalResult=parseInt($(".load-More").attr('data-totalResult'));
                 if(_totalCurrentResult==_totalResult){
-                    $(".load-More").remove();
+                    $(".load-More").hide();
                 }else{
                     $(".load-More").html('Incarca mai multe');
+                    $(".load-More").show();
+                }
+            }
+        });
+    });
+    //SORTING ACTIONS
+    $( "#products-sort" ).change(function() {
+        var _sortValue=$("#products-sort option:selected").val();
+        var _totalShownSet=$("#products-shown option:selected").val();
+        var _categorySlug=$(".load-More").attr('data-category');
+        var _totalCurrentResult = 0;
+        $.ajax({
+            url: laroute.route('fetchproducts'),
+            type:'get',
+            dataType:'json',
+            data:{
+                skip:_totalCurrentResult,
+                take:_totalShownSet,
+                slug:_categorySlug,
+                sort:_sortValue
+            },
+            beforeSend:function(){
+                $('#loader').show();
+            },
+            success:function(response){
+                $('#loader').hide();
+                $("#product-list-collection").empty();
+                var _html='';
+                var base_url = window.location.origin;
+                $.each(response,function(index,value){
+                    var product_details_url = laroute.route('productdetails', { slug : ''+value.slug+'' });
+                    _html+='<div class="col-xl-3 col-md-6 col-grid-box" id="product-item">';
+                        _html+='<div class="product-box">';
+                            _html+='<div class="img-wrapper">';
+                            if (value.discountPrice != null) {
+                                _html+= ' <div class="lable-block"><span class="lable4">discount</span></div>'
+                            }
+                                _html+='<div class="front">';
+                                _html+='<a href="'+ product_details_url +'"><img src="'+base_url+'/images/uploads/'+value.images[0].path+'/'+value.images[0].filename+'" class="img-fluid blur-up lazyload bg-img" alt=""></a></div>';
+                        _html+='<div class="cart-info cart-wrap">';
+                        _html+='<button data-toggle="modal" data-target="#addtocart"  title="Adauga in cos"><i class="ti-shopping-cart" ></i></button> <a href="javascript:void(0)" title="Adauga in Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a href="'+ product_details_url +'" title="Vizualizare"><i class="ti-search" aria-hidden="true"></i></a></div></div>';
+                        _html+='<div class="product-detail"><div>';
+                        _html+='<div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>';
+                        _html+='<a href="'+ product_details_url +'"><h6>'+value.name+'</h6></a>';
+                        if (value.discountPrice != null) {
+                            _html+= '<h4>'+value.discountPrice+' Lei <del>'+value.price+' Lei</del></h4>'
+                        }
+                        else
+                        {
+                            _html+='<h4>'+value.price+' Lei</h4>';
+                        }
+                        _html+='</div>';
+                        _html+='</div>';
+                        _html+='</div>';
+                        _html+='</div>';
+                });
+                $("#product-list-collection").append(_html);
+                // Change Load More When No Further result
+                var _totalCurrentResult=$("div #product-item").length;
+                var _totalResult=parseInt($(".load-More").attr('data-totalResult'));
+                if(_totalCurrentResult==_totalResult){
+                    $(".load-More").hide();
+                }else{
+                    $(".load-More").html('Incarca mai multe');
+                    $(".load-More").show();
                 }
             }
         });
     });
 });
-
-
-
-
-

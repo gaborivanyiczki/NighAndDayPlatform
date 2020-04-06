@@ -144,18 +144,18 @@
                                                     </div>
                                                     <div class="product-page-per-view">
                                                         <select id="products-shown">
-                                                            <option value="10" selected>12 produse pe pagina</option>
+                                                            <option value="12" selected>12 produse pe pagina</option>
                                                             <option value="15">18 produse pe pagina</option>
                                                             <option value="25">32 produse pe pagina</option>
                                                         </select>
                                                     </div>
                                                     <div class="product-page-filter">
-                                                        <select>
+                                                        <select id="products-sort">
                                                             <option value="default">Sorteaza</option>
-                                                            <option value="Low to High">Pret crescator</option>
-                                                            <option value="Low to High">Pret descrescator</option>
-                                                            <option value="Low to High">Cele mai noi</option>
-                                                            <option value="Low to High">Cele mai vechi</option>
+                                                            <option value="priceAsc">Pret crescator</option>
+                                                            <option value="priceDesc">Pret descrescator</option>
+                                                            <option value="newest">Cele mai noi</option>
+                                                            <option value="oldest">Cele mai vechi</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -164,6 +164,7 @@
                                     </div>
                                     <div class="product-wrapper-grid product-load-more">
                                         <div class="row" id="product-list-collection">
+                                            <div id='loader' style="display:none;"><img src="{{ URL::to('/') }}/images/uploads/loader/ajax-loader.gif"/></div>
                                             @if(json_decode($categoryModel['products'], true) == null)
                                             <div class="col-xl-3 col-md-6 col-grid-box" id="product-item">
                                                 <div class="product-box">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repository\Eloquent\CategoriesRepository;
 use App\Repository\Eloquent\ProductsRepository;
 use App\Dtos\ProductQuick;
+use App\Helper\ProductHelper;
 use App\ViewModels\CategoryPageModel;
 use Illuminate\Http\Request;
 
@@ -37,7 +38,9 @@ class CategoryController extends Controller
             $skip = $request->skip;
             $slug = $request->slug;
             $take = $request->take;
-            $products = ProductQuick::buildCollection($this->productRepo->getProductsByFilter($slug, $skip, $take));
+            $sort = ProductHelper::getSortingAttributes($request->sort);
+
+            $products = ProductQuick::buildCollection($this->productRepo->getProductsByFilter($slug, $skip, $take, $sort));
 
             return response()->json($products);
         }

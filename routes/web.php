@@ -28,4 +28,4 @@ Route::post('contact-us', ['as'=>'contactus.store','uses'=>'ContactController@co
 Route::get('/product/{slug}', 'ProductController@details')->name('productdetails');
 //Category
 Route::get('/category/{slug}', 'CategoryController@products')->name('categoryproducts');
-Route::get('/load-more', 'CategoryController@fetchProducts')->name('loadMore');
+Route::get('/fetch-products', 'CategoryController@fetchProducts')->name('fetchproducts');

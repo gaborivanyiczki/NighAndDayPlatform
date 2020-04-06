@@ -17,5 +17,5 @@ interface ProductsRepositoryInterface
 
    public function getCountProductsByCategory($slug);
 
-   public function getProductsByFilter($categorySlug, $skip, $take);
+   public function getProductsByFilter($categorySlug, $skip, $take, array $sort);
 }

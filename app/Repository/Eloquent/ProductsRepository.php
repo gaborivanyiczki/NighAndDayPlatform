@@ -78,7 +78,7 @@ class ProductsRepository extends BaseRepository implements ProductsRepositoryInt
                             ->count();
     }
 
-    public function getProductsByFilter($categorySlug, $skip, $take)
+    public function getProductsByFilter($categorySlug, $skip, $take, array $sort)
     {
         return $this->model->with(['images' => function($query) { $query->select('Path','Filename','Product_ID')->where('default', 1); }])
                             ->join('categories', 'categories.id', '=', 'Category_ID')
@@ -86,6 +86,7 @@ class ProductsRepository extends BaseRepository implements ProductsRepositoryInt
                             ->select('products.Name as Name','products.Slug as Slug','Price','DiscountPrice','products.id as id')
                             ->skip($skip)
                             ->take($take)
+                            ->orderBy('products.'.$sort['SortColumn'], $sort['SortBy'])
                             ->get()->toArray();
     }
 }
