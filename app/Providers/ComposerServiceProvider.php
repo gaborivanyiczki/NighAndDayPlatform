@@ -46,5 +46,8 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer(
             'contact', 'App\Http\ViewComposers\ContactComposer'
         );
+        view()->composer(
+            'faq', 'App\Http\ViewComposers\FaqComposer'
+        );
     }
 }

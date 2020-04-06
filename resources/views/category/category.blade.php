@@ -56,71 +56,23 @@
                                                                     <h3 class="collapse-block-title">brand</h3>
                                                                     <div class="collection-collapse-block-content">
                                                                         <div class="collection-brand-filter">
-                                                                            <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                                                                <input type="checkbox" class="custom-control-input" id="zara">
-                                                                                <label class="custom-control-label" for="zara">zara</label>
-                                                                            </div>
-                                                                            <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                                                                <input type="checkbox" class="custom-control-input" id="vera-moda">
-                                                                                <label class="custom-control-label" for="vera-moda">vera-moda</label>
-                                                                            </div>
-                                                                            <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                                                                <input type="checkbox" class="custom-control-input" id="forever-21">
-                                                                                <label class="custom-control-label" for="forever-21">forever-21</label>
-                                                                            </div>
-                                                                            <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                                                                <input type="checkbox" class="custom-control-input" id="roadster">
-                                                                                <label class="custom-control-label" for="roadster">roadster</label>
-                                                                            </div>
-                                                                            <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                                                                <input type="checkbox" class="custom-control-input" id="only">
-                                                                                <label class="custom-control-label" for="only">only</label>
-                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <!-- color filter start here -->
                                                                 <div class="collection-collapse-block open">
-                                                                    <h3 class="collapse-block-title">colors</h3>
+                                                                    <h3 class="collapse-block-title">culori</h3>
                                                                     <div class="collection-collapse-block-content">
                                                                         <div class="color-selector">
-                                                                            <ul>
-                                                                                <li class="color-1 active"></li>
-                                                                                <li class="color-2"></li>
-                                                                                <li class="color-3"></li>
-                                                                                <li class="color-4"></li>
-                                                                                <li class="color-5"></li>
-                                                                                <li class="color-6"></li>
-                                                                                <li class="color-7"></li>
-                                                                            </ul>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <!-- price filter start here -->
                                                                 <div class="collection-collapse-block border-0 open">
-                                                                    <h3 class="collapse-block-title">price</h3>
+                                                                    <h3 class="collapse-block-title">pret</h3>
                                                                     <div class="collection-collapse-block-content">
                                                                         <div class="collection-brand-filter">
-                                                                            <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                                                                <input type="checkbox" class="custom-control-input" id="hundred">
-                                                                                <label class="custom-control-label" for="hundred">$10 - $100</label>
-                                                                            </div>
-                                                                            <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                                                                <input type="checkbox" class="custom-control-input" id="twohundred">
-                                                                                <label class="custom-control-label" for="twohundred">$100 - $200</label>
-                                                                            </div>
-                                                                            <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                                                                <input type="checkbox" class="custom-control-input" id="threehundred">
-                                                                                <label class="custom-control-label" for="threehundred">$200 - $300</label>
-                                                                            </div>
-                                                                            <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                                                                <input type="checkbox" class="custom-control-input" id="fourhundred">
-                                                                                <label class="custom-control-label" for="fourhundred">$300 - $400</label>
-                                                                            </div>
-                                                                            <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                                                                <input type="checkbox" class="custom-control-input" id="fourhundredabove">
-                                                                                <label class="custom-control-label" for="fourhundredabove">$400 above</label>
-                                                                            </div>
+
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -163,8 +115,10 @@
                                         </div>
                                     </div>
                                     <div class="product-wrapper-grid product-load-more">
+                                        <div id='loader' style="display:none;">
+                                            <img src="{{ URL::to('/') }}/images/uploads/loader/ajax-loader.gif" style="position: absolute;top: 50%;left: 50%;margin: -50px 0px 0px -50px;"/>
+                                        </div>
                                         <div class="row" id="product-list-collection">
-                                            <div id='loader' style="display:none;"><img src="{{ URL::to('/') }}/images/uploads/loader/ajax-loader.gif"/></div>
                                             @if(json_decode($categoryModel['products'], true) == null)
                                             <div class="col-xl-3 col-md-6 col-grid-box" id="product-item">
                                                 <div class="product-box">
