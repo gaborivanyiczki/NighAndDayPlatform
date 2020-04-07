@@ -63,9 +63,9 @@
                                     @else
                                         @foreach (json_decode($brands, true) as $key => $value)
                                             @if($value['New'] == 1)
-                                            <li><a href="#">{!! $value['Name'] !!} <span class="new-tag">nou</span></a></li>
+                                            <li><a href="{{ route('brand.details', ['slug' => $value['Slug']]) }}">{!! $value['Name'] !!} <span class="new-tag">nou</span></a></li>
                                             @else
-                                            <li><a href="#">{!! $value['Name'] !!}</a></li>
+                                            <li><a href="{{ route('brand.details', ['slug' => $value['Slug']]) }}">{!! $value['Name'] !!}</a></li>
                                             @endif
                                         @endforeach
                                     @endempty

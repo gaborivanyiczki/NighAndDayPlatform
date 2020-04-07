@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col">
                 <div class="title3">
-                    <h2 class="title-inner3">Produse Noi</h2>
+                    <h2 class="title-inner3">PRODUSE NOI</h2>
                     <div class="line"></div>
                 </div>
                 <div class="product-5 product-m no-arrow">
@@ -33,7 +33,7 @@
                                     </div>
                                     <div class="cart-info cart-wrap">
                                         <a href="javascript:void(0)"  title="Adauga in Wishlist"><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                        <button  title="Add to cart" onclick="openCart()"><i class="ti-shopping-cart"></i> Adauga in cos</button>
+                                        <button id="addtocart" data-target="{!! $value['slug'] !!}" title="Adauga in cos"><i class="ti-shopping-cart" data-target="{!! $value['slug'] !!}"></i></button>
                                         <a class="mobile-quick-view" href="{{ route('productdetails', ['slug' => $value['slug']]) }}" title="Vizualizare"><i class="ti-search" aria-hidden="true"></i></a>
                                     </div>
                                     <div class="quick-view-part">
@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="cart-info cart-wrap">
                                         <a href="javascript:void(0)"  title="Adauga in Wishlist"><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                        <button  title="Add to cart" onclick="openCart()"><i class="ti-shopping-cart"></i> Adauga in cos</button>
+                                        <button id="addtocart" data-target="{!! $value['slug'] !!}" title="Adauga in cos"><i class="ti-shopping-cart" data-target="{!! $value['slug'] !!}"></i></button>
                                         <a class="mobile-quick-view" href="{{ route('productdetails', ['slug' => $value['slug']]) }}" title="Vizualizare"><i class="ti-search" aria-hidden="true"></i></a>
                                     </div>
                                     <div class="quick-view-part">

@@ -6,4 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 interface BrandsRepositoryInterface
 {
    public function getNavigationBrands();
+   public function getWidgetBrands();
+   public function getBrandBySlug($slug);
 }

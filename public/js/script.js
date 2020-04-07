@@ -1172,47 +1172,270 @@
 
 
     /*=====================
-     18.Add to cart
+     18.CART
      ==========================*/
     $('.product-box button .ti-shopping-cart').on('click', function () {
-        $.notify({
-            icon: 'fa fa-check',
-            title: 'Success!',
-            message: 'Item Successfully added to your cart'
-        },{
-            element: 'body',
-            position: null,
-            type: "success",
-            allow_dismiss: true,
-            newest_on_top: false,
-            showProgressbar: true,
-            placement: {
-                from: "top",
-                align: "right"
+        var _productSlug = $(this).attr('data-target');
+        var _route = laroute.route('addtocart');
+        $.ajax({
+            url: _route,
+            type:'get',
+            dataType:'json',
+            data:{
+                slug:_productSlug
             },
-            offset: 20,
-            spacing: 10,
-            z_index: 1031,
-            delay: 5000,
-            animate: {
-                enter: 'animated fadeInDown',
-                exit: 'animated fadeOutUp'
-            },
-            icon_type: 'class',
-            template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
-            '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
-            '<span data-notify="icon"></span> ' +
-            '<span data-notify="title">{1}</span> ' +
-            '<span data-notify="message">{2}</span>' +
-            '<div class="progress" data-notify="progressbar">' +
-            '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-            '</div>' +
-            '<a href="{3}" target="{4}" data-notify="url"></a>' +
-            '</div>'
+            success:function(){
+                var _badgeValue = $("#cartbadge").text();
+                if(_badgeValue != '')
+                {
+                    $("#cartbadge").text(parseInt(_badgeValue, 10) + 1);
+                }
+                else
+                {
+                    $("#cartbadge").text('1');
+                }
+                $.notify({
+                    icon: 'fa fa-check',
+                    title: 'Succes!',
+                    message: 'Produsul a fost adaugat in cos.'
+                },{
+                    element: 'body',
+                    position: null,
+                    type: "success",
+                    allow_dismiss: true,
+                    newest_on_top: false,
+                    showProgressbar: true,
+                    placement: {
+                        from: "top",
+                        align: "right"
+                    },
+                    offset: 20,
+                    spacing: 10,
+                    z_index: 1031,
+                    delay: 5000,
+                    animate: {
+                        enter: 'animated fadeInDown',
+                        exit: 'animated fadeOutUp'
+                    },
+                    icon_type: 'class',
+                    template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+                    '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
+                    '<span data-notify="icon"></span> ' +
+                    '<span data-notify="title">{1}</span> ' +
+                    '<span data-notify="message">{2}</span>' +
+                    '<div class="progress" data-notify="progressbar">' +
+                    '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                    '</div>' +
+                    '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                    '</div>'
+                });
+            }
         });
     });
 
+    $('#removeItemFromCart').on('click', function () {
+        var _itemToBeDeleted = $("#removeItemFromCart").attr('data-target');
+        var _route = laroute.route('removefromcart');
+        $.ajax({
+            url: _route,
+            type:'get',
+            dataType:'json',
+            data:{
+                id:_itemToBeDeleted
+            },
+            success:function(response){
+                //set cart badge
+                var _badgeValue = $("#cartbadge").text();
+                if(_badgeValue != '')
+                {
+                    $("#cartbadge").text(parseInt(_badgeValue, 10) - 1);
+                }
+                //remove item from cart page
+                $("#carttable tbody").empty();
+                if(response)
+                {
+                    var _html='';
+                    var base_url = window.location.origin;
+                    var total = 0;
+                    $.each(response,function(index,value){
+                        var product_details_url = laroute.route('productdetails', { slug : ''+value.associatedModel.Slug+'' });
+                        var productPrice = (value.associatedModel.DiscountPrice != null) ? value.associatedModel.DiscountPrice : value.price;
+                        total+= productPrice*value.quantity;
+                        _html+='<tbody>'
+                            _html+= '<tr>'
+                                _html+= '<td><a href="#"><img src="'+ base_url +'/images/pro3/1.jpg" alt=""></a></td>';
+                                _html+= '<td>';
+                                    _html+= '<a href="'+ product_details_url +'">'+value.name+'</a>';
+                                    _html+= '<div class="mobile-cart-content row"><div class="col-xs-3"><div class="qty-box"><div class="input-group">';
+                                    _html+= '<input type="text" name="quantity" class="form-control input-number" value="'+ value.quantity +'">';
+                                    _html+= '</div></div></div>'
+                                    _html+= '<div class="col-xs-3">';
+                                    _html+= '<h2 class="td-color"> '+ productPrice +' Lei</h2></div>';
+                                    _html+= '<div class="col-xs-3">';
+                                    _html+= '<h2 class="td-color"><a href="#" class="icon" id="removeItemFromCart" data-target="'+ value.id +'"></div></div>';
+                                _html+= '</td>';
+                                _html+= '<td>';
+                                    _html+= '<h2>'+ productPrice +' Lei</h2>';
+                                _html+= '</td>';
+                                _html+= '<td>';
+                                    _html+= '<div class="qty-box">';
+                                    _html+= '<div class="input-group">';
+                                    _html+= '<input type="number" name="quantity" class="form-control input-number" value="'+ value.quantity +'">';
+                                    _html+= '</div></div>';
+                                _html+= '</td>';
+                                _html+= '<td>';
+                                    _html+= '<a href="#" class="icon" id="removeItemFromCart" data-target="'+ value.id +'"><i class="ti-close"></i></a>';
+                                _html+= '</td>';
+                                _html+= '<td>';
+                                _html+= '<h3>'+ productPrice*value.quantity +' Lei</h3>';
+                                _html+= '</td>';
+                             _html+= '</tr>'
+                        _html+='</tbody>'
+                    });
+                    $("#carttotal").text(total);
+                    $("#carttable").append(_html);
+                }
+                //show notification
+                $.notify({
+                    icon: 'fa fa-check',
+                    title: 'Succes!',
+                    message: 'Produsul a fost sters din cos.'
+                },{
+                    element: 'body',
+                    position: null,
+                    type: "success",
+                    allow_dismiss: true,
+                    newest_on_top: false,
+                    showProgressbar: true,
+                    placement: {
+                        from: "top",
+                        align: "right"
+                    },
+                    offset: 20,
+                    spacing: 10,
+                    z_index: 1031,
+                    delay: 5000,
+                    animate: {
+                        enter: 'animated fadeInDown',
+                        exit: 'animated fadeOutUp'
+                    },
+                    icon_type: 'class',
+                    template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+                    '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
+                    '<span data-notify="icon"></span> ' +
+                    '<span data-notify="title">{1}</span> ' +
+                    '<span data-notify="message">{2}</span>' +
+                    '<div class="progress" data-notify="progressbar">' +
+                    '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                    '</div>' +
+                    '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                    '</div>'
+                });
+            }
+        });
+    });
 
+    $('#removeItemFromCartM').on('click', function () {
+        var _itemToBeDeleted = $("#removeItemFromCartM").attr('data-target');
+        var _route = laroute.route('removefromcart');
+        $.ajax({
+            url: _route,
+            type:'get',
+            dataType:'json',
+            data:{
+                id:_itemToBeDeleted
+            },
+            success:function(response){
+                //set cart badge
+                var _badgeValue = $("#cartbadge").text();
+                if(_badgeValue != '')
+                {
+                    $("#cartbadge").text(parseInt(_badgeValue, 10) - 1);
+                }
+                //remove item from cart page
+                $("#carttable tbody").empty();
+                if(response)
+                {
+                    var _html='';
+                    var base_url = window.location.origin;
+                    var total = 0;
+                    $.each(response,function(index,value){
+                        var product_details_url = laroute.route('productdetails', { slug : ''+value.associatedModel.Slug+'' });
+                        var productPrice = (value.associatedModel.DiscountPrice != null) ? value.associatedModel.DiscountPrice : value.price;
+                        total+= productPrice*value.quantity;
+                        _html+='<tbody>'
+                            _html+= '<tr>'
+                                _html+= '<td><a href="#"><img src="'+ base_url +'/images/pro3/1.jpg" alt=""></a></td>';
+                                _html+= '<td>';
+                                    _html+= '<a href="'+ product_details_url +'">'+value.name+'</a>';
+                                    _html+= '<div class="mobile-cart-content row"><div class="col-xs-3"><div class="qty-box"><div class="input-group">';
+                                    _html+= '<input type="text" name="quantity" class="form-control input-number" value="'+ value.quantity +'">';
+                                    _html+= '</div></div></div>'
+                                    _html+= '<div class="col-xs-3">';
+                                    _html+= '<h2 class="td-color"> '+ productPrice +' Lei</h2></div>';
+                                    _html+= '<div class="col-xs-3">';
+                                    _html+= '<h2 class="td-color"><a href="#" class="icon" id="removeItemFromCart" data-target="'+ value.id +'"></div></div>';
+                                _html+= '</td>';
+                                _html+= '<td>';
+                                    _html+= '<h2>'+ productPrice +' Lei</h2>';
+                                _html+= '</td>';
+                                _html+= '<td>';
+                                    _html+= '<div class="qty-box">';
+                                    _html+= '<div class="input-group">';
+                                    _html+= '<input type="number" name="quantity" class="form-control input-number" value="'+ value.quantity +'">';
+                                    _html+= '</div></div>';
+                                _html+= '</td>';
+                                _html+= '<td>';
+                                    _html+= '<a href="#" class="icon" id="removeItemFromCart" data-target="'+ value.id +'"><i class="ti-close"></i></a>';
+                                _html+= '</td>';
+                                _html+= '<td>';
+                                _html+= '<h3>'+ productPrice*value.quantity +' Lei</h3>';
+                                _html+= '</td>';
+                             _html+= '</tr>'
+                        _html+='</tbody>'
+                    });
+                    $("#carttotal").text(total);
+                    $("#carttable").append(_html);
+                }
+                //show notification
+                $.notify({
+                    icon: 'fa fa-check',
+                    title: 'Succes!',
+                    message: 'Produsul a fost sters din cos.'
+                },{
+                    element: 'body',
+                    position: null,
+                    type: "success",
+                    allow_dismiss: true,
+                    newest_on_top: false,
+                    showProgressbar: true,
+                    placement: {
+                        from: "top",
+                        align: "right"
+                    },
+                    offset: 20,
+                    spacing: 10,
+                    z_index: 1031,
+                    delay: 5000,
+                    animate: {
+                        enter: 'animated fadeInDown',
+                        exit: 'animated fadeOutUp'
+                    },
+                    icon_type: 'class',
+                    template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+                    '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
+                    '<span data-notify="icon"></span> ' +
+                    '<span data-notify="title">{1}</span> ' +
+                    '<span data-notify="message">{2}</span>' +
+                    '<div class="progress" data-notify="progressbar">' +
+                    '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                    '</div>' +
+                    '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                    '</div>'
+                });
+            }
+        });
+    });
     /*=====================
      19.Add to wishlist
      ==========================*/

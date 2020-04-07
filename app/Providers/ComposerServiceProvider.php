@@ -49,5 +49,8 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer(
             'faq', 'App\Http\ViewComposers\FaqComposer'
         );
+        view()->composer(
+            'partials.technologies', 'App\Http\ViewComposers\TechnologiesComposer'
+        );
     }
 }

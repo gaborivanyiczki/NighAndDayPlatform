@@ -2,7 +2,7 @@
 <!-- Tab product -->
 <div class="title1 section-t-space">
     <h4>best seller</h4>
-    <h2 class="title-inner1">produse populare</h2>
+    <h2 class="title-inner1">PRODUSE POPULARE</h2>
 </div>
 <section class="section-b-space p-t-0 ratio_asos">
     <div class="container">
@@ -33,7 +33,9 @@
                                                     @endforeach
                                                 </div>
                                                 <div class="cart-info cart-wrap">
-                                                    <button data-toggle="modal" data-target="#addtocart"  title="Adauga in cos"><i class="ti-shopping-cart" ></i></button> <a href="javascript:void(0)" title="Adauga in Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}" title="Vizualizare"><i class="ti-search" aria-hidden="true"></i></a> </a></div>
+                                                    <button id="addtocart" data-target="{!! $value['slug'] !!}" title="Adauga in cos"><i class="ti-shopping-cart" data-target="{!! $value['slug'] !!}"></i></button>
+                                                    <a href="javascript:void(0)" title="Adauga in Wishlist"><i class="ti-heart" aria-hidden="true"></i></a>
+                                                    <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}" title="Vizualizare"><i class="ti-search" aria-hidden="true"></i></a> </a></div>
                                                 </div>
                                             <div class="product-detail">
                                                 <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
@@ -52,7 +54,9 @@
                                                     @endforeach
                                                 </div>
                                                 <div class="cart-info cart-wrap">
-                                                    <button data-toggle="modal" data-target="#addtocart"  title="Adauga in cos"><i class="ti-shopping-cart" ></i></button> <a href="javascript:void(0)" title="Adauga in Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}" title="Vizualizare"><i class="ti-search" aria-hidden="true"></i></a> </a></div>
+                                                    <button id="addtocart" data-target="{!! $value['slug'] !!}" title="Adauga in cos"><i class="ti-shopping-cart" data-target="{!! $value['slug'] !!}"></i></button>
+                                                    <a href="javascript:void(0)" title="Adauga in Wishlist"><i class="ti-heart" aria-hidden="true"></i></a>
+                                                    <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}" title="Vizualizare"><i class="ti-search" aria-hidden="true"></i></a> </a></div>
                                                 </div>
                                             <div class="product-detail">
                                                 <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>

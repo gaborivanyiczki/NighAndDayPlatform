@@ -29,3 +29,10 @@ Route::get('/product/{slug}', 'ProductController@details')->name('productdetails
 //Category
 Route::get('/category/{slug}', 'CategoryController@products')->name('categoryproducts');
 Route::get('/fetch-products', 'CategoryController@fetchProducts')->name('fetchproducts');
+//Brand
+Route::get('/brand/{slug}', 'BrandController@brandDetails')->name('brand.details');
+//Cart
+Route::get('/add-to-cart', 'CartController@addToCart')->name('addtocart');
+Route::get('/cart/get', 'CartController@getCartContent')->name('getcart');
+Route::get('/cart', 'CartController@cart')->name('cart');
+Route::get('/remove-from-cart', 'CartController@removeItemFromCart')->name('removefromcart');

@@ -89,4 +89,12 @@ class ProductsRepository extends BaseRepository implements ProductsRepositoryInt
                             ->orderBy('products.'.$sort['SortColumn'], $sort['SortBy'])
                             ->get()->toArray();
     }
+
+    public function findParticularProductBySlug($slug)
+    {
+        return $this->model->where('Slug', $slug)
+                            ->select('id', 'Name', 'Price', 'DiscountPrice', 'Slug')
+                            ->first();
+
+    }
 }
