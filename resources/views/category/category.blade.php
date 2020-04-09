@@ -142,7 +142,10 @@
                                                                         @endforeach
                                                                     </div>
                                                                     <div class="cart-info cart-wrap">
-                                                                        <button data-toggle="modal" data-target="#addtocart"  title="Adauga in cos"><i class="ti-shopping-cart" ></i></button> <a href="javascript:void(0)" title="Adauga in Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}" title="Vizualizare"><i class="ti-search" aria-hidden="true"></i></a> </a></div>
+                                                                        <button class="cart-button" data-target="{!! $value['slug'] !!}" title="Add to cart"><i class="ti-shopping-cart"></i></button>
+                                                                        <a href="javascript:void(0)" title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a>
+                                                                        <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="product-detail">
                                                                     <div>
@@ -165,7 +168,10 @@
                                                                         @endforeach
                                                                     </div>
                                                                     <div class="cart-info cart-wrap">
-                                                                        <button data-toggle="modal" data-target="#addtocart"  title="Adauga in cos"><i class="ti-shopping-cart" ></i></button> <a href="javascript:void(0)" title="Adauga in Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}" title="Vizualizare"><i class="ti-search" aria-hidden="true"></i></a> </div>
+                                                                        <button class="cart-button" data-target="{!! $value['slug'] !!}" title="Add to cart"><i class="ti-shopping-cart"></i></button>
+                                                                        <a href="javascript:void(0)" title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a>
+                                                                        <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="product-detail">
                                                                     <div>

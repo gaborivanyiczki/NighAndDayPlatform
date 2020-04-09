@@ -43,10 +43,7 @@
                                     </div>
                                 </li>
                                 <li class="onhover-div mobile-cart">
-                                    <div class="icon-wrapper">
-                                        <a href="{{ route('cart') }}"><img src="{{ URL::to('/') }}/images/icon/cart.png" class="img-fluid blur-up lazyload" alt=""><i class="ti-shopping-cart"></i></a>
-                                        <span class="badge" id="cartbadge"></span>
-                                    </div>
+                                    @include('partials.cart-icon')
                                 </li>
                             </ul>
                         </div>

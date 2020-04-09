@@ -52,5 +52,8 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer(
             'partials.technologies', 'App\Http\ViewComposers\TechnologiesComposer'
         );
+        view()->composer(
+            'partials.cart-icon', 'App\Http\ViewComposers\CartBadgeComposer'
+        );
     }
 }

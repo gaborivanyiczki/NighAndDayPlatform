@@ -97,7 +97,10 @@
                                     <input type="text" name="quantity" class="form-control input-number" value="1"> <span class="input-group-prepend"><button type="button" class="btn quantity-right-plus" data-type="plus" data-field=""><i class="ti-angle-right"></i></button></span></div>
                             </div>
                         </div>
-                        <div class="product-buttons"><a href="#" data-toggle="modal" data-target="#addtocart" class="btn btn-solid"><i class="fa fa-shopping-cart"></i> adauga in cos</a><a href="#" data-toggle="modal" data-target="#addtowishlist" class="btn btn-solid gray-btn" style="margin-left:15px;"><i class="fa fa-heart" style="color:red;"></i> adauga in wishlist</a></div>
+                        <div class="product-buttons">
+                            <button class="cart-button btn btn-solid" data-target="{!! $productModel['product']['slug'] !!}"><i class="fa fa-shopping-cart"></i> adauga in cos</button>
+                            <button class="btn btn-solid gray-btn" style="margin-left:15px;"><i class="fa fa-heart" style="color:red;"></i> adauga in wishlist</button>
+                        </div>
                         <div class="border-product">
                             <ul>
                                 <li style="display: block;">Cod produs: <b>{{ $productModel['product']['productCode'] }}</b></li>

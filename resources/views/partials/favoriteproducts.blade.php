@@ -33,7 +33,7 @@
                                                     @endforeach
                                                 </div>
                                                 <div class="cart-info cart-wrap">
-                                                    <button id="addtocart" data-target="{!! $value['slug'] !!}" title="Adauga in cos"><i class="ti-shopping-cart" data-target="{!! $value['slug'] !!}"></i></button>
+                                                    <button class="cart-button" id="addtocart" data-target="{!! $value['slug'] !!}" title="Adauga in cos"><i class="ti-shopping-cart" data-target="{!! $value['slug'] !!}"></i></button>
                                                     <a href="javascript:void(0)" title="Adauga in Wishlist"><i class="ti-heart" aria-hidden="true"></i></a>
                                                     <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}" title="Vizualizare"><i class="ti-search" aria-hidden="true"></i></a> </a></div>
                                                 </div>
@@ -54,7 +54,7 @@
                                                     @endforeach
                                                 </div>
                                                 <div class="cart-info cart-wrap">
-                                                    <button id="addtocart" data-target="{!! $value['slug'] !!}" title="Adauga in cos"><i class="ti-shopping-cart" data-target="{!! $value['slug'] !!}"></i></button>
+                                                    <button class="cart-button" id="addtocart" data-target="{!! $value['slug'] !!}" title="Adauga in cos"><i class="ti-shopping-cart" data-target="{!! $value['slug'] !!}"></i></button>
                                                     <a href="javascript:void(0)" title="Adauga in Wishlist"><i class="ti-heart" aria-hidden="true"></i></a>
                                                     <a href="{{ route('productdetails', ['slug' => $value['slug']]) }}" title="Vizualizare"><i class="ti-search" aria-hidden="true"></i></a> </a></div>
                                                 </div>

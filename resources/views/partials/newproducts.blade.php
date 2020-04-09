@@ -33,7 +33,7 @@
                                     </div>
                                     <div class="cart-info cart-wrap">
                                         <a href="javascript:void(0)"  title="Adauga in Wishlist"><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                        <button id="addtocart" data-target="{!! $value['slug'] !!}" title="Adauga in cos"><i class="ti-shopping-cart" data-target="{!! $value['slug'] !!}"></i></button>
+                                        <button class="cart-button" data-target="{!! $value['slug'] !!}">Adauga in cos</button>
                                         <a class="mobile-quick-view" href="{{ route('productdetails', ['slug' => $value['slug']]) }}" title="Vizualizare"><i class="ti-search" aria-hidden="true"></i></a>
                                     </div>
                                     <div class="quick-view-part">
@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="cart-info cart-wrap">
                                         <a href="javascript:void(0)"  title="Adauga in Wishlist"><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                        <button id="addtocart" data-target="{!! $value['slug'] !!}" title="Adauga in cos"><i class="ti-shopping-cart" data-target="{!! $value['slug'] !!}"></i></button>
+                                        <button class="cart-button" data-target="{!! $value['slug'] !!}">Adauga in cos</button>
                                         <a class="mobile-quick-view" href="{{ route('productdetails', ['slug' => $value['slug']]) }}" title="Vizualizare"><i class="ti-search" aria-hidden="true"></i></a>
                                     </div>
                                     <div class="quick-view-part">

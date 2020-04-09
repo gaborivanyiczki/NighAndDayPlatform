@@ -27,7 +27,7 @@ class ProductsRepository extends BaseRepository implements ProductsRepositoryInt
 
     public function getNewProducts()
     {
-        return $this->model->with(['images' => function($query) { $query->select('Path', 'Filename','Product_ID')->where('default', 1); }])
+        return $this->model->with(['images' => function($query) { $query->select('Path', 'Filename','Product_ID')->where('Default', 1); }])
                                         ->select('Name','Slug','Price','DiscountPrice','id')
                                         ->orderBy('created_at', 'desc')
                                         ->take(5)
@@ -46,7 +46,7 @@ class ProductsRepository extends BaseRepository implements ProductsRepositoryInt
     public function getSimilarProducts($slug, $category)
     {
         return $this->model->where([ ['Slug', '!=', $slug],['Category_ID', $category] ])
-                            ->with(['images' => function($query) { $query->select('Path', 'Filename','Product_ID')->where('default', 1); }])
+                            ->with(['images' => function($query) { $query->select('Path', 'Filename','Product_ID')->where('Default', 1); }])
                             ->select('Name','Slug','Price','DiscountPrice','id')
                             ->take(6)
                             ->get()->toArray();
@@ -55,7 +55,7 @@ class ProductsRepository extends BaseRepository implements ProductsRepositoryInt
     public function getOtherProducts($slug)
     {
         return $this->model->where([ ['Slug', '!=', $slug],['Favorite', 1],['Active', 1] ])
-                            ->with(['images' => function($query) { $query->select('Path','Filename','Product_ID')->where('default', 1); }])
+                            ->with(['images' => function($query) { $query->select('Path','Filename','Product_ID')->where('Default', 1); }])
                             ->select('Name','Slug','Price','DiscountPrice','id')
                             ->take(6)
                             ->get()->toArray();
@@ -63,7 +63,7 @@ class ProductsRepository extends BaseRepository implements ProductsRepositoryInt
 
     public function getProductsByCategory($slug)
     {
-        return $this->model->with(['images' => function($query) { $query->select('Path','Filename','Product_ID')->where('default', 1); }])
+        return $this->model->with(['images' => function($query) { $query->select('Path','Filename','Product_ID')->where('Default', 1); }])
                             ->join('categories', 'categories.id', '=', 'Category_ID')
                             ->where([['products.Active', 1], ['categories.Slug', $slug]])
                             ->select('products.Name as Name','products.Slug as Slug','Price','DiscountPrice','products.id as id')
@@ -80,7 +80,7 @@ class ProductsRepository extends BaseRepository implements ProductsRepositoryInt
 
     public function getProductsByFilter($categorySlug, $skip, $take, array $sort)
     {
-        return $this->model->with(['images' => function($query) { $query->select('Path','Filename','Product_ID')->where('default', 1); }])
+        return $this->model->with(['images' => function($query) { $query->select('Path','Filename','Product_ID')->where('Default', 1); }])
                             ->join('categories', 'categories.id', '=', 'Category_ID')
                             ->where([['products.Active', 1], ['categories.Slug', $categorySlug]])
                             ->select('products.Name as Name','products.Slug as Slug','Price','DiscountPrice','products.id as id')
@@ -92,7 +92,8 @@ class ProductsRepository extends BaseRepository implements ProductsRepositoryInt
 
     public function findParticularProductBySlug($slug)
     {
-        return $this->model->where('Slug', $slug)
+        return $this->model->with(['images' => function($query) { $query->select('Path', 'Filename','Product_ID','Default')->where('Default', 1)->first(); }])
+                            ->where('Slug', $slug)
                             ->select('id', 'Name', 'Price', 'DiscountPrice', 'Slug')
                             ->first();
 

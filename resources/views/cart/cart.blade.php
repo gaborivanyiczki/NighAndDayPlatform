@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <!-- breadcrumb start -->
 <div class="breadcrumb-section">
     <div class="container">
@@ -22,7 +21,6 @@
     </div>
 </div>
 <!-- breadcrumb End -->
-
 <!--section start-->
 <section class="cart-section section-b-space">
     <div class="container">
@@ -41,7 +39,7 @@
                     </thead>
                     @empty(json_decode($cartModel, true))
                     <tbody>
-                        <td>Nu exista produse.</td>
+                        <td>Nu exista produse in cos.</td>
                     </tbody>
                     @else
 
@@ -49,22 +47,20 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <a href="#"><img src="{{ URL::to('/') }}/images/pro3/1.jpg" alt=""></a>
+                                    @foreach($item['associatedModel']['images'] as $image)
+                                    <a href="{{ route('productdetails', ['slug' => $item['associatedModel']['Slug']]) }}"><img src="{{ URL::to('/') }}/images/uploads/{!! $image['Path'] !!}/{!! $image['Filename'] !!}" alt=""></a>
+                                    @endforeach
                                 </td>
                                 <td><a href="{{ route('productdetails', ['slug' => $item['associatedModel']['Slug']]) }}">{!! $item['associatedModel']['Name'] !!}</a>
                                     <div class="mobile-cart-content row">
                                         <div class="col-xs-3">
-                                            <div class="qty-box">
-                                                <div class="input-group">
-                                                    <input type="text" name="quantity" class="form-control input-number" value="{!! $item['quantity'] !!}">
-                                                </div>
-                                            </div>
+                                            <input type="number" min="1" max="10" onkeydown="return false" name="quantity" value="{!! $item['quantity'] !!}">
                                         </div>
                                         <div class="col-xs-3">
                                             <h2 class="td-color">{!! $item['associatedModel']['DiscountPrice'] != null ? $item['associatedModel']['DiscountPrice'] : $item['associatedModel']['Price'] !!} Lei</h2>
                                         </div>
                                         <div class="col-xs-3">
-                                            <h2 class="td-color"><a href="#" class="icon" id="removeItemFromCartM" data-target="{!! $item['id'] !!}"><i class="ti-close"></i></a></h2>
+                                            <h2 class="td-color"><a class="icon" id="removeItemFromCartM-{!! $item['id'] !!}" data-target="{!! $item['id'] !!}"><i class="ti-close"></i></a></h2>
                                         </div>
                                     </div>
                                 </td>
@@ -73,12 +69,12 @@
                                 </td>
                                 <td>
                                     <div class="qty-box">
-                                        <div class="input-group">
-                                            <input type="number" name="quantity" class="form-control input-number" value="{!! $item['quantity'] !!}">
-                                        </div>
+                                    <div class="input-group">
+                                        <input type="number" min="1" max="10" onkeydown="return false" name="quantity" value="{!! $item['quantity'] !!}">
                                     </div>
+                                </div>
                                 </td>
-                                <td><a href="#" class="icon" id="removeItemFromCart" data-target="{!! $item['id'] !!}"><i class="ti-close"></i></a></td>
+                                <td><a class="icon" id="removeItemFromCart-{!! $item['id'] !!}" data-target="{!! $item['id'] !!}"><i class="ti-close"></i></a></td>
                                 <td>
                                     <h3>{!! $item['associatedModel']['DiscountPrice'] != null ? $item['quantity'] * $item['associatedModel']['DiscountPrice'] : $item['quantity'] * $item['associatedModel']['Price'] !!} Lei</h3>
                                 </td>
@@ -91,20 +87,37 @@
                 </table>
                 <table class="table cart-table table-responsive-md">
                     <tfoot>
+
+                    @empty(json_decode($cartModel, true))
                     <tr>
+                    </tr>
+                    @else
+                    <tr id="totalRow">
                         <td style="width: 82%;"><h3>total:</h3></td>
                         <td><h3 style="font-weight: bold;" id="carttotal">{!! $cartTotal !!} Lei</h3></td>
                     </tr>
+                    @endempty
+
                     </tfoot>
                 </table>
             </div>
         </div>
         <div class="row cart-buttons">
+
+            @empty(json_decode($cartModel, true))
+            <div class="col-12"><a href="{{ route('home') }}" class="btn btn-solid">continua cumparaturile</a></div>
+            @else
             <div class="col-6"><a href="{{ route('home') }}" class="btn btn-solid">continua cumparaturile</a></div>
             <div class="col-6"><a href="#" class="btn btn-solid">finalizeaza</a></div>
+            @endempty
+
         </div>
     </div>
 </section>
 <!--section end-->
-
 @endsection
+
+@push('custom-scripts')
+     <!-- The rest of your scripts -->
+     <script src="{{ asset('js/bootstrap-input-spinner.js') }}" defer></script>
+@endpush

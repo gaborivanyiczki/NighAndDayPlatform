@@ -7388,20 +7388,6 @@ footer {
     -webkit-box-flex: unset;
         -ms-flex: unset;
             flex: unset; }
-  .qty-box .input-group button {
-    background-color: transparent;
-    border: 0;
-    color: #777777;
-    cursor: pointer;
-    padding-left: 12px;
-    font-size: 12px;
-    font-weight: 900;
-    line-height: 1; }
-    .qty-box .input-group button i {
-      font-weight: 900;
-      color: #222222; }
-  .qty-box .input-group .icon {
-    padding-right: 0; }
 
 .order-history .responsive-data {
   display: none; }
