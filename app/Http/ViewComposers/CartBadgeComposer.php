@@ -12,11 +12,13 @@ class CartBadgeComposer
         if (Auth::check())
         {
             $userId = Auth::id();
-            $cartItemsCount = \Cart::session($userId)->getTotalQuantity();
+            $cartCollection = \Cart::session($userId)->getContent();
+            $cartItemsCount = $cartCollection->count();
         }
         else
         {
-            $cartItemsCount = \Cart::getTotalQuantity();
+            $cartCollection = \Cart::getContent();
+            $cartItemsCount = $cartCollection->count();
         }
 
         $view->with('data', $cartItemsCount);

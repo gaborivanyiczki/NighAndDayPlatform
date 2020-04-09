@@ -54,7 +54,7 @@
                                 <td><a href="{{ route('productdetails', ['slug' => $item['associatedModel']['Slug']]) }}">{!! $item['associatedModel']['Name'] !!}</a>
                                     <div class="mobile-cart-content row">
                                         <div class="col-xs-3">
-                                            <input type="number" min="1" max="10" onkeydown="return false" name="quantity" value="{!! $item['quantity'] !!}">
+                                            <input type="number" min="1" max="10" name="quantity" data-target="{!! $item['id'] !!}" value="{!! $item['quantity'] !!}">
                                         </div>
                                         <div class="col-xs-3">
                                             <h2 class="td-color">{!! $item['associatedModel']['DiscountPrice'] != null ? $item['associatedModel']['DiscountPrice'] : $item['associatedModel']['Price'] !!} Lei</h2>
@@ -70,7 +70,7 @@
                                 <td>
                                     <div class="qty-box">
                                     <div class="input-group">
-                                        <input type="number" min="1" max="10" onkeydown="return false" name="quantity" value="{!! $item['quantity'] !!}">
+                                        <input type="number" min="1" max="10" name="quantity" data-target="{!! $item['id'] !!}" value="{!! $item['quantity'] !!}">
                                     </div>
                                 </div>
                                 </td>

@@ -1160,7 +1160,21 @@
     /*=====================
      18.ADD TO CART
      ==========================*/
-     $('body').delegate('.cart-button','click', function () {
+     var config = {
+        decrementButton: "<strong>-</strong>", // button text
+        incrementButton: "<strong>+</strong>", // ..
+        groupClass: "", // css class of the resulting input-group
+        buttonsClass: "btn-outline-secondary",
+        buttonsWidth: "2.5rem",
+        textAlign: "center",
+        autoDelay: 700, // ms holding before auto value change
+        autoInterval: 600, // speed of auto value change
+        boostThreshold: 10, // boost after these steps
+        boostMultiplier: "auto" // you can also set a constant number as multiplier
+    }
+    $("input[type='number']").inputSpinner(config);
+
+    $('body').delegate('.cart-button','click', function () {
         var _productSlug = $(this).attr('data-target');
         var _route = laroute.route('addtocart');
         $.ajax({
@@ -1219,7 +1233,7 @@
         });
     });
     /*=====================
-     02. Remove From Cart
+     19. Remove From Cart
      ==========================*/
      $('table').delegate('.icon','click', function () {
         var _itemToBeDeleted = $(this).attr('data-target');
@@ -1244,7 +1258,8 @@
                         elements++;
                         var product_details_url = laroute.route('productdetails', { slug : ''+value.associatedModel.Slug+'' });
                         var productPrice = (value.associatedModel.DiscountPrice != null) ? value.associatedModel.DiscountPrice : value.price;
-                        total+= productPrice*value.quantity;
+                        var subtotal = productPrice*value.quantity;
+                        total+= subtotal;
                         //build html elements
                         _html+='<tbody>'
                             _html+= '<tr>'
@@ -1252,7 +1267,7 @@
                                 _html+= '<td>';
                                     _html+= '<a href="'+ product_details_url +'">'+value.name+'</a>';
                                     _html+= '<div class="mobile-cart-content row"><div class="col-xs-3"><div class="qty-box"><div class="input-group">';
-                                    _html+= '<input type="text" name="quantity" class="form-control input-number" value="'+ value.quantity +'">';
+                                    _html+= '<input type="number" min="1" max="10" name="quantity" data-target="'+ value.id +'" value="'+ value.quantity +'">';
                                     _html+= '</div></div></div>'
                                     _html+= '<div class="col-xs-3">';
                                     _html+= '<h2 class="td-color"> '+ productPrice +' Lei</h2></div>';
@@ -1265,21 +1280,22 @@
                                 _html+= '<td>';
                                     _html+= '<div class="qty-box">';
                                     _html+= '<div class="input-group">';
-                                    _html+= '<input type="number" name="quantity" class="form-control input-number" value="'+ value.quantity +'">';
+                                    _html+= '<input type="number" min="1" max="10" name="quantity" data-target="'+ value.id +'" value="'+ value.quantity +'">';
                                     _html+= '</div></div>';
                                 _html+= '</td>';
                                 _html+= '<td>';
                                     _html+= '<a class="icon" id="removeItemFromCart-'+ value.id +'" data-target="'+ value.id +'"><i class="ti-close"></i></as>';
                                 _html+= '</td>';
                                 _html+= '<td>';
-                                _html+= '<h3>'+ productPrice*value.quantity +' Lei</h3>';
+                                _html+= '<h3>'+ subtotal.toFixed(2) +' Lei</h3>';
                                 _html+= '</td>';
                              _html+= '</tr>'
                         _html+='</tbody>'
                     });
                     //append html elements
-                    $("#carttotal").text(total + ' Lei');
+                    $("#carttotal").text(total.toFixed(2) + ' Lei');
                     $("#carttable").append(_html);
+                    $("input[type='number']").inputSpinner(config);
                     //set cart badge
                     $("#cartbadge").text(elements);
                 }else{
@@ -1294,6 +1310,7 @@
                     //append html elements
                     $(".cart-buttons").append(_html);
                     $("#carttable").append(_cartItemHtml);
+                    $("input[type='number']").inputSpinner(config);
                     //set cart badge
                     $("#cartbadge").text('');
                 }
@@ -1336,22 +1353,75 @@
             }
         });
     });
-    /*=====================
-     01. Input Spinner
-     ==========================*/
-     var config = {
-        decrementButton: "<strong>-</strong>", // button text
-        incrementButton: "<strong>+</strong>", // ..
-        groupClass: "", // css class of the resulting input-group
-        buttonsClass: "btn-outline-secondary",
-        buttonsWidth: "2.5rem",
-        textAlign: "center",
-        autoDelay: 700, // ms holding before auto value change
-        autoInterval: 600, // speed of auto value change
-        boostThreshold: 10, // boost after these steps
-        boostMultiplier: "auto" // you can also set a constant number as multiplier
-    }
-    $("input[type='number']").inputSpinner(config);
+    /*==============================
+     20. Update Cart Item Quantity
+    ================================*/
+    $('table').delegate("input[name='quantity']","change", function () {
+        var newValue = $(this).val();
+        var itemId = $(this).attr('data-target');
+        var _route = laroute.route('updatecartquantity');
+        $.ajax({
+            url: _route,
+            type:'get',
+            dataType:'json',
+            data:{
+                id:itemId,
+                quantity:newValue
+            },
+            success:function(response){
+                console.log(response);
+                //update item from cart page
+                $("#carttable tbody").empty();
+                var base_url = window.location.origin;
+                if($.trim(response))
+                {
+                    var _html='';
+                    var total = 0;
+                    $.each(response,function(index,value){
+                        var product_details_url = laroute.route('productdetails', { slug : ''+value.associatedModel.Slug+'' });
+                        var productPrice = (value.associatedModel.DiscountPrice != null) ? value.associatedModel.DiscountPrice : value.price;
+                        var subtotal = productPrice*value.quantity;
+                        total+= subtotal;
+                        //build html elements
+                        _html+='<tbody>'
+                            _html+= '<tr>'
+                                _html+= '<td><a href="'+ product_details_url +'"><img src="'+base_url+'/images/uploads/'+value.associatedModel.images[0].Path+'/'+value.associatedModel.images[0].Filename+'" alt=""></a></td>';
+                                _html+= '<td>';
+                                    _html+= '<a href="'+ product_details_url +'">'+value.name+'</a>';
+                                    _html+= '<div class="mobile-cart-content row"><div class="col-xs-3"><div class="qty-box"><div class="input-group">';
+                                    _html+= '<input type="number" min="1" max="10" name="quantity" data-target="'+ value.id +'" value="'+ value.quantity +'">';
+                                    _html+= '</div></div></div>'
+                                    _html+= '<div class="col-xs-3">';
+                                    _html+= '<h2 class="td-color"> '+ productPrice +' Lei</h2></div>';
+                                    _html+= '<div class="col-xs-3">';
+                                    _html+= '<h2 class="td-color"><a class="icon" id="removeItemFromCartM-'+ value.id +'" data-target="'+ value.id +'"><i class="ti-close"></i></a></div></div>';
+                                _html+= '</td>';
+                                _html+= '<td>';
+                                    _html+= '<h2>'+ productPrice +' Lei</h2>';
+                                _html+= '</td>';
+                                _html+= '<td>';
+                                    _html+= '<div class="qty-box">';
+                                    _html+= '<div class="input-group">';
+                                    _html+= '<input type="number" min="1" max="10" name="quantity" data-target="'+ value.id +'" value="'+ value.quantity +'">';
+                                    _html+= '</div></div>';
+                                _html+= '</td>';
+                                _html+= '<td>';
+                                    _html+= '<a class="icon" id="removeItemFromCart-'+ value.id +'" data-target="'+ value.id +'"><i class="ti-close"></i></as>';
+                                _html+= '</td>';
+                                _html+= '<td>';
+                                _html+= '<h3>'+ subtotal.toFixed(2) +' Lei</h3>';
+                                _html+= '</td>';
+                             _html+= '</tr>'
+                        _html+='</tbody>'
+                    });
+                    //append html elements
+                    $("#carttotal").text(total.toFixed(2) + ' Lei');
+                    $("#carttable").append(_html);
+                    $("input[type='number']").inputSpinner(config);
+                }
+            }
+        });
+    })
 
     /*=====================
      19.Add to wishlist

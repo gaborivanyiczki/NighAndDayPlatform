@@ -74,24 +74,56 @@ class CartController extends Controller
         return response()->json(['success' => 'success'], 200);
     }
 
+    public function updateCartItemQuantity(Request $request)
+    {
+        $itemId = $request->id;
+        $newValue = $request->quantity;
+        $cartCollection = null;
+        //$cartTotal = null;
+
+        if (Auth::check())
+        {
+            $userId = Auth::id();
+            \Cart::session($userId)->update($itemId,[
+                'quantity' => array(
+                    'relative' => false,
+                    'value' => $newValue
+                ), ]);
+            $cartCollection = \Cart::session($userId)->getContent();
+            //$cartTotal = \Cart::session($userId)->getTotal();
+        }
+        else
+        {
+            \Cart::update($itemId,[
+                'quantity' => array(
+                    'relative' => false,
+                    'value' => $newValue
+                ), ]);
+            $cartCollection = \Cart::getContent();
+           // $cartTotal = \Cart::getTotal();
+        }
+
+        return response()->json($cartCollection);
+    }
+
     public function removeItemFromCart(Request $request)
     {
         $itemId = $request->id;
         $cartCollection = null;
-        $cartTotal = null;
+        //$cartTotal = null;
 
         if (Auth::check())
         {
             $userId = Auth::id();
             \Cart::session($userId)->remove($itemId);
             $cartCollection = \Cart::session($userId)->getContent();
-            $cartTotal = \Cart::session($userId)->getTotal();
+            //$cartTotal = \Cart::session($userId)->getTotal();
         }
         else
         {
             \Cart::remove($itemId);
             $cartCollection = \Cart::getContent();
-            $cartTotal = \Cart::getTotal();
+            //$cartTotal = \Cart::getTotal();
         }
 
         return response()->json($cartCollection);

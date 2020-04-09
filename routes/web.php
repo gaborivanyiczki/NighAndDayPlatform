@@ -36,3 +36,4 @@ Route::get('/add-to-cart', 'CartController@addToCart')->name('addtocart');
 Route::get('/cart/get', 'CartController@getCartContent')->name('getcart');
 Route::get('/cart', 'CartController@cart')->name('cart');
 Route::get('/remove-from-cart', 'CartController@removeItemFromCart')->name('removefromcart');
+Route::get('/update-cart-qty', 'CartController@updateCartItemQuantity')->name('updatecartquantity');
