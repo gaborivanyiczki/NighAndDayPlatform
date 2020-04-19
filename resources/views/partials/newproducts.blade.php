@@ -32,8 +32,8 @@
                                     @endforeach
                                     </div>
                                     <div class="cart-info cart-wrap">
-                                        <a href="javascript:void(0)"  title="Adauga in Wishlist"><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                        <button class="cart-button" data-target="{!! $value['slug'] !!}">Adauga in cos</button>
+                                        <a href="javascript:void(0)"  title="Adauga in Wishlist" style="margin-right: 5px;"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                                        <a type="button" class="cart-button" data-target="{!! $value['slug'] !!}"><i class="ti-shopping-cart"></i></a>
                                         <a class="mobile-quick-view" href="{{ route('productdetails', ['slug' => $value['slug']]) }}" title="Vizualizare"><i class="ti-search" aria-hidden="true"></i></a>
                                     </div>
                                     <div class="quick-view-part">
@@ -64,8 +64,8 @@
                                     @endforeach
                                     </div>
                                     <div class="cart-info cart-wrap">
-                                        <a href="javascript:void(0)"  title="Adauga in Wishlist"><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                        <button class="cart-button" data-target="{!! $value['slug'] !!}">Adauga in cos</button>
+                                        <a href="javascript:void(0)"  title="Adauga in Wishlist" style="margin-right: 5px;"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                                        <a type="button" class="cart-button" data-target="{!! $value['slug'] !!}"><i class="ti-shopping-cart"></i></a>
                                         <a class="mobile-quick-view" href="{{ route('productdetails', ['slug' => $value['slug']]) }}" title="Vizualizare"><i class="ti-search" aria-hidden="true"></i></a>
                                     </div>
                                     <div class="quick-view-part">

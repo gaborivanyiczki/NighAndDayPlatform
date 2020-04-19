@@ -1,65 +1,18 @@
 /*-----------------------------------------------------------------------------------
 
-    Template Name:Multikart
-    Template URI: themes.pixelstrap.com/multikart
-    Description: This is E-commerce website
-    Author: Pixelstrap
-    Author URI: https://themeforest.net/user/pixelstrap
+    Project Name: NighAndDay
+    Projec URL: www.nighandday.ro
+    Description: eCommerce Platform
 
 ----------------------------------------------------------------------------------- */
-/* 1. General CSS
-   1.1. Button CSS
-   1.2. Title CSS
-   1.3. Brand logo CSS */
-/* 2. Header CSS */
-/* 3. Home slider CSS  */
-/* 4. Instagram CSS  */
-/* 5. Blog CSS */
-/* 6. Service CSS  */
-/* 7. About CSS  */
-/* 8. Banner Timer CSS  */
-/* 9. Category CSS */
-/* 10. Product Box CSS */
-/* 11. Theme tab CSS */
-/* 12. Banner CSS */
-/* 13. Collection Banner CSS */
-/* 14. Product-box slider CSS */
-/* 15. Modal popup CSS */
-/* 16. Look-book CSS */
-/* 17. Demo css
-   17.1. look-book
-   17.2. Full page
-   17.3. Electronic
-   17.4. Fashion-3
-   17.5. Beauty
-   17.6. Flower
-   17.7. Nursery CSS
-   17.8. Game css
-   17.9. Gym
-   17.10. jewellery
-   17.11. pets
-   17.12. tools
-   17.13. marijuana
-   17.14. left sidebar  */
-/* 18. portfolio CSS */
-/* 19. Add to cart CSS */
-/* 20. Flying cart CSS */
-/* 21. Footer CSS */
-/* 22. Inner pages CSS */
-/* 23. Loader CSS*/
-/* 24. Tap to top CSS */
-/* 25. theme setting box CSS */
-/* 26. RTL CSS */
-/* 27. Menu CSS */
-/* 28. Dark CSS */
-/* 29. Responsive CSS */
+
 /*=====================
     1.General CSS start
 ==========================*/
 body {
   font-family: Lato, sans-serif;
   position: relative;
-  background: #ffffff;
+  background-color: #e9ebee;
   font-size: 14px; }
   body.christmas {
     font-family: Philosopher, sans-serif; }
@@ -1099,7 +1052,7 @@ header {
     top: 50px;
     position: absolute;
     z-index: 10;
-    background-color: #f8f8f8;
+    background-color: #fff;
     -webkit-transition: all linear 0.3s;
     transition: all linear 0.3s;
     min-width: 160px;
@@ -1112,7 +1065,7 @@ header {
     visibility: hidden;
     right: 0;
     padding: 15px 20px;
-    border-radius: 0 !important; }
+    border-radius: 5px !important; }
     .onhover-dropdown .onhover-show-div.product-page-full {
       z-index: 99999; }
   .onhover-dropdown:hover .onhover-show-div {
@@ -1235,8 +1188,6 @@ header {
     padding-right: 20px; }
     .top-header .header-dropdown li:first-child {
       padding-right: 0; }
-    .top-header .header-dropdown li a {
-      text-transform: capitalize; }
     .top-header .header-dropdown li i {
       padding-right: 5px;
       -webkit-transition: all 0.5s ease;
@@ -2684,6 +2635,7 @@ header {
     transition: all 0.5s ease; }
 
 .no-slider .product-box {
+  background-color: white;
   width: 100%;
   -webkit-box-flex: 0;
       -ms-flex: 0 0 25%;
@@ -2914,9 +2866,12 @@ header {
       border: none;
       padding: 0; }
   .product-box .product-detail, .product-box .product-info, .product-wrap .product-detail, .product-wrap .product-info {
-    padding-left: 5px; }
+    padding: 0;
+    text-align: center;
+    position: relative;
+    margin-bottom: 10px; }
     .product-box .product-detail .rating, .product-box .product-info .rating, .product-wrap .product-detail .rating, .product-wrap .product-info .rating {
-      margin-top: 15px; }
+      margin-top: 12px; }
       .product-box .product-detail .rating i, .product-box .product-info .rating i, .product-wrap .product-detail .rating i, .product-wrap .product-info .rating i {
         padding-right: 5px; }
         .product-box .product-detail .rating i:nth-child(-n + 4), .product-box .product-info .rating i:nth-child(-n + 4), .product-wrap .product-detail .rating i:nth-child(-n + 4), .product-wrap .product-info .rating i:nth-child(-n + 4) {
@@ -3685,6 +3640,8 @@ header {
     transition: all 0.5s ease; }
 
 .theme-card {
+  background-color: white;
+  border-radius: 5px;
   position: relative; }
   .theme-card.center-align {
     display: -webkit-box;
@@ -7399,7 +7356,9 @@ footer {
   font-weight: 600; }
 
 .cart-section .table tbody + tbody, .wishlist-section .table tbody + tbody {
-  border-top: none; }
+  border-top: none;
+  background-color: white;
+}
 
 .cart-section .cart-buttons, .wishlist-section .cart-buttons {
   padding-top: 35px; }
@@ -7757,7 +7716,6 @@ footer {
 
 .product-right .product-title {
   color: #222222;
-  text-transform: capitalize;
   font-weight: 700;
   margin-bottom: 0; }
 
@@ -8472,8 +8430,17 @@ footer {
   color: #5f5f5f;
   line-height: 20px; }
 
+.dashboard-left .dashboard {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: white;
+}
+
 .dashboard-right .dashboard {
   border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: white;
+  margin-bottom: 15px;
   padding: 30px; }
   .dashboard-right .dashboard .page-title h2 {
     font-size: 22px;

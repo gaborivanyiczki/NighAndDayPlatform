@@ -36,7 +36,9 @@
 
     <!-- Theme css -->
     <link href="{{ asset('css/color5.css') }}" rel="stylesheet" type="text/css" media="screen" id="color">
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="  crossorigin="anonymous"></script>
 
+    @stack('head')
 </head>
 
 <body>
@@ -67,8 +69,6 @@
 <!-- tap to top end -->
 
 <!-- Scripts -->
-<!-- latest jquery-->
-<script src="{{ asset('js/jquery-3.3.1.min.js') }}" defer></script>
 <!-- popper js-->
 <script src="{{ asset('js/popper.min.js') }}" defer></script>
 <!-- slick js-->

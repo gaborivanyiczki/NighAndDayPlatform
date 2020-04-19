@@ -22,7 +22,7 @@
 </div>
 <!-- breadcrumb End -->
 <!--section start-->
-<section class="cart-section section-b-space">
+<section class="cart-section section-b-space" style="background-color: white;">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">

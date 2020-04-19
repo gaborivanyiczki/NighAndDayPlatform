@@ -1423,6 +1423,14 @@
         });
     })
 
+    /*==============================
+     21. Size change event (Product Page)
+    ================================*/
+    $('div > .size-box').delegate(".size-form","change", function () {
+        var link = this.value;
+        window.location.replace(link);
+    })
+
     /*=====================
      19.Add to wishlist
      ==========================*/

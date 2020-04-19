@@ -2,18 +2,10 @@
 
 namespace App\Providers;
 
-use App\GlobalSettings;
-use App\Repository\SettingsRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class ComposerServiceProvider extends ServiceProvider
 {
-    protected $settings;
-
-   // public function __construct(SettingsRepositoryInterface $settings)
-   // {
-   //     $this->settings = $settings;
-   // }
     /**
      * Register any application services.
      *

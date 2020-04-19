@@ -11,20 +11,22 @@
                 </div>
                 <div class="col-lg-6 text-right">
                     <ul class="header-dropdown">
-                        <li class="mobile-wishlist"><a href="#" style="color: #18335B;font-weight:bold;"><i class="fa fa-heart" aria-hidden="true" style="color:#ff0000;"></i> wishlist</a></li>
+                        <li class="mobile-wishlist"><a href="#" style="color: #18335B;font-weight:bold;"><i class="fa fa-heart" aria-hidden="true" style="color:#ff0000;"></i> Wishlist</a></li>
                         @guest
                         <li class="mobile-account" style="font-weight: bold;"><a href="{{ route('login') }}" style="color: #18335B;font-weight:bold;"><i class="fa fa-user" aria-hidden="true"></i> Contul meu</a></li>
                         @else
-                        <li class="onhover-dropdown mobile-account" style="font-weight: bold;"><i class="fa fa-user" aria-hidden="true"></i> Contul meu
+                        <li class="onhover-dropdown mobile-account" style="font-weight: bold;"><a href="{{ route('myaccount') }}" style="color: #18335B;font-weight:bold;"><i class="fa fa-user" aria-hidden="true"></i> Contul meu</a>
                             <ul class="onhover-show-div" style="width: 200px;">
                                 <lh><h6>Salut, {{ Auth::user()->firstname }} {{Auth::user()->lastname}}<h6></lh>
                                 <li class="divider"></li>
-                                <li><a href="#" data-lng="en"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Comenzile mele</a></li>
-                                <li><a href="#" data-lng="en"><i class="fa fa-gift" aria-hidden="true"></i> Voucherele mele</a></li>
-                                <li><a href="#" data-lng="en"><i class="fa fa-star" aria-hidden="true"></i> Reviews</a></li>                                
-                                <li><a href="#" data-lng="en"><i class="fa fa-certificate" aria-hidden="true"></i> Garantiile mele</a></li>                                                               
-                                <li><a href="#" data-lng="en"><i class="fa fa-user-circle-o"></i> Date personale</a></li>                                                                                             
-                                <li><a href="#" data-lng="en"><i class="fa fa-cog" aria-hidden="true"></i> Setari cont</a></li>
+                                <li><a href="{{ route('myaccount') }}" data-lng="ro">Informatii cont</a></li>
+                                <li><a href="{{ route('myaddresses') }}" data-lng="ro">Adrese personale</a></li>
+                                <li><a href="{{ route('myorders') }}" data-lng="ro">Comenzile mele</a></li>
+                                <li><a href="{{ route('myvouchers') }}" data-lng="ro">Voucherele mele</a></li>
+                                <li><a href="{{ route('mywarranties') }}" data-lng="ro">Garantiile mele</a></li>
+                                <li><a href="{{ route('myreviews') }}" data-lng="ro">Review-urile mele</a></li>
+                                <li><a href="{{ route('user.settings') }}" data-lng="ro">Setari cont</a></li>
+                                <li><a href="{{ route('mysubscriptions') }}" data-lng="ro">Abonarile mele</a></li>
                                 <li class="divider"></li>
                                 <li><a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -37,8 +39,8 @@
                                         @csrf
                                     </form></li>
                             </ul>
-                        </li>    
-                        @endguest                        
+                        </li>
+                        @endguest
                     </ul>
                 </div>
             </div>

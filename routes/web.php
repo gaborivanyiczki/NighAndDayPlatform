@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 //Authentication
 Auth::routes();
-
+//////////////////      CUSTOM ROUTES   /////////////////////////////////////////
 //Home
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/contact', 'HomeController@contact')->name('contact');
@@ -37,3 +37,17 @@ Route::get('/cart/get', 'CartController@getCartContent')->name('getcart');
 Route::get('/cart', 'CartController@cart')->name('cart');
 Route::get('/remove-from-cart', 'CartController@removeItemFromCart')->name('removefromcart');
 Route::get('/update-cart-qty', 'CartController@updateCartItemQuantity')->name('updatecartquantity');
+//UserManagement
+Route::get('/user/account', 'UserController@myaccount')->name('myaccount');
+Route::get('/user/addresses', 'UserController@myaddresses')->name('myaddresses');
+Route::get('/user/orders', 'UserController@myorders')->name('myorders');
+Route::get('/user/vouchers', 'UserController@myvouchers')->name('myvouchers');
+Route::get('/user/warranties', 'UserController@mywarranties')->name('mywarranties');
+Route::get('/user/reviews', 'UserController@myreviews')->name('myreviews');
+Route::get('/user/settings', 'UserController@settings')->name('user.settings');
+Route::get('/user/subscriptions', 'UserController@mysubscriptions')->name('mysubscriptions');
+
+Route::post('/user/postUserAddress', 'UserController@postUserAddress')->name('user.add.adress');
+Route::post('/user/updateUserAddress', 'UserController@updateUserAddress')->name('user.edit.adress');
+Route::post('/user/removeUserAddress', 'UserController@removeUserAddress')->name('removeUserAddress');
+Route::get('/user/getUserAddress', 'UserController@getUserAddress')->name('getUserAddress');

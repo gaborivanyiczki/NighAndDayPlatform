@@ -68,7 +68,7 @@
                         <div class="product-description border-product">
 
                             @foreach ($productModel['product']['choosable'] as $item)
-                                <h6 class="product-title size-text">alege {!! $item['attributeName'] !!} <span><a href="" data-toggle="modal" data-target="#sizemodal">lista dimensiuni</a></span></h6>
+                                <h6 class="product-title size-text">Alege {!! $item['attributeName'] !!} <span><a href="" data-toggle="modal" data-target="#sizemodal">lista dimensiuni</a></span></h6>
                                 <div class="modal fade" id="sizemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
@@ -82,7 +82,7 @@
                                 </div>
 
                                 <div class="size-box" style="max-width: 50%;">
-                                    <select class="form-control" size="1">
+                                    <select class="form-control size-form" size="1">
                                         <option value="#">{!! $item['value'] !!}</option>
                                         @foreach ($item['attributeList'] as $attributeItem)
                                         <option value="{{ route('productdetails', ['slug' => $attributeItem['Slug']]) }}">{!! $attributeItem['Value'] !!}</option>
@@ -90,12 +90,6 @@
                                     </select>
                                 </div>
                             @endforeach
-
-                            <h6 class="product-title">Cantitate</h6>
-                            <div class="qty-box">
-                                <div class="input-group"><span class="input-group-prepend"><button type="button" class="btn quantity-left-minus" data-type="minus" data-field=""><i class="ti-angle-left"></i></button> </span>
-                                    <input type="text" name="quantity" class="form-control input-number" value="1"> <span class="input-group-prepend"><button type="button" class="btn quantity-right-plus" data-type="plus" data-field=""><i class="ti-angle-right"></i></button></span></div>
-                            </div>
                         </div>
                         <div class="product-buttons">
                             <button class="cart-button btn btn-solid" data-target="{!! $productModel['product']['slug'] !!}"><i class="fa fa-shopping-cart"></i> adauga in cos</button>

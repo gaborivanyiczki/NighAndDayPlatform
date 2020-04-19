@@ -5,10 +5,12 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Fico7489\Laravel\EloquentJoin\Traits\EloquentJoin;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use EloquentJoin;
 
     /**
      * The attributes that are mass assignable.
@@ -36,4 +38,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function userAddresses()
+    {
+        return $this->hasMany('App\UserAddress', 'User_ID');
+    }
 }
