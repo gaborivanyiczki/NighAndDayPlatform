@@ -25,7 +25,7 @@
 <!-- breadcrumb End -->
 
 <!-- section start -->
-<section class="section-b-space ratio_asos">
+<section class="section-b-space ratio_asos" style="background-color: white;">
     <div class="collection-wrapper">
         <div class="container">
             <div class="row">

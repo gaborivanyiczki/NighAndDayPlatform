@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="page-title">
-                    <h2>contact</h2></div>
+                    <h2>Contact</h2></div>
             </div>
             <div class="col-sm-6">
                 <nav aria-label="breadcrumb" class="theme-breadcrumb">
@@ -27,7 +27,7 @@
 
 
 <!--section start-->
-<section class="contact-page section-b-space">
+<section class="contact-page section-b-space" style="background-color: white;">
     <div class="container">
         @if(Session::has('success'))
             <div class="alert alert-success">

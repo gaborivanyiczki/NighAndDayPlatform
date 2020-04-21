@@ -9,13 +9,13 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="page-title">
-                    <h2>despre noi</h2></div>
+                    <h2>Despre noi</h2></div>
             </div>
             <div class="col-sm-6">
                 <nav aria-label="breadcrumb" class="theme-breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}">acasa</a></li>
-                        <li class="breadcrumb-item active">despre noi</li>
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Acasa</a></li>
+                        <li class="breadcrumb-item active">Despre noi</li>
                     </ol>
                 </nav>
             </div>
@@ -27,7 +27,7 @@
 
 
 <!-- about section start -->
-<section class="about-page section-b-space">
+<section class="about-page section-b-space" style="background-color: white;">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -56,7 +56,7 @@
 <!-- about section end -->
 
 <!--Team start-->
-<section id="team" class="team section-b-space ratio_asos">
+<section id="team" class="team section-b-space ratio_asos" style="background-color: white;">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
@@ -106,8 +106,7 @@
 
 
 <!-- service section -->
-<div class="container about-cls section-b-space">
-    <section class="service border-section small-section">
+    <section class="service border-section small-section" style="background-color: white;">
         <div class="row">
             <div class="col-md-4 service-block">
                 <div class="media">
@@ -158,7 +157,6 @@
             </div>
         </div>
     </section>
-</div>
 <!-- service section end -->
 
 

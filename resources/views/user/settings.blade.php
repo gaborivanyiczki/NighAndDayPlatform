@@ -65,10 +65,7 @@
                         </div>
                         <div class="welcome-msg">
                             <div class="alert alert-info" role="alert">
-                                Acest panou este menit sa ofere posibilitatea de a edita sau adauga adresele tale personale.
-                            </div>
-                            <div class="alert alert-info" role="alert">
-                                Setarea unei adrese implicite va ajuta sa economisesti timp la finalizarea unei comenzi.
+                                Acest panou este menit sa ofere posibilitatea de a edita datele contului dvs.
                             </div>
                         </div>
                     </div>
@@ -77,34 +74,30 @@
                     <div class="dashboard">
                         <div class="box-account box-info">
                             <div class="box-head" style="margin-bottom: 8px;">
-                                <h2>Informatii cont</h2></div>
+                                <h2>Setari Cont</h2></div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="box">
                                         <div class="box-title">
-                                            <h3>Informatii personale</h3><a href="#">Editeaza</a></div>
+                                            <h3>Informatii personale</h3><a href="#" type="button" class="edit-modal" data-toggle="modal">Editeaza</a></div>
                                         <div class="box-content">
                                             <table class="table table-borderless">
                                                 <thead>
                                                 </thead>
                                                 <tbody>
-                                                  <tr>
-                                                    <td style="font-weight: 700;">Nume complet:</td>
-                                                    <td>Gabor Ivanyiczki</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td style="font-weight: 700;">Email implicit:</td>
-                                                    <td>xd.gaga@gmail.com</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td style="font-weight: 700;">Telefon implicit:</td>
-                                                    <td>0745789843</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td style="font-weight: 700;">Parola:</td>
-                                                    <td>******** <h6><a href="#">Schimba Parola</a></h6></td>
-                                                  </tr>
-                                                </tbody>
+                                                    <tr>
+                                                      <td style="font-weight: 700;">Nume complet:</td>
+                                                      <td>{!! $userModel->fullname !!}</td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td style="font-weight: 700;">Email implicit:</td>
+                                                      <td>{!! $userModel->email !!}</td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td style="font-weight: 700;">Telefon implicit:</td>
+                                                      <td>{!! $userModel->telephone !!}</td>
+                                                    </tr>
+                                                  </tbody>
                                             </table>
                                         </div>
                                     </div>
@@ -112,25 +105,21 @@
                                 <div class="col-sm-6">
                                     <div class="box">
                                         <div class="box-title">
-                                            <h3>Abonari</h3><a href="#">Editeaza</a></div>
+                                            <h3>Parola mea</h3><a href="#" type="button" class="reset-password" data-toggle="modal" data-target="#resetUserPassword">Schimba Parola</a></div>
                                         <div class="box-content">
-                                            <p>Nu exista abonari.</p>
+                                            <table class="table table-borderless">
+                                                <thead>
+                                                </thead>
+                                                <tbody>
+                                                  <tr>
+                                                    <td style="font-weight: 700;">Parola:</td>
+                                                    <td>******** </td>
+                                                  </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div>
-                                <div class="box">
-                                    <div class="box-title">
-                                        <h3>Lista Adrese</h3><a href="#">Gestioneaza Adrese</a></div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <h6>Adresa de facturare implicita</h6><address>Nu aveti o adresa de facturare setata.<br></address></div>
-                                        <div class="col-sm-6">
-                                            <h6>Adresa de livrare implicita</h6><address>Nu aveti o adresa de livrare setata.<br></address></div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -140,4 +129,128 @@
 </section>
 <!-- section end -->
 
+<div class="modal fade" id="editUserDetails" tabindex="-1" role="dialog" aria-labelledby="editUserDetailsTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Modifica detalii cont</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form method="POST" class="theme-form" action="{{ route('user.edit.details') }}">
+                @csrf
+                <div class="form-group">
+                    <input id="editAddressType" type="hidden" class="form-control" name="addressType" value="" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="editFirstName">Nume</label>
+                    <input id="editFirstName" type="text" class="form-control @error('address') is-invalid @enderror" name="firstname" value="" required autofocus>
+                    @error('firstname')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+               <div class="form-group">
+                <label for="editLastName">Prenume</label>
+                <input id="editLastName" type="text" class="form-control @error('zipcode') is-invalid @enderror" name="lastname" value="" required autofocus>
+                @error('lastname')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+                </div>
+                <div class="form-group">
+                    <label for="telephone">Telefon contact</label>
+                    <input id="editTelephone" type="text" class="form-control @error('telephone') is-invalid @enderror" name="telephone" value="" autofocus>
+                    @error('telephone')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+               <div class="form-group">
+                       <button type="submit" class="btn btn-solid btn-sm">Modifica</button>
+               </div>
+           </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Inchide</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="resetUserPassword" tabindex="-1" role="dialog" aria-labelledby="editUserDetailsTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Resetare parola</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form method="POST" class="theme-form" action="{{ route('user.reset.password') }}">
+                @csrf
+                <div class="form-group">
+                    <input id="editAddressType" type="hidden" class="form-control" name="addressType" value="" required autofocus>
+                </div>
+                <div class="form-group row">
+                    <label for="password" class="col-md-4 col-form-label text-md-right">Current Password</label>
+
+                    <div class="col-md-6">
+                        <input id="password" type="password" class="form-control" name="current_password" autocomplete="current-password">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="password" class="col-md-4 col-form-label text-md-right">New Password</label>
+
+                    <div class="col-md-6">
+                        <input id="new_password" type="password" class="form-control" name="new_password" autocomplete="current-password">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="password" class="col-md-4 col-form-label text-md-right">New Confirm Password</label>
+
+                    <div class="col-md-6">
+                        <input id="new_confirm_password" type="password" class="form-control" name="new_confirm_password" autocomplete="current-password">
+                    </div>
+                </div>
+               <div class="form-group">
+                       <button type="submit" class="btn btn-solid btn-sm">Modifica</button>
+               </div>
+           </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Inchide</button>
+        </div>
+      </div>
+    </div>
+</div>
+
 @endsection
+@push('head')
+<script>
+    $(document).on('click','.edit-modal',function(){
+        var _url = laroute.route('getUserDetails');
+        $.ajax({
+            url: _url,
+            type:'get',
+            dataType:'json',
+            success:function(response){
+                $('#editFirstName').val(response.firstname);
+                $('#editLastName').val(response.lastname);
+                $('#editTelephone').val(response.telephone);
+
+                $('#editUserDetails').modal('show');
+            }
+        });
+    });
+</script>
+@endpush

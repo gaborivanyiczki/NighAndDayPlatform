@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserAddress;
 use App\Repository\Eloquent\AddressTypeRepository;
 use App\Repository\Eloquent\UserAddressRepository;
+use App\Repository\Eloquent\UserVouchersRepository;
+use App\User;
+use App\ViewModels\UserDetailsViewModel;
 use App\ViewModels\UserViewModel;
 use Facade\FlareClient\Http\Exceptions\BadResponse;
 use Illuminate\Http\Request;
@@ -14,16 +17,18 @@ class UserController extends Controller
 {
     protected $userAddressRepo;
     protected $addressTypeRepo;
+    protected $userVouchersRepo;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(UserAddressRepository $userAddressRepository, AddressTypeRepository $addressTypeRepository)
+    public function __construct(UserAddressRepository $userAddressRepository, AddressTypeRepository $addressTypeRepository, UserVouchersRepository $userVouchersRepository)
     {
         $this->middleware('auth');
         $this->userAddressRepo = $userAddressRepository;
         $this->addressTypeRepo = $addressTypeRepository;
+        $this->userVouchersRepo = $userVouchersRepository;
     }
 
     /**
@@ -43,7 +48,6 @@ class UserController extends Controller
     public function myaddresses()
     {
         $userAddresses = json_encode($this->userAddressRepo->getUserAddresses(Auth::id()));
-
         $availableAddressTypes =  json_encode($this->addressTypeRepo->getAvailableAddressTypes(Auth::id()));
 
         return view('user.myaddresses')->with('userAddresses', json_decode($userAddresses))
@@ -57,7 +61,10 @@ class UserController extends Controller
 
     public function myvouchers()
     {
-        return view('user.myvouchers');
+        $userId = Auth::id();
+        $vouchers = json_encode($this->userVouchersRepo->getUserVouchers($userId));
+
+        return view('user.myvouchers')->with('userVouchers', json_decode($vouchers, true));
     }
 
     public function mywarranties()
@@ -72,7 +79,10 @@ class UserController extends Controller
 
     public function settings()
     {
-        return view('user.settings');
+        $userDetails = Auth::user();
+        $userViewModel = json_encode(new UserViewModel($userDetails));
+
+        return view('user.settings')->with('userModel', json_decode($userViewModel));
     }
 
     public function mysubscriptions()
@@ -128,6 +138,47 @@ class UserController extends Controller
             $this->userAddressRepo->removeUserAddress($addressTypeId, $userId);
 
             return redirect()->route('myaddresses');
+        }
+        else
+        {
+            return response('Not found', 400);
+        }
+    }
+
+    public function getUserDetails()
+    {
+        $userDetails = Auth::user();
+        $userViewModel = new UserDetailsViewModel($userDetails);
+
+        return response()->json($userViewModel);
+    }
+
+    public function updateUserDetails(Request $request)
+    {
+        $user = Auth::user();
+
+        $user->firstname = $request->firstname;
+        $user->lastname = $request->lastname;
+        $user->telephone = $request->telephone;
+
+        $user->save();
+
+        return redirect()->route('user.settings');
+    }
+
+    public function resetPassword(Request $request)
+    {
+        if (Auth::check())
+        {
+            $request->validate([
+                'current_password' => ['required'],
+                'new_password' => ['required'],
+                'new_confirm_password' => ['same:new_password'],
+            ]);
+
+            User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+
+            return redirect()->route('user.settings');
         }
         else
         {

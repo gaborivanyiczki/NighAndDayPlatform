@@ -51,3 +51,7 @@ Route::post('/user/postUserAddress', 'UserController@postUserAddress')->name('us
 Route::post('/user/updateUserAddress', 'UserController@updateUserAddress')->name('user.edit.adress');
 Route::post('/user/removeUserAddress', 'UserController@removeUserAddress')->name('removeUserAddress');
 Route::get('/user/getUserAddress', 'UserController@getUserAddress')->name('getUserAddress');
+
+Route::get('/user/getUserDetails', 'UserController@getUserDetails')->name('getUserDetails');
+Route::post('/user/updateUserDetails', 'UserController@updateUserDetails')->name('user.edit.details');
+Route::post('/user/resetPassword', 'UserController@resetPassword')->name('user.reset.password');

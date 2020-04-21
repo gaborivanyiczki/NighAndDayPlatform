@@ -43,4 +43,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\UserAddress', 'User_ID');
     }
+
+    public function userVouchers()
+    {
+        return $this->hasMany('App\UserVoucher', 'User_ID');
+    }
 }

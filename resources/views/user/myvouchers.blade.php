@@ -65,10 +65,10 @@
                         </div>
                         <div class="welcome-msg">
                             <div class="alert alert-info" role="alert">
-                                Acest panou este menit sa ofere posibilitatea de a edita sau adauga adresele tale personale.
+                                Acest panou este menit sa ofere posibilitatea de a verifica disponibilitatea voucherelor pe care le detineti.
                             </div>
                             <div class="alert alert-info" role="alert">
-                                Setarea unei adrese implicite va ajuta sa economisesti timp la finalizarea unei comenzi.
+                                Atentie! Puteti aplica doar un singur voucher per comanda plasata.
                             </div>
                         </div>
                     </div>
@@ -77,59 +77,51 @@
                     <div class="dashboard">
                         <div class="box-account box-info">
                             <div class="box-head" style="margin-bottom: 8px;">
-                                <h2>Informatii cont</h2></div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="box">
-                                        <div class="box-title">
-                                            <h3>Informatii personale</h3><a href="#">Editeaza</a></div>
-                                        <div class="box-content">
-                                            <table class="table table-borderless">
-                                                <thead>
-                                                </thead>
-                                                <tbody>
-                                                  <tr>
-                                                    <td style="font-weight: 700;">Nume complet:</td>
-                                                    <td>Gabor Ivanyiczki</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td style="font-weight: 700;">Email implicit:</td>
-                                                    <td>xd.gaga@gmail.com</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td style="font-weight: 700;">Telefon implicit:</td>
-                                                    <td>0745789843</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td style="font-weight: 700;">Parola:</td>
-                                                    <td>******** <h6><a href="#">Schimba Parola</a></h6></td>
-                                                  </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="box">
-                                        <div class="box-title">
-                                            <h3>Abonari</h3><a href="#">Editeaza</a></div>
-                                        <div class="box-content">
-                                            <p>Nu exista abonari.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                <h2>Voucherele mele</h2>
                             </div>
-                            <div>
-                                <div class="box">
-                                    <div class="box-title">
-                                        <h3>Lista Adrese</h3><a href="#">Gestioneaza Adrese</a></div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <h6>Adresa de facturare implicita</h6><address>Nu aveti o adresa de facturare setata.<br></address></div>
-                                        <div class="col-sm-6">
-                                            <h6>Adresa de livrare implicita</h6><address>Nu aveti o adresa de livrare setata.<br></address></div>
-                                    </div>
-                                </div>
+                            <div class="content">
+                                <table class="table table-striped">
+                                    <thead>
+                                    </thead>
+                                    <tbody>
+                                       @empty($userVouchers)
+                                            <tr>
+                                                <td>
+                                                    <h6>Nu aveti vouchere disponibile.</h6>
+                                                </td>
+                                            </tr>
+                                       @else
+                                            @foreach ($userVouchers as $item)
+                                            <tr>
+                                                <td>
+                                                    <h6>{!! $item['VoucherCode'] !!}</h6>
+                                                </td>
+                                                @if($item['DiscountType'] == 1)
+                                                <td>
+                                                    <h6>{!! $item['Discount'] !!} % reducere</h6>
+                                                </td>
+                                                @elseif($item->Discountype == 2)
+                                                <td>
+                                                    <h6>{!! $item['Discount'] !!} lei reducere</h6>
+                                                </td>
+                                                @endif
+                                                <td>
+                                                    <h6>Valabilitate: {!! date('d-m-Y', strtotime($item['StartDate'])); !!} - {!! date('d-m-Y', strtotime($item['ExpiryDate'])); !!}</h6>
+                                                </td>
+                                                @if ($item['Used'])
+                                                <td>
+                                                    <h6>Status: <b>Folosit</b></h6>
+                                                </td>
+                                                @else
+                                                <td>
+                                                    <h6>Status: <b style="color:green;">Disponibil</b></h6>
+                                                </td>
+                                                @endif
+                                            </tr>
+                                            @endforeach
+                                       @endempty
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

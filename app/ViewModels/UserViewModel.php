@@ -13,13 +13,15 @@ class UserViewModel extends ViewModel
     public $subscriptions;
     public $defaultAddresses;
 
-    public function __construct($user, $userAddresses)
+    public function __construct($user, $userAddresses = 0)
     {
         $this->fullname = $user->firstname." ".$user->lastname;
         $this->email = $user->email;
         $this->telephone = $user->telephone;
         $this->subscriptions = $user->newsletter;
-        $this->defaultAddresses = $userAddresses;
+        if($userAddresses != 0){
+            $this->defaultAddresses = $userAddresses;
+        }
     }
 
     public function user(): User

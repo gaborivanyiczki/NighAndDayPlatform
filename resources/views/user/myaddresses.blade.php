@@ -197,12 +197,12 @@
                     @enderror
                 </div>
                <div class="form-group">
-                       <button type="submit" class="btn btn-solid">Adauga</button>
+                       <button type="submit" class="btn btn-solid btn-sm">Adauga</button>
                </div>
            </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Inchide</button>
+          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Inchide</button>
         </div>
       </div>
     </div>
@@ -262,12 +262,12 @@
                     @enderror
                 </div>
                <div class="form-group">
-                       <button type="submit" class="btn btn-solid">Modifica</button>
+                       <button type="submit" class="btn btn-solid btn-sm">Modifica</button>
                </div>
            </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Inchide</button>
+          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Inchide</button>
         </div>
       </div>
     </div>

@@ -17,9 +17,11 @@ use App\Repository\Eloquent\CategoriesRepository;
 use App\Repository\Eloquent\ProductAttributeRepository;
 use App\Repository\Eloquent\ProductsRepository;
 use App\Repository\Eloquent\UserAddressRepository;
+use App\Repository\Eloquent\UserVouchersRepository;
 use App\Repository\ProductAttributeRepositoryInterface;
 use App\Repository\ProductsRepositoryInterface;
 use App\Repository\UserAddressRepositoryInterface;
+use App\Repository\UserVouchersRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -40,6 +42,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ProductAttributeRepositoryInterface::class, ProductAttributeRepository::class);
         $this->app->bind(UserAddressRepositoryInterface::class, UserAddressRepository::class);
         $this->app->bind(AddressTypeRepositoryInterface::class, AddressTypeRepository::class);
+        $this->app->bind(UserVouchersRepositoryInterface::class, UserVouchersRepository::class);
     }
 
     /**

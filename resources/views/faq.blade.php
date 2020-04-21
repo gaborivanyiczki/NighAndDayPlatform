@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="page-title">
-                    <h2>intrebari frecvente</h2></div>
+                    <h2>Intrebari frecvente</h2></div>
             </div>
             <div class="col-sm-6">
                 <nav aria-label="breadcrumb" class="theme-breadcrumb">

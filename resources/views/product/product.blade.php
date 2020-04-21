@@ -25,7 +25,7 @@
 <!-- breadcrumb End -->
 
 <!-- section start -->
-<section>
+<section style="background-color: white;">
     <div class="collection-wrapper">
         <div class="container">
             <div class="row">
@@ -144,7 +144,7 @@
 <!-- Section ends -->
 
 <!-- product-tab starts -->
-<section class="tab-product m-0">
+<section class="tab-product m-0" style="background-color: white;">
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-lg-12">

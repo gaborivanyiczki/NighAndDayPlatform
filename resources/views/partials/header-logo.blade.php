@@ -32,16 +32,6 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li class="onhover-div mobile-setting">
-                                    <div><img src="{{ URL::to('/') }}/images/icon/setting.png" class="img-fluid blur-up lazyload" alt=""> <i class="ti-settings"></i></div>
-                                    <div class="show-div setting">
-                                        <h6>limba</h6>
-                                        <ul>
-                                            <li><a href="#">romana</a></li>
-                                            <li><a href="#">engleza</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
                                 <li class="onhover-div mobile-cart">
                                     @include('partials.cart-icon')
                                 </li>

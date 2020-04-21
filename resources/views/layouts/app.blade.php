@@ -36,8 +36,7 @@
 
     <!-- Theme css -->
     <link href="{{ asset('css/color5.css') }}" rel="stylesheet" type="text/css" media="screen" id="color">
-    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="  crossorigin="anonymous"></script>
-
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     @stack('head')
 </head>
 
