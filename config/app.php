@@ -167,6 +167,7 @@ return [
          */
         'Collective\Html\HtmlServiceProvider',
         Darryldecode\Cart\CartServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
         /*
          * Application Service Providers...

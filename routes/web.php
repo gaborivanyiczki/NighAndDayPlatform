@@ -55,3 +55,9 @@ Route::get('/user/getUserAddress', 'UserController@getUserAddress')->name('getUs
 Route::get('/user/getUserDetails', 'UserController@getUserDetails')->name('getUserDetails');
 Route::post('/user/updateUserDetails', 'UserController@updateUserDetails')->name('user.edit.details');
 Route::post('/user/resetPassword', 'UserController@resetPassword')->name('user.reset.password');
+
+
+
+
+//DASHBOARD
+Route::get('/system/dashboard', 'DashboardController@home')->name('dashboard.home');

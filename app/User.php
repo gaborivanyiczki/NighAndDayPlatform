@@ -6,11 +6,13 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Fico7489\Laravel\EloquentJoin\Traits\EloquentJoin;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use EloquentJoin;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
