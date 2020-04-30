@@ -18,9 +18,10 @@ class ProductAttributeRepository extends BaseRepository implements ProductAttrib
 
     public function getChoosableAttributes($productAttributeGroup, $attribute)
     {
-        return $this->model->where([ ['Product_Attribute_Group_ID', $productAttributeGroup],['Attribute_ID', $attribute] ])
+        return $this->model->where([ ['Product_Attribute_Group_ID', $productAttributeGroup],['product_attributes.Attribute_ID', $attribute] ])
                             ->join('products', 'products.id', '=', 'Product_ID')
-                            ->select('products.Slug','Value')
+                            ->join('attribute_values', 'attribute_values.id', '=', 'Attribute_Value_ID')
+                            ->select('products.Slug','attribute_values.Value as Value')
                             ->get();
     }
 }

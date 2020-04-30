@@ -20,4 +20,12 @@ interface ProductsRepositoryInterface
    public function getProductsByFilter($categorySlug, $skip, $take, array $sort);
 
    public function findParticularProductBySlug($slug);
+
+   public function findProductById($id);
+
+   public function getProductIdBySlug($slug);
+
+   public function getProductNameById($id);
+
+   public function getActiveProductsForSelect();
 }

@@ -8,6 +8,13 @@ class ProductMediaFile extends Model
 {
     protected $table = 'product_media_files';
 
+    protected $fillable=['Product_ID',
+                        'Path',
+                        'Filename',
+                        'Default',
+                        'UploadedBy'
+                        ];
+
     protected $casts = [
         'Default' => 'boolean',
     ];

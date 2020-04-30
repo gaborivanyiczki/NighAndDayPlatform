@@ -57,7 +57,89 @@ Route::post('/user/updateUserDetails', 'UserController@updateUserDetails')->name
 Route::post('/user/resetPassword', 'UserController@resetPassword')->name('user.reset.password');
 
 
-
-
 //DASHBOARD
 Route::get('/system/dashboard', 'DashboardController@home')->name('dashboard.home');
+
+
+//DASHBOARD//PRODUCTS
+Route::get('/system/dashboard/products', 'Dashboard\ProductController@index')->name('dashboard.products');
+Route::get('/system/dashboard/products/show', 'Dashboard\ProductController@show')->name('dashboard.product.show');
+Route::get('/system/dashboard/products/create', 'Dashboard\ProductController@create')->name('dashboard.product.create');
+Route::post('/system/dashboard/products/store', 'Dashboard\ProductController@store')->name('dashboard.product.store');
+Route::get('/system/dashboard/products/edit/{id}', 'Dashboard\ProductController@edit')->name('dashboard.product.edit');
+Route::post('/system/dashboard/products/update', 'Dashboard\ProductController@update')->name('dashboard.product.update');
+Route::post('/system/dashboard/products/delete', 'Dashboard\ProductController@destroy')->name('dashboard.product.destroy');
+
+Wizard::routes('/system/dashboard/wizard/product', 'ProductWizardController', 'wizard.product');
+
+
+//DASHBOARD//ATTRIBUTES
+Route::get('/system/dashboard/attributes/get', 'Dashboard\AttributeController@getAttributes')->name('dashboard.attributes.get');
+Route::get('/system/dashboard/attributes/getValues', 'Dashboard\AttributeController@getAttributeValues')->name('dashboard.attributes.getValues');
+Route::get('/system/dashboard/attributes', 'Dashboard\AttributeController@index')->name('dashboard.attributes');
+Route::get('/system/dashboard/attributes/values', 'Dashboard\AttributeController@attributeValues')->name('dashboard.attributes.values');
+Route::get('/system/dashboard/attributes/groups', 'Dashboard\AttributeController@attributeGroups')->name('dashboard.attributes.groups');
+ //attributes
+Route::get('/system/dashboard/attributes/create', 'Dashboard\AttributeController@create')->name('dashboard.attributes.create');
+Route::post('/system/dashboard/attributes/store', 'Dashboard\AttributeController@store')->name('dashboard.attributes.store');
+Route::get('/system/dashboard/attributes/edit/{id}', 'Dashboard\AttributeController@edit')->name('dashboard.attributes.edit');
+Route::post('/system/dashboard/attributes/update', 'Dashboard\AttributeController@update')->name('dashboard.attributes.update');
+Route::post('/system/dashboard/attributes/delete', 'Dashboard\AttributeController@destroy')->name('dashboard.attributes.destroy');
+ //attribute values
+Route::get('/system/dashboard/attributes/values/create', 'Dashboard\AttributeController@attributeValuesCreate')->name('dashboard.attributes.values.create');
+Route::post('/system/dashboard/attributes/values/store', 'Dashboard\AttributeController@attributeValueStore')->name('dashboard.attributes.values.store');
+Route::get('/system/dashboard/attributes/values/edit/{id}', 'Dashboard\AttributeController@attributeValuesEdit')->name('dashboard.attributes.values.edit');
+Route::post('/system/dashboard/attributes/values/update', 'Dashboard\AttributeController@attributeValuesUpdate')->name('dashboard.attributes.values.update');
+Route::post('/system/dashboard/attributes/values/delete', 'Dashboard\AttributeController@attributeValuesDestroy')->name('dashboard.attributes.values.destroy');
+ //groups
+Route::get('/system/dashboard/attributes/groups/create', 'Dashboard\AttributeController@attributeGroupsCreate')->name('dashboard.attributes.groups.create');
+Route::post('/system/dashboard/attributes/groups/store', 'Dashboard\AttributeController@attributeGroupsStore')->name('dashboard.attributes.groups.store');
+Route::get('/system/dashboard/attributes/groups/edit/{id}', 'Dashboard\AttributeController@attributeGroupsEdit')->name('dashboard.attributes.groups.edit');
+Route::post('/system/dashboard/attributes/groups/update', 'Dashboard\AttributeController@attributeGroupsUpdate')->name('dashboard.attributes.groups.update');
+Route::post('/system/dashboard/attributes/groups/delete', 'Dashboard\AttributeController@attributeGroupsDestroy')->name('dashboard.attributes.groups.destroy');
+
+//DASHBOARD//CATEGORIES
+Route::get('/system/dashboard/categories', 'Dashboard\CategoryController@index')->name('dashboard.categories');
+Route::get('/system/dashboard/categories/show', 'Dashboard\CategoryController@show')->name('dashboard.categories.show');
+Route::get('/system/dashboard/categories/create', 'Dashboard\CategoryController@create')->name('dashboard.categories.create');
+Route::post('/system/dashboard/categories/store', 'Dashboard\CategoryController@store')->name('dashboard.categories.store');
+Route::get('/system/dashboard/categories/edit/{id}', 'Dashboard\CategoryController@edit')->name('dashboard.categories.edit');
+Route::post('/system/dashboard/categories/update', 'Dashboard\CategoryController@update')->name('dashboard.categories.update');
+Route::post('/system/dashboard/categories/delete', 'Dashboard\CategoryController@destroy')->name('dashboard.categories.destroy');
+
+//DASHBOARD//BRANDS
+Route::get('/system/dashboard/brands', 'Dashboard\BrandsController@index')->name('dashboard.brands');
+Route::get('/system/dashboard/brands/show', 'Dashboard\BrandsController@show')->name('dashboard.brands.show');
+Route::get('/system/dashboard/brands/create', 'Dashboard\BrandsController@create')->name('dashboard.brands.create');
+Route::post('/system/dashboard/brands/store', 'Dashboard\BrandsController@store')->name('dashboard.brands.store');
+Route::get('/system/dashboard/brands/edit/{id}', 'Dashboard\BrandsController@edit')->name('dashboard.brands.edit');
+Route::post('/system/dashboard/brands/update', 'Dashboard\BrandsController@update')->name('dashboard.brands.update');
+Route::post('/system/dashboard/brands/delete', 'Dashboard\BrandsController@destroy')->name('dashboard.brands.destroy');
+
+//DASHBOARD//ORDERS
+Route::get('/system/dashboard/orders/getProducts', 'Dashboard\OrderController@getProducts')->name('dashboard.orders.getProducts');
+Route::get('/system/dashboard/orders', 'Dashboard\OrderController@index')->name('dashboard.orders');
+Route::get('/system/dashboard/orders/create', 'Dashboard\OrderController@create')->name('dashboard.orders.create');
+Route::post('/system/dashboard/orders/store', 'Dashboard\OrderController@store')->name('dashboard.orders.store');
+/*Route::get('/system/dashboard/brands/show', 'Dashboard\BrandsController@show')->name('dashboard.brands.show');
+Route::post('/system/dashboard/brands/store', 'Dashboard\BrandsController@store')->name('dashboard.brands.store');
+Route::get('/system/dashboard/brands/edit/{id}', 'Dashboard\BrandsController@edit')->name('dashboard.brands.edit');
+Route::post('/system/dashboard/brands/update', 'Dashboard\BrandsController@update')->name('dashboard.brands.update');
+Route::post('/system/dashboard/brands/delete', 'Dashboard\BrandsController@destroy')->name('dashboard.brands.destroy');*/
+
+//DASHBOARD//VOUCHERS
+Route::get('/system/dashboard/vouchers', 'Dashboard\VouchersController@index')->name('dashboard.vouchers');
+Route::get('/system/dashboard/vouchers/create', 'Dashboard\VouchersController@create')->name('dashboard.vouchers.create');
+Route::post('/system/dashboard/vouchers/store', 'Dashboard\VouchersController@store')->name('dashboard.vouchers.store');
+Route::get('/system/dashboard/vouchers/edit/{id}', 'Dashboard\VouchersController@edit')->name('dashboard.vouchers.edit');
+Route::post('/system/dashboard/vouchers/update', 'Dashboard\VouchersController@update')->name('dashboard.vouchers.update');
+Route::post('/system/dashboard/vouchers/delete', 'Dashboard\VouchersController@destroy')->name('dashboard.vouchers.destroy');
+/*Route::get('/system/dashboard/brands/show', 'Dashboard\BrandsController@show')->name('dashboard.brands.show');
+Route::post('/system/dashboard/brands/store', 'Dashboard\BrandsController@store')->name('dashboard.brands.store');
+Route::get('/system/dashboard/brands/edit/{id}', 'Dashboard\BrandsController@edit')->name('dashboard.brands.edit');
+Route::post('/system/dashboard/brands/update', 'Dashboard\BrandsController@update')->name('dashboard.brands.update');
+Route::post('/system/dashboard/brands/delete', 'Dashboard\BrandsController@destroy')->name('dashboard.brands.destroy');*/
+
+//DASHBOARD//USER-MANAGEMENT
+Route::get('/system/dashboard/user/profile', 'Dashboard\UsersController@profile')->name('dashboard.user.profile');
+Route::post('/system/dashboard/user/resetPassword', 'Dashboard/UsersController@resetPassword')->name('dashboard.user.reset.password');

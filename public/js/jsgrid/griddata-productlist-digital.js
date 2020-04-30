@@ -94,6 +94,34 @@
             "Product Title": "Ebooks",
             "Entry Type": "Add",
             "Quantity": "4",
+        },
+        {
+            "Id": "142",
+            "Product": "../assets/images/digital-product/css.jpg",
+            "Product Title": "Css",
+            "Entry Type": "Add",
+            "Quantity": "2",
+        },
+        {
+            "Id": "142",
+            "Product": "../assets/images/digital-product/css.jpg",
+            "Product Title": "Css",
+            "Entry Type": "Add",
+            "Quantity": "2",
+        },
+        {
+            "Id": "142",
+            "Product": "../assets/images/digital-product/css.jpg",
+            "Product Title": "Css",
+            "Entry Type": "Add",
+            "Quantity": "2",
+        },
+        {
+            "Id": "142",
+            "Product": "../assets/images/digital-product/css.jpg",
+            "Product Title": "Css",
+            "Entry Type": "Add",
+            "Quantity": "2",
         }
     ];
     db.users = [

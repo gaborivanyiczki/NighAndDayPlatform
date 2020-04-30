@@ -28,19 +28,34 @@ class ProductsRepository extends BaseRepository implements ProductsRepositoryInt
     public function getNewProducts()
     {
         return $this->model->with(['images' => function($query) { $query->select('Path', 'Filename','Product_ID')->where('Default', 1); }])
-                                        ->select('Name','Slug','Price','DiscountPrice','id')
-                                        ->orderBy('created_at', 'desc')
-                                        ->take(5)
-                                        ->get()->toArray();
+                            ->where('Active', 1)
+                            ->select('Name','Slug','Price','DiscountPrice','id')
+                            ->orderBy('created_at', 'desc')
+                            ->take(5)
+                            ->get()->toArray();
     }
 
     public function findProductBySlug($slug)
     {
         return $this->model->with(['images' => function($query) { $query->select('Path', 'Filename','Product_ID','Default'); }])
-                            ->with(['attributes' => function($query){ $query->join('attributes', 'attributes.id', '=', 'Attribute_ID')
-                                                                            ->select('Product_ID', 'Attribute_ID as Attribute', 'Product_Attribute_Group_ID as ProductAttributeGroup' ,'attributes.Attribute_Group_ID as AttributeGroup' ,'attributes.Name as AttributeName','Value','attributes.Choosable as Choosable'); }])
+                            ->with(['attributes' => function($query){ $query->join('attributes', 'attributes.id', '=', 'product_attributes.Attribute_ID')
+                                                                            ->join('attribute_values', 'attribute_values.id', '=', 'product_attributes.Attribute_Value_ID')
+                                                                            ->select('Product_ID', 'product_attributes.Attribute_ID as Attribute', 'Product_Attribute_Group_ID as ProductAttributeGroup' ,'attributes.Attribute_Group_ID as AttributeGroup' ,'attributes.Name as AttributeName','attribute_values.Value as Value','attributes.Choosable as Choosable'); }])
                             ->where('Slug', $slug)->first();
+    }
 
+    public function findProductById($id)
+    {
+        return $this->model->with(['images' => function($query) { $query->where('Default',1)->select('Path', 'Filename','Product_ID','Default'); }])
+                            ->where('id', $id)->first();
+
+    }
+
+    public function getProductIdBySlug($slug)
+    {
+        return $this->model->where('Slug', $slug)
+                            ->select('id')
+                            ->first();
     }
 
     public function getSimilarProducts($slug, $category)
@@ -96,6 +111,21 @@ class ProductsRepository extends BaseRepository implements ProductsRepositoryInt
                             ->where('Slug', $slug)
                             ->select('id', 'Name', 'Price', 'DiscountPrice', 'Slug')
                             ->first();
+
+    }
+
+    public function getProductNameById($id)
+    {
+        return $this->model->where('id', $id)
+                            ->select('Name')
+                            ->first();
+    }
+
+    public function getActiveProductsForSelect()
+    {
+        return $this->model->where('Active', 1)
+                            ->select('id','Name')
+                            ->get();
 
     }
 }

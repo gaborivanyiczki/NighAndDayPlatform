@@ -21,4 +21,10 @@ class AttributeGroupsRepository extends BaseRepository implements AttributeGroup
         return $this->model->select('id','Name')
                             ->get();
     }
+
+    public function findAttributeGroupById($id)
+    {
+        return $this->model->where('id', $id)
+                            ->first();
+    }
 }

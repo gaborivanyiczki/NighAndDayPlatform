@@ -15,7 +15,7 @@ class CreateProductMediaFilesTable extends Migration
     {
         Schema::create('product_media_files', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('Product_ID')->unsigned();
+            $table->bigInteger('Product_ID')->unsigned()->nullable();
             $table->string('Path');
             $table->string('Filename');
             $table->boolean('Default')->default(0);

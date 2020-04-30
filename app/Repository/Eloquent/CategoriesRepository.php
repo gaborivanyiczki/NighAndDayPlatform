@@ -27,4 +27,17 @@ class CategoriesRepository extends BaseRepository implements CategoriesRepositor
                             ->select('Name','Description','Slug','ImagePath','ImageName')
                             ->first();
     }
+
+    public function getActiveCategories()
+    {
+        return $this->model->where('Active', 1)
+                            ->select('id', 'Name')
+                            ->get();
+    }
+
+    public function findCategoryById($id)
+    {
+        return $this->model->where('id', $id)
+                            ->first();
+    }
 }

@@ -10,6 +10,8 @@ class AttributeGroup extends Model
     use EloquentJoin;
     protected $table = 'attribute_groups';
 
+    protected $fillable=['Name'];
+
     public function attributes()
     {
         return $this->hasMany('App\Attribute', 'Attribute_Group_ID');

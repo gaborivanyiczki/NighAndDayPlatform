@@ -72,9 +72,6 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="{{ route('news') }}">noutati</a>
-                            </li>
-                            <li>
                                 <a href="{{ route('about') }}">despre noi</a>
                             </li>
                             <li>

@@ -10,6 +10,12 @@ class ProductAttribute extends Model
     use EloquentJoin;
     protected $table = 'product_attributes';
 
+    protected $fillable=['Product_ID',
+                        'Attribute_ID',
+                        'Product_Attribute_Group_ID',
+                        'Attribute_Value_ID',
+                        'CreatedUser'];
+
     public function product()
     {
         return $this->belongsTo('App\Product');
@@ -24,6 +30,12 @@ class ProductAttribute extends Model
     {
         return $this->belongsTo('App\Attribute');
     }
+
+    public function attribute_value()
+    {
+        return $this->belongsTo('App\AttributeValue');
+    }
+
 
     public function attribute_choosable()
     {

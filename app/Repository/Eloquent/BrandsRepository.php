@@ -35,4 +35,17 @@ class BrandsRepository extends BaseRepository implements BrandsRepositoryInterfa
                             ->select('Name','Slug','New','LogoPath as Path','LogoFile as Image')
                             ->first();
     }
+
+    public function getActiveBrands()
+    {
+        return $this->model->where('Active', 1)
+                            ->select('id', 'Name')
+                            ->get();
+    }
+
+    public function findBrandById($id)
+    {
+        return $this->model->where('id', $id)
+                            ->first();
+    }
 }

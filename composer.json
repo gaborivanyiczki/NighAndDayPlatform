@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2.5",
         "darryldecode/cart": "^4.1",
+        "digitaldream/laracrud": "^4.0",
         "fico7489/laravel-eloquent-join": "^4.1",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
@@ -22,7 +23,11 @@
         "spatie/data-transfer-object": "^1.13",
         "spatie/laravel-permission": "^3.11",
         "spatie/laravel-view-models": "^1.3",
-        "te7a-houdini/laroute": "^2.0"
+        "te7a-houdini/laroute": "^2.0",
+        "yajra/laravel-datatables": "^1.5",
+        "yajra/laravel-datatables-editor": "^1.21",
+        "yajra/laravel-datatables-html": "^4.25",
+        "ycs77/laravel-wizard": "^2.2"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

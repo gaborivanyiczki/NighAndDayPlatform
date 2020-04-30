@@ -7,4 +7,6 @@ interface CategoriesRepositoryInterface
 {
    public function getNavigationCategories();
    public function getCategoryBySlug($slug);
+   public function getActiveCategories();
+   public function findCategoryById($id);
 }

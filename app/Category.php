@@ -9,6 +9,16 @@ class Category extends Model
 {
     use NodeTrait;
 
+    protected $fillable=['Name',
+    'Slug',
+    'Description',
+    'parent_id',
+    'Active',
+    'New',
+    'ImagePath',
+    'ImageName',
+    'CreatedUser'];
+
     public function getLftName()
     {
          return '_lft';

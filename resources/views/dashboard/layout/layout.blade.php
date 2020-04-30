@@ -25,24 +25,16 @@
     <!-- Flag icon-->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/flag-icon.css') }}">
 
-    <!-- ico-font-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/icofont.css') }}">
-
-    <!-- Prism css-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/prism.css') }}">
-
-    <!-- Chartist css -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/chartist.css') }}">
-
     <!-- Bootstrap css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}">
 
     <!-- App css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/admin.css') }}">
 
+    @stack('styles')
+
     <!-- JQUERY-->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    @stack('head')
 </head>
 
 <body>
@@ -72,47 +64,20 @@
 <script src="{{ asset('js/popper.min.js') }}"></script>
 <!-- Bootstrap js-->
 <script src="{{ asset('js/bootstrap.js') }}"></script>
+
 <!-- feather icon js-->
 <script src="{{ asset('js/icons/feather-icon/feather.min.js') }}"></script>
 <script src="{{ asset('js/icons/feather-icon/feather-icon.js') }}"></script>
 <!-- Sidebar jquery-->
 <script src="{{ asset('js/sidebar-menu.js') }}"></script>
-
-<!--chartist js-->
-<script src="{{ asset('js/chart/chartist/chartist.js') }}"></script>
-
-<!--chartjs js-->
-<script src="{{ asset('js/chart/chartjs/chart.min.js') }}"></script>
-
+<script src="{{ asset('js/laroute.js') }}"></script>
 <!-- lazyload js-->
 <script src="{{ asset('js/lazysizes.min.js') }}"></script>
-
-<!--copycode js-->
-<script src="{{ asset('js/prism/prism.min.js') }}"></script>
-<script src="{{ asset('js/clipboard/clipboard.min.js') }}"></script>
-<script src="{{ asset('js/custom-card/custom-card.js') }}"></script>
-
-<!--counter js-->
-<script src="{{ asset('js/counter/jquery.waypoints.min.js') }}"></script>
-<script src="{{ asset('js/counter/jquery.counterup.min.js') }}"></script>
-<script src="{{ asset('js/counter/counter-custom.js') }}"></script>
-
-<!--peity chart js-->
-<script src="{{ asset('js/chart/peity-chart/peity.jquery.js') }}"></script>
-
-<!--sparkline chart js-->
-<script src="{{ asset('js/chart/sparkline/sparkline.js') }}"></script>
-
-<!--dashboard custom js-->
-<script src="{{ asset('js/dashboard/default.js') }}"></script>
-
 <!--right sidebar js-->
 <script src="{{ asset('js/chat-menu.js') }}"></script>
-
-<!--height equal js-->
-<script src="{{ asset('js/height-equal.js') }}"></script>
-
 <!--script admin-->
 <script src="{{ asset('js/admin-script.js') }}"></script>
+@stack('scripts')
+
 </body>
 </html>

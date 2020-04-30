@@ -8,7 +8,45 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use EloquentJoin;
+
     protected $table = 'products';
+
+    /**
+    * Mass assignable columns
+    */
+    protected $fillable=['Name',
+                        'Slug',
+                        'ProductCode',
+                        'Warranty',
+                        'Return',
+                        'Delivery',
+                        'Description',
+                        'Price',
+                        'DiscountPrice',
+                        'Discount',
+                        'Quantity',
+                        'Status_ID',
+                        'Category_ID',
+                        'Brand_ID',
+                        'Active',
+                        'Favorite',
+                        'CreatedUser'];
+
+    /**
+    * Date time columns.
+    */
+    protected $dates=[];
+
+
+    /**
+    * productWishlists
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    */
+    public function productWishlists()
+    {
+        return $this->hasMany(ProductWishlist::class,'Product_ID');
+    }
 
     public function images()
     {

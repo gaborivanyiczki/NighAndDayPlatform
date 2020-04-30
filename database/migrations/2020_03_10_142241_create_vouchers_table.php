@@ -17,11 +17,15 @@ class CreateVouchersTable extends Migration
             $table->id();
             $table->string('Code')->unique();
             $table->integer('Discount');
-            $table->integer('DiscountType');
+            $table->bigInteger('VoucherType_ID')->unsigned();
             $table->timestamp('StartDate');
             $table->timestamp('ExpiryDate');
             $table->boolean('Active');
             $table->timestamps();
+
+            $table->foreign('VoucherType_ID')
+            ->references('id')->on('voucher_types')
+            ->onDelete('cascade');
         });
     }
 
