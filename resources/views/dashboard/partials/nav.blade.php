@@ -66,17 +66,24 @@
                 </ul>
             </li>
             <li><a class="sidebar-header" href="invoice.html"><i data-feather="archive"></i><span>Facturi</span></a>
-            <li><a class="sidebar-header" href="media.html"><i data-feather="camera"></i><span>Fisiere Media</span></a></li>
-            <li><a class="sidebar-header" href=""><i data-feather="user-plus"></i><span>Utilizatori</span><i class="fa fa-angle-right pull-right"></i></a>
+            <li><a class="sidebar-header" href="#"><i data-feather="camera"></i><span>Fisiere Media</span></a></li>
+            <li><a class="sidebar-header" href="#"><i data-feather="user-plus"></i><span>Utilizatori</span><i class="fa fa-angle-right pull-right"></i></a>
                 <ul class="sidebar-submenu">
-                    <li><a href="user-list.html"><i class="fa fa-circle"></i>Lista Utilizatori</a></li>
-                    <li><a href="create-user.html"><i class="fa fa-circle"></i>Adauga Utilizator</a></li>
+                    <li><a href="{{ route('dashboard.users') }}"><i class="fa fa-circle"></i>Lista Utilizatori</a></li>
                 </ul>
             </li>
             <li><a class="sidebar-header" href="#"><i data-feather="settings"></i><span>Setari Platforma</span><i class="fa fa-angle-right pull-right"></i></a>
                 <ul class="sidebar-submenu">
-                    <li><a href="{{ route('dashboard.brands') }}"><i class="fa fa-circle"></i>Intrebari Frecvente</a></li>
-                    <li><a href="{{ route('dashboard.brands.create') }}"><i class="fa fa-circle"></i>Setari generale</a></li>
+                    <li>
+                        <a href="#"><i class="fa fa-circle"></i>
+                            <span>Intrebari Frecvente</span> <i class="fa fa-angle-right pull-right"></i>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="{{ route('dashboard.faq') }}"><i class="fa fa-circle"></i>Lista de intrebari</a></li>
+                            <li><a href="{{ route('dashboard.faq.create') }}"><i class="fa fa-circle"></i>Adauga Intrebare</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{{ route('dashboard.settings') }}"><i class="fa fa-circle"></i>Setari generale</a></li>
                 </ul>
             </li>
             </li>

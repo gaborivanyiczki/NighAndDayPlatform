@@ -59,7 +59,9 @@ Route::post('/user/resetPassword', 'UserController@resetPassword')->name('user.r
 
 //DASHBOARD
 Route::get('/system/dashboard', 'DashboardController@home')->name('dashboard.home');
-
+Route::get('/system/dashboard/settings', 'DashboardController@settings')->name('dashboard.settings');
+Route::get('/system/dashboard/settings/edit/{id}', 'DashboardController@editSettings')->name('dashboard.settings.edit');
+Route::post('/system/dashboard/settings/update', 'DashboardController@updateSettings')->name('dashboard.settings.update');
 
 //DASHBOARD//PRODUCTS
 Route::get('/system/dashboard/products', 'Dashboard\ProductController@index')->name('dashboard.products');
@@ -121,11 +123,6 @@ Route::get('/system/dashboard/orders/getProducts', 'Dashboard\OrderController@ge
 Route::get('/system/dashboard/orders', 'Dashboard\OrderController@index')->name('dashboard.orders');
 Route::get('/system/dashboard/orders/create', 'Dashboard\OrderController@create')->name('dashboard.orders.create');
 Route::post('/system/dashboard/orders/store', 'Dashboard\OrderController@store')->name('dashboard.orders.store');
-/*Route::get('/system/dashboard/brands/show', 'Dashboard\BrandsController@show')->name('dashboard.brands.show');
-Route::post('/system/dashboard/brands/store', 'Dashboard\BrandsController@store')->name('dashboard.brands.store');
-Route::get('/system/dashboard/brands/edit/{id}', 'Dashboard\BrandsController@edit')->name('dashboard.brands.edit');
-Route::post('/system/dashboard/brands/update', 'Dashboard\BrandsController@update')->name('dashboard.brands.update');
-Route::post('/system/dashboard/brands/delete', 'Dashboard\BrandsController@destroy')->name('dashboard.brands.destroy');*/
 
 //DASHBOARD//VOUCHERS
 Route::get('/system/dashboard/vouchers', 'Dashboard\VouchersController@index')->name('dashboard.vouchers');
@@ -134,12 +131,20 @@ Route::post('/system/dashboard/vouchers/store', 'Dashboard\VouchersController@st
 Route::get('/system/dashboard/vouchers/edit/{id}', 'Dashboard\VouchersController@edit')->name('dashboard.vouchers.edit');
 Route::post('/system/dashboard/vouchers/update', 'Dashboard\VouchersController@update')->name('dashboard.vouchers.update');
 Route::post('/system/dashboard/vouchers/delete', 'Dashboard\VouchersController@destroy')->name('dashboard.vouchers.destroy');
-/*Route::get('/system/dashboard/brands/show', 'Dashboard\BrandsController@show')->name('dashboard.brands.show');
-Route::post('/system/dashboard/brands/store', 'Dashboard\BrandsController@store')->name('dashboard.brands.store');
-Route::get('/system/dashboard/brands/edit/{id}', 'Dashboard\BrandsController@edit')->name('dashboard.brands.edit');
-Route::post('/system/dashboard/brands/update', 'Dashboard\BrandsController@update')->name('dashboard.brands.update');
-Route::post('/system/dashboard/brands/delete', 'Dashboard\BrandsController@destroy')->name('dashboard.brands.destroy');*/
 
 //DASHBOARD//USER-MANAGEMENT
 Route::get('/system/dashboard/user/profile', 'Dashboard\UsersController@profile')->name('dashboard.user.profile');
-Route::post('/system/dashboard/user/resetPassword', 'Dashboard/UsersController@resetPassword')->name('dashboard.user.reset.password');
+Route::post('/system/dashboard/user/resetPassword', 'Dashboard\UsersController@resetPassword')->name('dashboard.user.reset.password');
+Route::post('/system/dashboard/user/updateProfile', 'Dashboard\UsersController@updateProfile')->name('dashboard.user.update.profile');
+Route::get('/system/dashboard/users', 'Dashboard\UsersController@index')->name('dashboard.users');
+Route::get('/system/dashboard/users/edit/{id}', 'Dashboard\UsersController@edit')->name('dashboard.users.edit');
+Route::post('/system/dashboard/users/update', 'Dashboard\UsersController@update')->name('dashboard.users.update');
+Route::post('/system/dashboard/users/delete', 'Dashboard\UsersController@destroy')->name('dashboard.users.destroy');
+
+//DASHBOARD//FAQ
+Route::get('/system/dashboard/faq', 'Dashboard\FaqController@index')->name('dashboard.faq');
+Route::get('/system/dashboard/faq/create', 'Dashboard\FaqController@create')->name('dashboard.faq.create');
+Route::post('/system/dashboard/faq/store', 'Dashboard\FaqController@store')->name('dashboard.faq.store');
+Route::get('/system/dashboard/faq/edit/{id}', 'Dashboard\FaqController@edit')->name('dashboard.faq.edit');
+Route::post('/system/dashboard/faq/update', 'Dashboard\FaqController@update')->name('dashboard.faq.update');
+Route::post('/system/dashboard/faq/delete', 'Dashboard\FaqController@destroy')->name('dashboard.faq.destroy');

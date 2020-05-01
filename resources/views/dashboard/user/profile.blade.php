@@ -1,6 +1,10 @@
 @extends('dashboard.layout.layout')
 
 @section('content')
+@push('styles')
+    <link href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css" rel="stylesheet">
+@endpush
+
  <!-- Container-fluid starts-->
  <div class="container-fluid">
     <div class="page-header">
@@ -124,7 +128,7 @@
                                 <h5 class="f-w-600">Editeaza profil</h5>
                                 <div class="row">
                                     <div class="col">
-
+                                        @include('forms.update-profile',['route'=>route('dashboard.user.update.profile'),'method'=>'POST'])
                                     </div>
                                 </div>
                             </div>
@@ -146,4 +150,15 @@
     </div>
 </div>
 <!-- Container-fluid Ends-->
+<script>
+    $(document).ready(function() {
+        $('#ActiveCheckBox').change(function() {
+            if($(this).is(":checked")) {
+                $('#ActiveCheckboxInput').val(1);
+            }else{
+                $('#ActiveCheckboxInput').val(0);
+            }
+        });
+    });
+</script>
 @endsection

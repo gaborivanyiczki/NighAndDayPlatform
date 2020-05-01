@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\GlobalSettingsDataTable;
+use App\GlobalSettings;
 use App\Order;
 use App\Repository\Eloquent\OrderRepository;
 use App\User;
@@ -45,5 +47,36 @@ class DashboardController extends Controller
             'totalIncome' =>$totalIncome,
             'lastOrders' =>$lastOrders
         ]);
+    }
+
+    public function settings(GlobalSettingsDataTable $dataTable)
+    {
+        return $dataTable->render('dashboard.settings.index');
+    }
+
+    public function editSettings($id)
+    {
+        $setting = GlobalSettings::find($id);
+
+        return view('dashboard.settings.edit', [
+            'model' => $setting
+            ]);
+    }
+
+    public function updateSettings(Request $request)
+    {
+        $request->validate([
+            'Name' => ['required'],
+            'Value' => ['required']
+        ]);
+
+        $setting = GlobalSettings::find($request->SettingID);
+
+        $setting->fill($request->input());
+
+        $setting->save();
+
+        return redirect()->route('dashboard.settings');
+
     }
 }

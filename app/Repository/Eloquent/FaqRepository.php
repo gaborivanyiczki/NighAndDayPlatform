@@ -23,4 +23,10 @@ class FaqRepository extends BaseRepository implements FaqRepositoryInterface
                             ->get();
     }
 
+    public function findFaqQuestionById($id)
+    {
+        return $this->model->where('id', $id)
+                            ->first();
+    }
+
 }
