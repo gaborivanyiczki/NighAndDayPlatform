@@ -4,7 +4,7 @@
     <input type="hidden" name="BrandID" value="{{$model->id}}"/>
 
     <div class="form-group">
-        <label>Adauga imagine</label>
+        <label>Schimba imagine</label>
         <input type="file" name="ImageName" class="form-control @error('ImageName') is-invalid @enderror">
         @error('ImageName')
             <span class="invalid-feedback" role="alert">

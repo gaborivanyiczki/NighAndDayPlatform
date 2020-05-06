@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\AttributeGroup;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
@@ -13,11 +14,14 @@ use App\Http\Requests\Products\Edit;
 use App\Http\Requests\Products\Update;
 use App\Http\Requests\Products\Destroy;
 use App\DataTables\ProductDataTable;
+use App\ProductAttribute;
+use App\ProductAttributesGroup;
 use App\ProductMediaFile;
 use App\Repository\Eloquent\BrandsRepository;
 use App\Repository\Eloquent\CategoriesRepository;
 use App\Repository\Eloquent\ProductsRepository;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 
 class ProductController extends Controller
@@ -54,11 +58,9 @@ class ProductController extends Controller
      * @param  Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Show $request, Product $product)
+    public function show(Request $request)
     {
-        return view('pages.products.show', [
-                'record' =>$product,
-        ]);
+        return view('pages.products.show');
 
     }
 
@@ -117,14 +119,23 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = $this->productRepo->findProductById($id);
+        $product = $this->productRepo->findProductWithAttributesById($id);
+        $attributes = $product->attributes;
+
+        $productAttributeGroup = ProductAttribute::where('Product_ID', $id)->select('Product_Attribute_Group_ID')->firstOrNew()->Product_Attribute_Group_ID;
+
+        $product->setAttribute('AttributeGroup_ID', $productAttributeGroup);
+
         $categories = $this->categoryRepo->getActiveCategories();
+        $attributeGroups = ProductAttributesGroup::select('id','Name')->get();
         $brands = $this->brandsRepo->getActiveBrands();
 
         return view('dashboard.product.edit', [
             'model' => $product,
             'categories' => $categories,
-            'brands' => $brands
+            'brands' => $brands,
+            'attributes' => $attributes,
+            'attributeGroups' => $attributeGroups
             ]);
     }
 
@@ -142,12 +153,119 @@ class ProductController extends Controller
 
         if ($product->save()) {
 
-            session()->flash('app_message', 'Product successfully updated');
-            return redirect()->route('dashboard.products');
-            } else {
-                session()->flash('app_error', 'Something is wrong while updating Product');
+            if ($request->hasFile('ImageName')) {
+                $currentUser = Auth::user()->email;
+                $imagePath = $request->file('ImageName');
+                $imageName = date("Y-m-d-H-i-s") . '-' . $imagePath ->getClientOriginalName();
+                $imagePath->move(config('global.product_image_move_path'), $imageName);
+
+                $imageModel = ProductMediaFile::where([['Product_ID', $request->ProductID],['Default', 1]])->firstOrNew();
+
+                $imageModel->Product_ID = $request->ProductID;
+                $imageModel->Path = config('global.product_path');
+                $imageModel->Filename= $imageName;
+                $imageModel->Default= 1;
+                $imageModel->UploadedBy = $currentUser;
+
+                $imageModel->save();
             }
+        }
+
         return redirect()->back();
+    }
+
+    public function updateAttributeGroup(Request $request)
+    {
+        ProductAttribute::where('Product_ID', $request->ProductID)->update(['Product_Attribute_Group_ID' => $request->Product_Attribute_Group_ID]);
+
+        return redirect()->back();
+    }
+
+    public function addAttributes(Request $request)
+    {
+        $productID = $request->ProductID;
+        $attributeList = $request->attribute_id;
+        $attributeValueList = $request->attribute_value;
+        $attributeGroupId = $request->Product_Attribute_Group_ID;
+        $currentUser = Auth::user()->email;
+
+        foreach($attributeList as $key => $attribute)
+        {
+            $productAttributeModel= new ProductAttribute();
+            $productAttributeModel->Attribute_ID = $attribute;
+            $productAttributeModel->Attribute_Value_ID = $attributeValueList[$key];
+            if($attributeGroupId != null){
+                $productAttributeModel->Product_Attribute_Group_ID = $attributeGroupId;
+            }
+            else{
+                $productAttributeGroupModel= new ProductAttributesGroup();
+                $productAttributeGroupModel->Name = Product::where('id', $productID)->select('Name')->first()->Name;
+
+                if($productAttributeGroupModel->save())
+                {
+                    $productAttributeModel->Product_Attribute_Group_ID = $productAttributeGroupModel->id;
+                    $attributeGroupId = $productAttributeGroupModel->id;
+                }
+
+            }
+
+            $productAttributeModel->Product_ID = $productID;
+            $productAttributeModel->CreatedUser = $currentUser;
+
+            $productAttributeModel->save();
+        }
+
+        return redirect()->back();
+    }
+
+    public function updateProductAttribute(Request $request)
+    {
+        $productId = $request->ProductID;
+        $attributeId = $request->Atribute_ID;
+        $previousAttributeValue = $request->Original_Atribute_Value;
+        $attributeValueId = $request->Attribute_Value;
+
+        ProductAttribute::where([['Product_ID', $productId], ['Attribute_ID', $attributeId], ['Attribute_Value_ID', $previousAttributeValue]])->update(['Attribute_Value_ID' => $attributeValueId]);
+
+        return redirect()->back();
+    }
+
+    public function addProductImage(Request $request)
+    {
+        if($request->hasFile('file'))
+        {
+            $imagePath = $request->file('file');
+            $imageName = date("Y-m-d-H-i-s") . '-' . $imagePath ->getClientOriginalName();
+
+            // Upload path
+            $destinationPath = config('global.product_image_move_path');
+
+            // Create directory if not exists
+            if (!file_exists($destinationPath)) {
+               mkdir($destinationPath, 0755, true);
+            }
+
+            $imagePath->move(config('global.product_image_move_path'), $imageName);
+
+            // Valid extensions
+            $validextensions = array("jpeg","jpg","png");
+            $extension = $request->file('file')->getClientOriginalExtension();
+
+            // Check extension
+            if(in_array(strtolower($extension), $validextensions)){
+                $imageModel= new ProductMediaFile;
+                $imageModel->Product_ID = $request->ProductID;
+                $imageModel->Path = config('global.product_path');
+                $imageModel->Filename= $imageName;
+                $imageModel->Default= 0;
+                $currentUser = Auth::user()->email;
+                $imageModel->UploadedBy = $currentUser;
+                $imageModel->save();
+            }
+        }
+
+        return redirect()->back();
+
     }
 
     /**
@@ -167,6 +285,21 @@ class ProductController extends Controller
             } else {
                 session()->flash('app_error', 'Error occurred while deleting Product');
             }
+
+        return redirect()->back();
+    }
+
+    public function deleteAttribute($id, $productId)
+    {
+        ProductAttribute::where([['Attribute_ID', $id], ['Product_ID', $productId]])->delete();
+
+        return redirect()->back();
+    }
+
+    public function deleteImage($filename)
+    {
+        unlink(public_path(config('global.product_image_move_path'). '/'.$filename));
+        ProductMediaFile::where([['Filename', $filename], ['Default', 0]])->delete();
 
         return redirect()->back();
     }

@@ -21,9 +21,22 @@ class OrderDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->editColumn('created_at', function($data) {
+                return $data->created_at->format('Y-m-d H:i:s');
+            })
+            ->editColumn('Total', function($data) {
+                return $data->Total . ' Lei';
+            })
+            ->editColumn('Confirmed', function($data) {
+                return '<i class="fa fa-'. ($data->Confirmed ? 'check' : 'times') .'" aria-hidden="true"></i>';
+            })
             ->addColumn('action', function ($data){
                 return $this->getActionColumn($data);
-            });
+            })
+            ->editColumn('UserEmail', function($data) {
+                return $data->UserEmail != null ? $data->UserEmail : 'Utilizator neinregistrat';
+            })
+            ->rawColumns(['created_at','action','Total','UserEmail','Confirmed']);
     }
 
     /**
@@ -34,9 +47,11 @@ class OrderDataTable extends DataTable
      */
     public function query(Order $model)
     {
-        return $model->join('users', 'users.id', '=', 'User_ID')
+        return $model->leftjoin('users', 'users.id', '=', 'User_ID')
                      ->join('order_statuses', 'order_statuses.id', '=', 'OrderStatus_ID')
-                     ->select(['orders.id', 'users.email as UserEmail', 'order_statuses.Name as OrderStatus', 'TotalNet as Total', 'orders.created_at']);
+                     ->join('payment_types', 'payment_types.id', '=', 'PaymentType_ID')
+                     ->where('orders.Archived', 0)
+                     ->select(['orders.id', 'users.email as UserEmail', 'orders.Confirmed','order_statuses.Name as OrderStatus', 'payment_types.Name as PaymentType' ,'TotalNet as Total', 'orders.created_at']);
     }
 
     /**
@@ -53,6 +68,7 @@ class OrderDataTable extends DataTable
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->buttons(
+                        Button::make('create'),
                         Button::make('export'),
                         Button::make('print'),
                         Button::make('reset'),
@@ -74,20 +90,24 @@ class OrderDataTable extends DataTable
                   ->width(60)
                   ->addClass('text-center'),
             Column::make('id')->title('ID Comanda')->width('10%'),
-            Column::make('UserEmail')->title('Email utilizator')->width('20%'),
-            Column::make('OrderStatus')->title('Status comanda')->width('20%'),
-            Column::make('Total')->title('Total comanda')->width('15%'),
-            Column::make('created_at')->title('Data comenzii')->width('20%'),
+            Column::make('UserEmail')->title('Email utilizator')->width('14%'),
+            Column::make('OrderStatus')->title('Status comanda')->width('14%'),
+            Column::make('PaymentType')->title('Tip plata')->width('14%'),
+            Column::make('Total')->title('Total comanda')->width('10%'),
+            Column::make('created_at')->title('Data comenzii')->width('18%'),
+            Column::make('Confirmed')->title('Confirmat')->width('5%'),
         ];
     }
 
     protected function getActionColumn($data): string
     {
-        $editUrl = route('dashboard.categories.edit', $data->id);
-        $deleteUrl = route('dashboard.categories.destroy', $data->id);
-        $edit = '<a class="btn btn-primary btn-sm btn mr-3" data-value="'.$data->id.'" href="'.$editUrl.'"><i class="fa fa-edit"></i></a>';
-        $delete = "<form onSubmit='return confirm('Doresti sa stergi acest produs?');' action='$deleteUrl' method='post' style='display: contents;'>".csrf_field()."<button type='submit' class='btn btn-secondary cursor-pointer'><i class='text-danger fa fa-remove'></i></button></form>";
-        return $edit . $delete;
+        $viewUrl = route('dashboard.orders.show', $data->id);
+        $editUrl = route('dashboard.orders.edit', $data->id);
+        $deleteUrl = route('dashboard.orders.archive', $data->id);
+        $view = '<a class="btn btn-success btn-xs btn mr-3" data-value="'.$data->id.'" href="'.$viewUrl.'"><i class="fa fa-eye"></i></a>';
+        $edit = '<a class="btn btn-primary btn-xs btn mr-3" data-value="'.$data->id.'" href="'.$editUrl.'"><i class="fa fa-edit"></i></a>';
+        $delete = "<form onSubmit='return confirm('Doresti sa arhivezi aceasta comanda?');' action='$deleteUrl' method='get' style='display: contents;'><button type='submit' class='btn btn-danger btn-xs'><i class='fa fa-trash' style='color:white;'></i></button></form>";
+        return $view . $edit . $delete;
     }
 
 

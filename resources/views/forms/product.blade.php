@@ -1,16 +1,26 @@
 
-<form action="{{isset($route)?$route:route('dashboard.product.update')}}" method="POST" >
+<form action="{{isset($route)?$route:route('dashboard.product.update')}}" method="POST" enctype="multipart/form-data">
     {{csrf_field()}}
     <input type="hidden" name="_method" value="{{isset($method)?$method:'POST'}}"/>
     <input type="hidden" name="ProductID" value="{{$model->id}}"/>
-        <div class="form-group">
+
+    <div class="form-group">
+        <label> Schimba imaginea principala (optional) </label>
+        <input type="file" name="ImageName" class="form-control @error('ImageName') is-invalid @enderror">
+        @error('ImageName')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <div class="form-group">
         <label for="Name" class="font-weight-bold">Denumire produs</label>
         <input type="text" class="form-control {{ $errors->has('Name') ? ' is-invalid' : '' }}" name="Name" id="Name" value="{{old('Name',$model->Name)}}" placeholder="" maxlength="255" required="required" >
-          @if($errors->has('Name'))
-    <div class="invalid-feedback">
-        <strong>{{ $errors->first('Name') }}</strong>
-    </div>
-  @endif
+        @if($errors->has('Name'))
+        <div class="invalid-feedback">
+            <strong>{{ $errors->first('Name') }}</strong>
+        </div>
+        @endif
     </div>
 
     <div class="form-group">

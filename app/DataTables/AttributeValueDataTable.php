@@ -21,9 +21,13 @@ class AttributeValueDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->editColumn('created_at', function($data) {
+                return $data->created_at->format('Y-m-d H:i:s');
+            })
             ->addColumn('action', function ($data){
                 return $this->getActionColumn($data);
-            });
+            })
+            ->rawColumns(['created_at','action']);
     }
 
     /**
@@ -34,7 +38,8 @@ class AttributeValueDataTable extends DataTable
      */
     public function query(AttributeValue $model)
     {
-        return $model->newQuery();
+        return $model->leftjoin('attributes as at', 'at.id', '=', 'Attribute_ID')
+                      ->select('attribute_values.id', 'at.Name as Attribute', 'attribute_values.Value', 'attribute_values.created_at');
     }
 
     /**
@@ -51,6 +56,7 @@ class AttributeValueDataTable extends DataTable
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->buttons(
+                        Button::make('create'),
                         Button::make('export'),
                         Button::make('print'),
                         Button::make('reset'),
@@ -71,9 +77,10 @@ class AttributeValueDataTable extends DataTable
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('Attribute_ID')->title('Atribut legatura'),
-            Column::make('Value')->title('Valoare'),
+            Column::make('id')->title('ID Valoare')->width('10%'),
+            Column::make('Attribute')->title('Atribut legatura')->width('30%'),
+            Column::make('Value')->title('Valoare')->width('30%'),
+            Column::make('created_at')->title('Data crearii')->width('20%'),
         ];
     }
 
@@ -81,8 +88,8 @@ class AttributeValueDataTable extends DataTable
     {
         $editUrl = route('dashboard.attributes.values.edit', $data->id);
         $deleteUrl = route('dashboard.attributes.values.destroy', $data->id);
-        $edit = '<a class="btn btn-primary btn-sm" data-value="'.$data->id.'" href="'.$editUrl.'"><i class="fa fa-edit"></i></a>';
-        $delete = "<form onSubmit='return confirm('Doresti sa stergi acest produs?');' action='$deleteUrl' method='post'>".csrf_field()."<button type='submit' class='btn btn-secondary cursor-pointer'><i class='text-danger fa fa-remove'></i></button></form>";
+        $edit = '<a class="btn btn-primary btn-xs btn mr-3" data-value="'.$data->id.'" href="'.$editUrl.'"><i class="fa fa-edit"></i></a>';
+        $delete = "<form onSubmit='return confirm('Doresti sa stergi acest brand?');' action='$deleteUrl' method='get' style='display: contents;'><button type='submit' class='btn btn-danger btn-xs'><i class='fa fa-remove'></i></button></form>";
         return $edit . $delete;
     }
 

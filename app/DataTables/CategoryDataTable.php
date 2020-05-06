@@ -29,9 +29,16 @@ class CategoryDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->editColumn('Active', function($data) {
+                return '<i class="fa fa-'. ($data->Active ? 'check' : 'times') .'" aria-hidden="true"></i>';
+            })
+            ->editColumn('New', function($data) {
+                return '<i class="fa fa-'. ($data->New ? 'check' : 'times') .'" aria-hidden="true"></i>';
+            })
             ->addColumn('action', function ($data){
                 return $this->getActionColumn($data);
-            });
+            })
+            ->rawColumns(['Active', 'action', 'New']);
     }
 
     /**
@@ -42,7 +49,8 @@ class CategoryDataTable extends DataTable
      */
     public function query(Category $model)
     {
-        return $model->newQuery();
+        return $model->leftjoin('categories as cp', 'cp.id', '=', 'categories.parent_id')
+                    ->select(['categories.id', 'cp.Name as Parent','categories.Name','categories.Active','categories.New']);
     }
 
     /**
@@ -79,10 +87,11 @@ class CategoryDataTable extends DataTable
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center'),
-            Column::make('id')->title('ID Categorie'),
-            Column::make('parent_id')->title('ID Categorie Baza'),
-            Column::make('Name')->title('Denumire'),
-            Column::make('Active')->title('Activ'),
+            Column::make('id')->title('ID Categorie')->width('15%'),
+            Column::make('Parent')->title('Categorie Parinte')->width('28%'),
+            Column::make('Name')->title('Denumire')->width('28%'),
+            Column::make('Active')->title('Activ')->width('10%'),
+            Column::make('New')->title('Marcat Nou')->width('10%'),
         ];
     }
 
@@ -90,9 +99,9 @@ class CategoryDataTable extends DataTable
     protected function getActionColumn($data): string
     {
         $editUrl = route('dashboard.categories.edit', $data->id);
-        $deleteUrl = route('dashboard.categories.destroy', $data->id);
-        $edit = '<a class="btn btn-primary btn-sm" data-value="'.$data->id.'" href="'.$editUrl.'"><i class="fa fa-edit"></i></a>';
-        $delete = "<form onSubmit='return confirm('Doresti sa stergi acest produs?');' action='$deleteUrl' method='post'>".csrf_field()."<button type='submit' class='btn btn-secondary cursor-pointer'><i class='text-danger fa fa-remove'></i></button></form>";
+        $deleteUrl = route('dashboard.categories.delete', $data->id);
+        $edit = '<a class="btn btn-primary btn-xs btn mr-3" data-value="'.$data->id.'" href="'.$editUrl.'"><i class="fa fa-edit"></i></a>';
+        $delete = "<form onSubmit='return confirm('Doresti sa stergi aceasta categorie?');' action='$deleteUrl' method='get' style='display: contents;'><button type='submit' class='btn btn-danger btn-xs'><i class='fa fa-remove'></i></button></form>";
         return $edit . $delete;
     }
 

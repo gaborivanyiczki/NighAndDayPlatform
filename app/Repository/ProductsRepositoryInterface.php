@@ -15,9 +15,15 @@ interface ProductsRepositoryInterface
 
    public function getProductsByCategory($slug);
 
+   public function getProductsByBrand($slug);
+
    public function getCountProductsByCategory($slug);
 
+   public function getCountProductsByBrand($slug);
+
    public function getProductsByFilter($categorySlug, $skip, $take, array $sort);
+
+   public function getProductsByBrandFilter($brandSlug, $skip, $take, array $sort);
 
    public function findParticularProductBySlug($slug);
 
@@ -28,4 +34,8 @@ interface ProductsRepositoryInterface
    public function getProductNameById($id);
 
    public function getActiveProductsForSelect();
+
+   public function getProductPrice($id);
+
+   public function findProductWithAttributesById($id);
 }

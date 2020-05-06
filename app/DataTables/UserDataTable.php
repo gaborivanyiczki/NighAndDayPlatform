@@ -21,9 +21,13 @@ class UserDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->editColumn('active', function($data) {
+                return '<i class="fa fa-'. ($data->active ? 'check' : 'times') .'" aria-hidden="true"></i>';
+            })
             ->addColumn('action', function ($data){
                 return $this->getActionColumn($data);
-            });
+            })
+            ->rawColumns(['active', 'action']);
     }
 
     /**
@@ -84,8 +88,8 @@ class UserDataTable extends DataTable
     {
         $editUrl = route('dashboard.users.edit', $data->id);
         $deleteUrl = route('dashboard.users.destroy', $data->id);
-        $edit = '<a class="btn btn-primary btn-sm btn mr-3" data-value="'.$data->id.'" href="'.$editUrl.'"><i class="fa fa-edit"></i></a>';
-        $delete = "<form onSubmit='return confirm('Doresti sa stergi acest produs?');' action='$deleteUrl' method='post' style='display: contents;'>".csrf_field()."<button type='submit' class='btn btn-secondary cursor-pointer'><i class='text-danger fa fa-remove'></i></button></form>";
+        $edit = '<a class="btn btn-primary btn-xs btn mr-3" data-value="'.$data->id.'" href="'.$editUrl.'"><i class="fa fa-edit"></i></a>';
+        $delete = "<form onSubmit='return confirm('Doresti sa stergi acest brand?');' action='$deleteUrl' method='get' style='display: contents;'><button type='submit' class='btn btn-danger btn-xs'><i class='fa fa-remove'></i></button></form>";
         return $edit . $delete;
     }
 

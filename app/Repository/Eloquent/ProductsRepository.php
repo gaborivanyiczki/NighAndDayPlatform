@@ -51,6 +51,16 @@ class ProductsRepository extends BaseRepository implements ProductsRepositoryInt
 
     }
 
+    public function findProductWithAttributesById($id)
+    {
+        return $this->model->with(['images' => function($query) { $query->select('Path', 'Filename','Product_ID','Default'); }])
+                            ->with(['attributes' => function($query){ $query->join('attributes', 'attributes.id', '=', 'product_attributes.Attribute_ID')
+                                                                            ->join('attribute_values', 'attribute_values.id', '=', 'product_attributes.Attribute_Value_ID')
+                                                                            ->select('Product_ID', 'product_attributes.Attribute_ID', 'attributes.Name as AttributeName', 'attribute_values.id as AttributeValue_ID'  ,'attribute_values.Value as AttributeValue'); }])
+                            ->where('id', $id)->first();
+
+    }
+
     public function getProductIdBySlug($slug)
     {
         return $this->model->where('Slug', $slug)
@@ -86,10 +96,27 @@ class ProductsRepository extends BaseRepository implements ProductsRepositoryInt
                             ->get()->toArray();
     }
 
+    public function getProductsByBrand($slug)
+    {
+        return $this->model->with(['images' => function($query) { $query->select('Path','Filename','Product_ID')->where('Default', 1); }])
+                            ->join('brands', 'brands.id', '=', 'Brand_ID')
+                            ->where([['products.Active', 1], ['brands.Slug', $slug]])
+                            ->select('products.Name as Name','products.Slug as Slug','Price','DiscountPrice','products.id as id')
+                            ->take(12)
+                            ->get()->toArray();
+    }
+
     public function getCountProductsByCategory($slug)
     {
         return $this->model->join('categories', 'categories.id', '=', 'Category_ID')
                             ->where([['products.Active', 1], ['categories.Slug', $slug]])
+                            ->count();
+    }
+
+    public function getCountProductsByBrand($slug)
+    {
+        return $this->model->join('brands', 'brands.id', '=', 'Brand_ID')
+                            ->where([['products.Active', 1], ['brands.Slug', $slug]])
                             ->count();
     }
 
@@ -98,6 +125,18 @@ class ProductsRepository extends BaseRepository implements ProductsRepositoryInt
         return $this->model->with(['images' => function($query) { $query->select('Path','Filename','Product_ID')->where('Default', 1); }])
                             ->join('categories', 'categories.id', '=', 'Category_ID')
                             ->where([['products.Active', 1], ['categories.Slug', $categorySlug]])
+                            ->select('products.Name as Name','products.Slug as Slug','Price','DiscountPrice','products.id as id')
+                            ->skip($skip)
+                            ->take($take)
+                            ->orderBy('products.'.$sort['SortColumn'], $sort['SortBy'])
+                            ->get()->toArray();
+    }
+
+    public function getProductsByBrandFilter($brandSlug, $skip, $take, array $sort)
+    {
+        return $this->model->with(['images' => function($query) { $query->select('Path','Filename','Product_ID')->where('Default', 1); }])
+                            ->join('brands', 'brands.id', '=', 'Brand_ID')
+                            ->where([['products.Active', 1], ['brands.Slug', $brandSlug]])
                             ->select('products.Name as Name','products.Slug as Slug','Price','DiscountPrice','products.id as id')
                             ->skip($skip)
                             ->take($take)
@@ -127,5 +166,14 @@ class ProductsRepository extends BaseRepository implements ProductsRepositoryInt
                             ->select('id','Name')
                             ->get();
 
+    }
+
+    public function getProductPrice($id)
+    {
+        $productPrices = $this->model->where('id', $id)
+                                    ->select('Price', 'DiscountPrice')
+                                    ->first();
+
+        return $productPrices->DiscountPrice != null ? $productPrices->DiscountPrice :  $productPrices->Price;
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\DataTables\UserDataTable;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -125,4 +126,10 @@ class UsersController extends Controller
         }
     }
 
+    public function getUserAddress(Request $request)
+    {
+        $userAddresses = UserAddress::where('User_ID', $request->user)->select('id','Address')->get();
+
+        return response()->json($userAddresses);
+    }
 }

@@ -1,6 +1,6 @@
 
   <div class="form-group">
-        <label for="Product_Attribute_Group_ID" class="font-weight-bold">Grup Produse</label>
+        <label for="Product_Attribute_Group_ID" class="font-weight-bold">Grup Produse (alege doar daca exista deja)</label>
         <select class="form-control {{ $errors->has('Product_Attribute_Group_ID') ? ' is-invalid' : '' }}" name="Product_Attribute_Group_ID" id="Product_Attribute_Group_ID">
             <option value="" disabled selected>---- Alege Grup Produs ---</option>
 

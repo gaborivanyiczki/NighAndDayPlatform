@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->bigInteger('User_ID')->unsigned()->nullable();
             $table->bigInteger('UserAddress_ID')->unsigned()->nullable();
             $table->bigInteger('OrderAddress_ID')->unsigned()->nullable();
-            $table->integer('ShipCharge')->default(0);
+            $table->double('ShipCharge', 8, 2)->default(0);
             $table->bigInteger('OrderStatus_ID')->unsigned()->default(1);
             $table->bigInteger('ShipmentStatus_ID')->unsigned()->nullable();
             $table->bigInteger('PaymentType_ID')->unsigned()->nullable();
@@ -54,6 +54,8 @@ class CreateOrdersTable extends Migration
             ->onDelete('cascade');
 
         });
+
+        DB::update("ALTER TABLE orders AUTO_INCREMENT = 1000;")
     }
 
     /**

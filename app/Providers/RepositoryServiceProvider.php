@@ -18,6 +18,7 @@ use App\Repository\Eloquent\SettingsRepository;
 use App\Repository\Eloquent\BaseRepository;
 use App\Repository\Eloquent\BrandsRepository;
 use App\Repository\Eloquent\CategoriesRepository;
+use App\Repository\Eloquent\OrderAddressRepository;
 use App\Repository\Eloquent\OrderRepository;
 use App\Repository\Eloquent\ProductAttributeRepository;
 use App\Repository\Eloquent\ProductsRepository;
@@ -26,6 +27,7 @@ use App\Repository\Eloquent\UserRepository;
 use App\Repository\Eloquent\UserVouchersRepository;
 use App\Repository\Eloquent\VoucherRepository;
 use App\Repository\Eloquent\VoucherTypeRepository;
+use App\Repository\OrderAddressRepositoryInterface;
 use App\Repository\OrderRepositoryInterface;
 use App\Repository\ProductAttributeRepositoryInterface;
 use App\Repository\ProductsRepositoryInterface;
@@ -61,6 +63,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(VoucherRepositoryInterface::class, VoucherRepository::class);
         $this->app->bind(VoucherTypeRepositoryInterface::class, VoucherTypeRepository::class);
+        $this->app->bind(OrderAddressRepositoryInterface::class, OrderAddressRepository::class);
     }
 
     /**

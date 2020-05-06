@@ -27,6 +27,7 @@ class Update extends FormRequest
         $id = $this->request->get('ProductID');
 
         return [
+            'ImageName' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 			'Name' => 'required|max:255',
 			'Slug' => 'required|unique:products,Slug,'.$id,
 			'ProductCode' => 'nullable|unique:products,ProductCode,'.$id,

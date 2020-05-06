@@ -2,24 +2,7 @@
 
 @section('content')
 @push('styles')
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css" rel="stylesheet">
-@endpush
-@push('scripts')
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.js"></script>
-    <script type="text/javascript">
-         $(document).ready(function() {
-           $('.summernote').summernote({
-            height: 200,
-            dialogsInBody: true,
-            callbacks:{
-                onInit:function(){
-                $('body > .note-popover').hide();
-                }
-             },
-         });
-      });
-    </script>
 @endpush
 
 <!-- Container-fluid starts-->
@@ -64,16 +47,16 @@
 
 <script>
     $(document).ready(function() {
-        $('#ConfirmedCheckBox').change(function() {
+        $('#ConfirmedCheckbox').change(function() {
             if($(this).is(":checked")) {
-                $('#ConfirmedCheckBoxInput').val(1);
+                $('#ConfirmedCheckboxInput').val(1);
             }else{
-                $('#ConfirmedCheckBoxInput').val(0);
+                $('#ConfirmedCheckboxInput').val(0);
             }
         });
     });
     $(document).ready(function() {
-        $('#ArchivedCheckbox').change(function() {
+        $('#ArchivedCheckBox').change(function() {
             if($(this).is(":checked")) {
                 $('#ArchivedCheckBoxInput').val(1);
             }else{
@@ -105,7 +88,7 @@
                             });
                            html += '</select> </td>';
                        html += '<td>';
-                            html += '<input type="number" class="form-control" name="product_qty['+number+']" id="Quantity_'+number+'" value="0" placeholder="" maxlength="255" >';
+                            html += '<input type="number" min="1" class="form-control" name="product_qty['+number+']" id="Quantity_'+number+'" value="1" placeholder="" maxlength="255" readonly>';
                            html += '</td>';
                        if(number > 1)
                        {
@@ -117,27 +100,25 @@
                            html += '<td><button type="button" name="add" id="add" class="btn btn-success">Adauga Produs</button></td></tr>';
                            $('tbody').html(html);
                        }
-                    /*$(document).on('change','#attribute_id_'+number+'', function () {
-                        var _attributeId = $('#attribute_id_'+number+' option:selected').val();
+
+                    $(document).on('change','#product_id_'+number+'', function () {
+                        var _product = $('#product_id_'+number+' option:selected').val();
+                        var _quantity = $('#Quantity_'+number+'').val();
+                        var _currentTotal = $('#TotalValue').val();
                         $.ajax({
-                            url: laroute.route('dashboard.attributes.getValues'),
+                            url: laroute.route('dashboard.orders.getProductPrice'),
                             type: 'GET',
                             dataType: 'json',
                             data:{
-                                attribute:_attributeId,
+                                product:_product,
+                                quantity:_quantity,
+                                total: _currentTotal
                             },
                             success: function(response) {
-                                var sel = $('#attribute_value_'+number+'');
-                                sel.empty();
-                                sel.append('<option value="" disabled selected>---- Alege Valoare ---</option>');
-                                $.each(response,function(index,value)
-                                {
-                                    sel.append('<option value="'+ value.id +'">'+ value.Value +'</option>');
-                                });
-
+                                $('#TotalValue').val(response.toFixed(2));
                             }
                         });
-                    });*/
+                    });
                 }
                 $(document).on('click', '#add', function(){
                     count++;
@@ -151,5 +132,41 @@
             }
         });
     });
+    </script>
+    <script>
+        $(document).on('change','#User_ID', function () {
+               var _userId = $('#User_ID option:selected').val();
+               $.ajax({
+                   url: laroute.route('dashboard.users.getUserAddress'),
+                   type: 'GET',
+                   dataType: 'json',
+                   data:{
+                       user:_userId,
+                   },
+                   success: function(response) {
+                       var sel = $('#UserAddress_ID');
+                       sel.empty();
+                       sel.append('<option value="" disabled selected>---- Alege Adresa ---</option>');
+                       $.each(response,function(index,value)
+                       {
+                           sel.append('<option value="'+ value.id +'">'+ value.Address +'</option>');
+                       });
+
+                    }
+                });
+            });
+    </script>
+    <script>
+        $(document).on('focusin', '#ShipCharge', function(){
+            $(this).data('val', $(this).val());
+        }).on('change','#ShipCharge', function () {
+               var prev = Number($(this).data('val'));
+               var shipmentCost = Number($('#ShipCharge').val());
+               var currentTotal = Number($('#TotalValue').val());
+               currentTotal = currentTotal - prev;
+               currentTotal = currentTotal + shipmentCost;
+
+               $('#TotalValue').val(currentTotal.toFixed(2));
+            });
     </script>
 @endsection

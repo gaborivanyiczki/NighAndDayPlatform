@@ -21,9 +21,13 @@ class AttributeDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->editColumn('Choosable', function($data) {
+                return '<i class="fa fa-'. ($data->Choosable ? 'check' : 'times') .'" aria-hidden="true"></i>';
+            })
             ->addColumn('action', function ($data){
                 return $this->getActionColumn($data);
-            });
+            })
+            ->rawColumns(['Choosable', 'action']);
     }
 
     /**
@@ -34,7 +38,8 @@ class AttributeDataTable extends DataTable
      */
     public function query(Attribute $model)
     {
-        return $model->newQuery();
+        return $model->leftjoin('attribute_groups as ag', 'ag.id', '=', 'Attribute_Group_ID')
+                      ->select('attributes.id', 'ag.Name as AttributeGroup', 'attributes.Name', 'attributes.Choosable');
     }
 
     /**
@@ -51,6 +56,7 @@ class AttributeDataTable extends DataTable
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->buttons(
+                        Button::make('create'),
                         Button::make('export'),
                         Button::make('print'),
                         Button::make('reset'),
@@ -71,10 +77,10 @@ class AttributeDataTable extends DataTable
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('Attribute_Group_ID')->title('Grup Atribut Legatura'),
-            Column::make('Name')->title('Nume atribut'),
-            Column::make('Choosable')->title('Chosable'),
+            Column::make('id')->title('ID Atribut')->width('20%'),
+            Column::make('AttributeGroup')->title('Grup Atribut Legatura')->width('25%'),
+            Column::make('Name')->title('Nume atribut')->width('25%'),
+            Column::make('Choosable')->title('Selectabil (pagina produs)')->width('20%'),
         ];
     }
 
@@ -88,8 +94,8 @@ class AttributeDataTable extends DataTable
     {
         $editUrl = route('dashboard.attributes.edit', $data->id);
         $deleteUrl = route('dashboard.attributes.destroy', $data->id);
-        $edit = '<a class="btn btn-primary btn-sm" data-value="'.$data->id.'" href="'.$editUrl.'"><i class="fa fa-edit"></i></a>';
-        $delete = "<form onSubmit='return confirm('Doresti sa stergi acest produs?');' action='$deleteUrl' method='post'>".csrf_field()."<button type='submit' class='btn btn-secondary cursor-pointer'><i class='text-danger fa fa-remove'></i></button></form>";
+        $edit = '<a class="btn btn-primary btn-xs btn mr-3" data-value="'.$data->id.'" href="'.$editUrl.'"><i class="fa fa-edit"></i></a>';
+        $delete = "<form onSubmit='return confirm('Doresti sa stergi acest brand?');' action='$deleteUrl' method='get' style='display: contents;'><button type='submit' class='btn btn-danger btn-xs'><i class='fa fa-remove'></i></button></form>";
         return $edit . $delete;
     }
 

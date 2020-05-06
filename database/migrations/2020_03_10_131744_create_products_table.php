@@ -26,13 +26,23 @@ class CreateProductsTable extends Migration
             $table->double('DiscountPrice', 8, 2)->nullable();
             $table->integer('Discount')->nullable();
             $table->integer('Quantity');
-            $table->integer('Status_ID')->nullable();
-            $table->integer('Category_ID')->nullable();
-            $table->integer('Brand_ID')->nullable();
+            $table->bigInteger('Status_ID')->unsigned()->nullable();
+            $table->bigInteger('Category_ID')->unsigned()->nullable();
+            $table->bigInteger('Brand_ID')->unsigned()->nullable();
             $table->boolean('Active')->default(1);
             $table->boolean('Favorite')->default(0);
             $table->string('CreatedUser')->nullable();
             $table->timestamps();
+
+            $table->foreign('Status_ID')
+            ->references('id')->on('product_statuses')
+            ->onDelete('set null');
+            $table->foreign('Category_ID')
+            ->references('id')->on('categories')
+            ->onDelete('set null');
+            $table->foreign('Brand_ID')
+            ->references('id')->on('brands')
+            ->onDelete('set null');
         });
     }
 

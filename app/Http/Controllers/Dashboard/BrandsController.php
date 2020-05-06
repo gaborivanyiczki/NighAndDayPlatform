@@ -81,25 +81,19 @@ class BrandsController extends Controller
             $brand->Logofile= $imageName;
         }
 
-        if ($brand->save()) {
-
+        if ($brand->save())
+        {
             session()->flash('app_message', 'Brand successfully updated');
-            return redirect()->route('dashboard.categories');
+            return redirect()->route('dashboard.brands');
             } else {
                 session()->flash('app_error', 'Something is wrong while updating Brand');
             }
         return redirect()->back();
     }
 
-    public function destroy($id)
+    public function delete($id)
     {
-        $brand = Brand::find($id);
-
-        if ($brand->delete()) {
-                session()->flash('app_message', 'Brand successfully deleted');
-            } else {
-                session()->flash('app_error', 'Error occurred while deleting Brand');
-            }
+        Brand::find($id)->update(['Active' => 0]);
 
         return redirect()->back();
     }

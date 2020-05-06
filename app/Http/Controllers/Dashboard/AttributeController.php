@@ -120,7 +120,7 @@ class AttributeController extends Controller
         if ($attribute->save()) {
 
             session()->flash('app_message', 'Attribute successfully updated');
-            return redirect()->route('dashboard.categories');
+            return redirect()->route('dashboard.attributes');
             } else {
                 session()->flash('app_error', 'Something is wrong while updating Attribute');
             }
@@ -163,7 +163,7 @@ class AttributeController extends Controller
         $model->CreatedUser = $currentUser;
         $model->save();
 
-        return redirect()->route('dashboard.attributes.values');
+        return redirect()->route('dashboard.attribute.values');
     }
 
     public function attributeValuesEdit($id)
@@ -185,7 +185,7 @@ class AttributeController extends Controller
         if ($attribute->save()) {
 
             session()->flash('app_message', 'Attribute value successfully updated');
-            return redirect()->route('dashboard.categories');
+            return redirect()->route('dashboard.attributes.values');
             } else {
                 session()->flash('app_error', 'Something is wrong while updating Attribute Value');
             }
@@ -237,7 +237,7 @@ class AttributeController extends Controller
         if ($attributeGroup->save()) {
 
             session()->flash('app_message', 'Attribute group successfully updated');
-            return redirect()->route('dashboard.categories');
+            return redirect()->route('dashboard.attributes.groups');
             } else {
                 session()->flash('app_error', 'Something is wrong while updating Attribute Group');
             }

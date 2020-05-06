@@ -21,6 +21,7 @@ class CreateUserAddressesTable extends Migration
             $table->string('ZipCode')->nullable();
             $table->string('Telephone');
             $table->string('ContactName');
+            $table->string('Email');
             $table->boolean('Default')->default(0);
             $table->timestamps();
 

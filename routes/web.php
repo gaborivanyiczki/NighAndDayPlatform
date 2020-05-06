@@ -31,6 +31,7 @@ Route::get('/category/{slug}', 'CategoryController@products')->name('categorypro
 Route::get('/fetch-products', 'CategoryController@fetchProducts')->name('fetchproducts');
 //Brand
 Route::get('/brand/{slug}', 'BrandController@brandDetails')->name('brand.details');
+Route::get('/fetch-products-brand', 'BrandController@fetchBrandProducts')->name('brand.fetchbrandproducts');
 //Cart
 Route::get('/add-to-cart', 'CartController@addToCart')->name('addtocart');
 Route::get('/cart/get', 'CartController@getCartContent')->name('getcart');
@@ -66,13 +67,19 @@ Route::post('/system/dashboard/settings/update', 'DashboardController@updateSett
 //DASHBOARD//PRODUCTS
 Route::get('/system/dashboard/products', 'Dashboard\ProductController@index')->name('dashboard.products');
 Route::get('/system/dashboard/products/show', 'Dashboard\ProductController@show')->name('dashboard.product.show');
-Route::get('/system/dashboard/products/create', 'Dashboard\ProductController@create')->name('dashboard.product.create');
+//Route::get('/system/dashboard/products/create', 'Dashboard\ProductController@create')->name('dashboard.product.create');
 Route::post('/system/dashboard/products/store', 'Dashboard\ProductController@store')->name('dashboard.product.store');
 Route::get('/system/dashboard/products/edit/{id}', 'Dashboard\ProductController@edit')->name('dashboard.product.edit');
 Route::post('/system/dashboard/products/update', 'Dashboard\ProductController@update')->name('dashboard.product.update');
+Route::post('/system/dashboard/products/updateAttributeGroup', 'Dashboard\ProductController@updateAttributeGroup')->name('dashboard.product.updateAttributeGroup');
+Route::post('/system/dashboard/products/addAttributes', 'Dashboard\ProductController@addAttributes')->name('dashboard.product.addAttributes');
 Route::post('/system/dashboard/products/delete', 'Dashboard\ProductController@destroy')->name('dashboard.product.destroy');
+Route::get('/system/dashboard/products/deleteAttribute/{id}/{productId}', 'Dashboard\ProductController@deleteAttribute')->name('dashboard.product.deleteAttribute');
+Route::post('/system/dashboard/products/updateProductAttribute', 'Dashboard\ProductController@updateProductAttribute')->name('dashboard.product.updateProductAttribute');
+Route::post('/system/dashboard/products/addProductImage', 'Dashboard\ProductController@addProductImage')->name('dashboard.product.addProductImage');
+Route::get('/system/dashboard/products/deleteImage/{filename}', 'Dashboard\ProductController@deleteImage')->name('dashboard.product.deleteImage');
 
-Wizard::routes('/system/dashboard/wizard/product', 'ProductWizardController', 'wizard.product');
+Wizard::routes('/system/dashboard/products/create', 'ProductWizardController', 'wizard.product');
 
 
 //DASHBOARD//ATTRIBUTES
@@ -107,7 +114,7 @@ Route::get('/system/dashboard/categories/create', 'Dashboard\CategoryController@
 Route::post('/system/dashboard/categories/store', 'Dashboard\CategoryController@store')->name('dashboard.categories.store');
 Route::get('/system/dashboard/categories/edit/{id}', 'Dashboard\CategoryController@edit')->name('dashboard.categories.edit');
 Route::post('/system/dashboard/categories/update', 'Dashboard\CategoryController@update')->name('dashboard.categories.update');
-Route::post('/system/dashboard/categories/delete', 'Dashboard\CategoryController@destroy')->name('dashboard.categories.destroy');
+Route::post('/system/dashboard/categories/delete', 'Dashboard\CategoryController@delete')->name('dashboard.categories.delete');
 
 //DASHBOARD//BRANDS
 Route::get('/system/dashboard/brands', 'Dashboard\BrandsController@index')->name('dashboard.brands');
@@ -116,13 +123,21 @@ Route::get('/system/dashboard/brands/create', 'Dashboard\BrandsController@create
 Route::post('/system/dashboard/brands/store', 'Dashboard\BrandsController@store')->name('dashboard.brands.store');
 Route::get('/system/dashboard/brands/edit/{id}', 'Dashboard\BrandsController@edit')->name('dashboard.brands.edit');
 Route::post('/system/dashboard/brands/update', 'Dashboard\BrandsController@update')->name('dashboard.brands.update');
-Route::post('/system/dashboard/brands/delete', 'Dashboard\BrandsController@destroy')->name('dashboard.brands.destroy');
+Route::get('/system/dashboard/brands/delete/{id}', 'Dashboard\BrandsController@delete')->name('dashboard.brands.delete');
 
 //DASHBOARD//ORDERS
 Route::get('/system/dashboard/orders/getProducts', 'Dashboard\OrderController@getProducts')->name('dashboard.orders.getProducts');
+Route::get('/system/dashboard/orders/getProductPrice', 'Dashboard\OrderController@getProductPrice')->name('dashboard.orders.getProductPrice');
 Route::get('/system/dashboard/orders', 'Dashboard\OrderController@index')->name('dashboard.orders');
+Route::get('/system/dashboard/orders/invoices', 'Dashboard\OrderController@invoices')->name('dashboard.orders.invoices');
+Route::get('/system/dashboard/orders/archived', 'Dashboard\OrderController@archived')->name('dashboard.orders.archived');
 Route::get('/system/dashboard/orders/create', 'Dashboard\OrderController@create')->name('dashboard.orders.create');
 Route::post('/system/dashboard/orders/store', 'Dashboard\OrderController@store')->name('dashboard.orders.store');
+Route::get('/system/dashboard/orders/edit/{id}', 'Dashboard\OrderController@edit')->name('dashboard.orders.edit');
+Route::post('/system/dashboard/orders/update', 'Dashboard\OrderController@update')->name('dashboard.orders.update');
+Route::get('/system/dashboard/orders/show/{id}', 'Dashboard\OrderController@show')->name('dashboard.orders.show');
+Route::get('/system/dashboard/orders/archive/{id}', 'Dashboard\OrderController@archive')->name('dashboard.orders.archive');
+Route::get('/system/dashboard/orders/generateInvoice/{id}', 'Dashboard\OrderController@generateInvoice')->name('dashboard.orders.generateInvoice');
 
 //DASHBOARD//VOUCHERS
 Route::get('/system/dashboard/vouchers', 'Dashboard\VouchersController@index')->name('dashboard.vouchers');
@@ -130,7 +145,7 @@ Route::get('/system/dashboard/vouchers/create', 'Dashboard\VouchersController@cr
 Route::post('/system/dashboard/vouchers/store', 'Dashboard\VouchersController@store')->name('dashboard.vouchers.store');
 Route::get('/system/dashboard/vouchers/edit/{id}', 'Dashboard\VouchersController@edit')->name('dashboard.vouchers.edit');
 Route::post('/system/dashboard/vouchers/update', 'Dashboard\VouchersController@update')->name('dashboard.vouchers.update');
-Route::post('/system/dashboard/vouchers/delete', 'Dashboard\VouchersController@destroy')->name('dashboard.vouchers.destroy');
+Route::post('/system/dashboard/vouchers/delete/{id}', 'Dashboard\VouchersController@destroy')->name('dashboard.vouchers.destroy');
 
 //DASHBOARD//USER-MANAGEMENT
 Route::get('/system/dashboard/user/profile', 'Dashboard\UsersController@profile')->name('dashboard.user.profile');
@@ -140,6 +155,7 @@ Route::get('/system/dashboard/users', 'Dashboard\UsersController@index')->name('
 Route::get('/system/dashboard/users/edit/{id}', 'Dashboard\UsersController@edit')->name('dashboard.users.edit');
 Route::post('/system/dashboard/users/update', 'Dashboard\UsersController@update')->name('dashboard.users.update');
 Route::post('/system/dashboard/users/delete', 'Dashboard\UsersController@destroy')->name('dashboard.users.destroy');
+Route::get('/system/dashboard/users/getUserAddress', 'Dashboard\UsersController@getUserAddress')->name('dashboard.users.getUserAddress');
 
 //DASHBOARD//FAQ
 Route::get('/system/dashboard/faq', 'Dashboard\FaqController@index')->name('dashboard.faq');

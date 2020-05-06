@@ -148,13 +148,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
-
-        if ($category->delete()) {
-                session()->flash('app_message', 'Category successfully deleted');
-            } else {
-                session()->flash('app_error', 'Error occurred while deleting Category');
-            }
+        Category::find($id)->update(['Active', 0]);
 
         return redirect()->back();
     }

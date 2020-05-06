@@ -18,6 +18,8 @@ class CreateOrderItemsTable extends Migration
             $table->bigInteger('Order_ID')->unsigned();
             $table->bigInteger('Product_ID')->unsigned();
             $table->integer('Quantity')->default(0);
+            $table->double('ProductPrice', 8, 2)->default(0);
+            $table->double('Total', 8, 2)->default(0);
             $table->timestamps();
 
             $table->foreign('Order_ID')

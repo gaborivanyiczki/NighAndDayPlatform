@@ -50,7 +50,8 @@
             <li><a class="sidebar-header" href=""><i data-feather="dollar-sign"></i><span>Comenzi</span><i class="fa fa-angle-right pull-right"></i></a>
                 <ul class="sidebar-submenu">
                     <li><a href="{{ route('dashboard.orders') }}"><i class="fa fa-circle"></i>Gestionare Comenzi</a></li>
-                <li><a href="{{ route('dashboard.orders.create') }}"><i class="fa fa-circle"></i>Adauga comanda</a></li>
+                    <li><a href="{{ route('dashboard.orders.archived') }}"><i class="fa fa-circle"></i>Comenzi Arhivate</a></li>
+                    <li><a href="{{ route('dashboard.orders.create') }}"><i class="fa fa-circle"></i>Adauga comanda</a></li>
                 </ul>
             </li>
             <li><a class="sidebar-header" href=""><i data-feather="tag"></i><span>Vouchere</span><i class="fa fa-angle-right pull-right"></i></a>
@@ -65,8 +66,7 @@
                     <li><a href="{{ route('dashboard.brands.create') }}"><i class="fa fa-circle"></i>Creeaza Brand</a></li>
                 </ul>
             </li>
-            <li><a class="sidebar-header" href="invoice.html"><i data-feather="archive"></i><span>Facturi</span></a>
-            <li><a class="sidebar-header" href="#"><i data-feather="camera"></i><span>Fisiere Media</span></a></li>
+            <li><a class="sidebar-header" href="{{ route('dashboard.orders.invoices') }}"><i data-feather="archive"></i><span>Facturi</span></a>
             <li><a class="sidebar-header" href="#"><i data-feather="user-plus"></i><span>Utilizatori</span><i class="fa fa-angle-right pull-right"></i></a>
                 <ul class="sidebar-submenu">
                     <li><a href="{{ route('dashboard.users') }}"><i class="fa fa-circle"></i>Lista Utilizatori</a></li>

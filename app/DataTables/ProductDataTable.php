@@ -21,9 +21,13 @@ class ProductDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->editColumn('Active', function($data) {
+                return '<i class="fa fa-'. ($data->Active ? 'check' : 'times') .'" aria-hidden="true"></i>';
+            })
             ->addColumn('action', function ($data){
                 return $this->getActionColumn($data);
-            });
+            })
+            ->rawColumns(['Active','action']);
     }
 
     /**
@@ -34,7 +38,8 @@ class ProductDataTable extends DataTable
      */
     public function query(Product $model)
     {
-        return $model->newQuery();
+        return $model->join('categories', 'categories.id', '=', 'Category_ID')
+                     ->select('products.id', 'products.Name', 'products.Price', 'products.DiscountPrice', 'products.Active', 'products.Quantity', 'products.ProductCode' , 'categories.Name as Category');
     }
 
     /**
@@ -51,6 +56,7 @@ class ProductDataTable extends DataTable
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->buttons(
+                        Button::make('create'),
                         Button::make('export'),
                         Button::make('print'),
                         Button::make('reset'),
@@ -71,11 +77,14 @@ class ProductDataTable extends DataTable
                   ->printable(true)
                   ->width(60)
                   ->addClass('text-center'),
-            Column::make('id')->title('ID Produs'),
-            Column::make('Name')->title('Denumire'),
-            Column::make('Price')->title('Pret'),
-            Column::make('DiscountPrice')->title('Pret redus'),
-            Column::make('Active')->title('Activ'),
+            Column::make('id')->title('ID')->width('5%'),
+            Column::make('Name')->title('Denumire')->width('20%'),
+            Column::make('ProductCode')->title('Cod produs')->width('10%'),
+            Column::make('Category')->title('Categorie')->width('20%'),
+            Column::make('Price')->title('Pret')->width('10%'),
+            Column::make('DiscountPrice')->title('Pret redus')->width('10%'),
+            Column::make('Quantity')->title('Cantitate stoc')->width('10%'),
+            Column::make('Active')->title('Activ')->width('5%'),
         ];
     }
 
@@ -88,8 +97,8 @@ class ProductDataTable extends DataTable
     {
         $editUrl = route('dashboard.product.edit', $data->id);
         $deleteUrl = route('dashboard.product.destroy', $data->id);
-        $edit = '<a class="btn btn-primary btn-sm" data-value="'.$data->id.'" href="'.$editUrl.'"><i class="fa fa-edit"></i></a>';
-        $delete = "<form onSubmit='return confirm('Doresti sa stergi acest produs?');' action='$deleteUrl' method='post'>".csrf_field()."<button type='submit' class='btn btn-secondary cursor-pointer'><i class='text-danger fa fa-remove'></i></button></form>";
+        $edit = '<a class="btn btn-primary btn-xs btn mr-3" data-value="'.$data->id.'" href="'.$editUrl.'"><i class="fa fa-edit"></i></a>';
+        $delete = "<form onSubmit='return confirm('Doresti sa stergi acest produs?');' action='$deleteUrl' method='post' style='display: contents;'>".csrf_field()."<button type='submit' class='btn btn-danger btn-xs'><i class='fa fa-remove'></i></button></form>";
         return $edit . $delete;
     }
 

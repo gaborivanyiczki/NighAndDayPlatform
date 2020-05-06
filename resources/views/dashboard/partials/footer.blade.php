@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 footer-copyright">
-                <p class="mb-0">Copyright 2020 © NighAndDay. Toate drepturile rezervate. Sistem creeat de YesAgency.</p>
+                <p class="mb-0">Copyright 2020 . Toate drepturile rezervate.</p>
             </div>
             <div class="col-md-6">
             </div>

@@ -21,9 +21,13 @@ class AttributeGroupDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->editColumn('created_at', function($data) {
+                return $data->created_at->format('Y-m-d H:i:s');
+            })
             ->addColumn('action', function ($data){
                 return $this->getActionColumn($data);
-            });
+            })
+            ->rawColumns(['created_at','action']);
     }
 
     /**
@@ -51,6 +55,7 @@ class AttributeGroupDataTable extends DataTable
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->buttons(
+                        Button::make('create'),
                         Button::make('export'),
                         Button::make('print'),
                         Button::make('reset'),
@@ -71,8 +76,9 @@ class AttributeGroupDataTable extends DataTable
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('Name'),
+            Column::make('id')->title('ID Grup Atribute')->width('20%'),
+            Column::make('Name')->title('Denumire Grup')->width('30%'),
+            Column::make('created_at')->title('Data crearii')->width('30%'),
         ];
     }
 
@@ -85,8 +91,8 @@ class AttributeGroupDataTable extends DataTable
     {
         $editUrl = route('dashboard.attributes.groups.edit', $data->id);
         $deleteUrl = route('dashboard.attributes.groups.destroy', $data->id);
-        $edit = '<a class="btn btn-primary btn-sm" data-value="'.$data->id.'" href="'.$editUrl.'"><i class="fa fa-edit"></i></a>';
-        $delete = "<form onSubmit='return confirm('Doresti sa stergi acest produs?');' action='$deleteUrl' method='post'>".csrf_field()."<button type='submit' class='btn btn-secondary cursor-pointer'><i class='text-danger fa fa-remove'></i></button></form>";
+        $edit = '<a class="btn btn-primary btn-xs btn mr-3" data-value="'.$data->id.'" href="'.$editUrl.'"><i class="fa fa-edit"></i></a>';
+        $delete = "<form onSubmit='return confirm('Doresti sa stergi acest brand?');' action='$deleteUrl' method='get' style='display: contents;'><button type='submit' class='btn btn-danger btn-xs'><i class='fa fa-remove'></i></button></form>";
         return $edit . $delete;
     }
 

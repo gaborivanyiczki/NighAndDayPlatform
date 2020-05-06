@@ -8,4 +8,8 @@ interface OrderRepositoryInterface
     public function getOrders();
 
     public function getLastOrders();
+
+    public function findOrderById($id);
+
+    public function findOrderWithParticularColumnsById($id);
 }

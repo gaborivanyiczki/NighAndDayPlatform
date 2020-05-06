@@ -13634,20 +13634,8 @@ div.dataTables_wrapper div.dataTables_paginate {
       Button CSS start
 ==========================**/
 .btn {
-  font-size: 14px;
-  padding: 0.5rem 1.5rem;
   border-radius: 5px;
-  letter-spacing: 1px; }
-
-.btn-lg {
-  font-size: 18px; }
-
-.btn-sm {
-  font-size: 12px; }
-
-.btn-xs {
-  padding: 0.05rem 0.4rem;
-  font-size: 11px; }
+}
 
 .large-btn {
   margin-bottom: -20px; }
@@ -15796,22 +15784,6 @@ ul.notification-dropdown.onhover-show-div {
     -webkit-box-shadow: 0 0 0 0.2rem white;
             box-shadow: 0 0 0 0.2rem white; }
 
-.btn-secondary {
-  background-color: #13c9ca !important;
-  border-color: #13c9ca !important; }
-  .btn-secondary.disabled {
-    background-color: #13c9ca !important;
-    border-color: #13c9ca !important; }
-  .btn-secondary:disabled {
-    background-color: #13c9ca !important;
-    border-color: #13c9ca !important; }
-  .btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active, .btn-secondary.active {
-    background-color: #0f9b9b !important;
-    border-color: #0f9b9b !important; }
-  .btn-secondary:focus {
-    -webkit-box-shadow: 0 0 0 0.2rem #83f3f3;
-            box-shadow: 0 0 0 0.2rem #83f3f3; }
-
 .btn-success {
   background-color: #81ba00 !important;
   border-color: #81ba00 !important; }
@@ -15827,22 +15799,6 @@ ul.notification-dropdown.onhover-show-div {
   .btn-success:focus {
     -webkit-box-shadow: 0 0 0 0.2rem #cbff54;
             box-shadow: 0 0 0 0.2rem #cbff54; }
-
-.btn-danger {
-  background-color: #a5a5a5 !important;
-  border-color: #a5a5a5 !important; }
-  .btn-danger.disabled {
-    background-color: #a5a5a5 !important;
-    border-color: #a5a5a5 !important; }
-  .btn-danger:disabled {
-    background-color: #a5a5a5 !important;
-    border-color: #a5a5a5 !important; }
-  .btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active {
-    background-color: #8c8c8c !important;
-    border-color: #8c8c8c !important; }
-  .btn-danger:focus {
-    -webkit-box-shadow: 0 0 0 0.2rem #f2f2f2;
-            box-shadow: 0 0 0 0.2rem #f2f2f2; }
 
 .btn-info {
   background-color: #00a8ff !important;
