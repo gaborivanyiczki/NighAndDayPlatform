@@ -55,7 +55,7 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
-
+                    <a href="{{ route('dashboard.products') }}" type="button" class="btn btn-default" style="background-color:#0a7df3;color:white;margin-bottom: 20px;">Inapoi Lista Produse</a>
                     <ul class="nav nav-tabs" id="productEditTab" role="tablist">
                         <li class="nav-item">
                           <a class="nav-link active" id="info-tab" data-toggle="tab" href="#product-info" role="tab" aria-controls="info" aria-selected="true">Informatii Produs</a>

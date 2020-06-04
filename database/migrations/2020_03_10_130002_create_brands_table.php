@@ -24,6 +24,8 @@ class CreateBrandsTable extends Migration
             $table->string('Address')->nullable();
             $table->string('LogoPath')->nullable();
             $table->string('LogoFile')->nullable();
+            $table->string('BannerPath')->nullable();
+            $table->string('BannerFile')->nullable();
             $table->timestamps();
         });
     }

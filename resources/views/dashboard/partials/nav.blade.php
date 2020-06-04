@@ -50,6 +50,7 @@
             <li><a class="sidebar-header" href=""><i data-feather="dollar-sign"></i><span>Comenzi</span><i class="fa fa-angle-right pull-right"></i></a>
                 <ul class="sidebar-submenu">
                     <li><a href="{{ route('dashboard.orders') }}"><i class="fa fa-circle"></i>Gestionare Comenzi</a></li>
+                    <li><a href="{{ route('dashboard.orders.configurator') }}"><i class="fa fa-circle"></i>Comenzi Configurator</a></li>
                     <li><a href="{{ route('dashboard.orders.archived') }}"><i class="fa fa-circle"></i>Comenzi Arhivate</a></li>
                     <li><a href="{{ route('dashboard.orders.create') }}"><i class="fa fa-circle"></i>Adauga comanda</a></li>
                 </ul>

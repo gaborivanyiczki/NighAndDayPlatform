@@ -108,7 +108,7 @@
             <div class="col-12"><a href="{{ route('home') }}" class="btn btn-solid">continua cumparaturile</a></div>
             @else
             <div class="col-6"><a href="{{ route('home') }}" class="btn btn-solid">continua cumparaturile</a></div>
-            <div class="col-6"><a href="#" class="btn btn-solid">finalizeaza</a></div>
+        <div class="col-6"><a href="{{ route('checkout') }}" class="btn btn-solid">finalizeaza</a></div>
             @endempty
 
         </div>

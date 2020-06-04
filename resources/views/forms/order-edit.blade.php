@@ -29,16 +29,15 @@
                 </div>
                 @endif
             </div>
-
             <div class="col">
-                <label for="UserAddress_ID" class="font-weight-bold">Adresa client utilizator (optional)</label>
-                <select class="form-control {{ $errors->has('UserAddress_ID') ? ' is-invalid' : '' }}" name="UserAddress_ID" id="UserAddress_ID">
-                    @if ($userAddresses != null)
-                        @foreach($userAddresses as $item)
-                            @if ($item['id'] == $order->UserAddress_ID)
-                                <option value="{{$item['id']}}" selected>{{$item['Address']}}</option>
+                <label for="InvoiceAddress_ID" class="font-weight-bold">Adresa de facturare client utilizator (optional)</label>
+                <select class="form-control {{ $errors->has('InvoiceAddress_ID') ? ' is-invalid' : '' }}" name="InvoiceAddress_ID" id="InvoiceAddress_ID">
+                    @if ($invoiceAddresses != null)
+                        @foreach($invoiceAddresses as $item)
+                            @if ($item['AddressID'] == $order->InvoiceAddress_ID)
+                                <option value="{{$item['AddressID']}}" selected>{{$item['Address']}}</option>
                             @else
-                                <option value="{{$item['id']}}">{{$item['Address']}}</option>
+                                <option value="{{$item['AddressID']}}">{{$item['Address']}}</option>
                             @endif
                         @endforeach
                     @else
@@ -47,9 +46,32 @@
                     <option value="">---- Alege adresa predefinita ---</option>
                 </select>
 
-                @if($errors->has('UserAddress_ID'))
+                @if($errors->has('InvoiceAddress_ID'))
                 <div class="invalid-feedback">
-                    <strong>{{ $errors->first('UserAddress_ID') }}</strong>
+                    <strong>{{ $errors->first('InvoiceAddress_ID') }}</strong>
+                </div>
+                @endif
+            </div>
+            <div class="col">
+                <label for="DeliveryAddress_ID" class="font-weight-bold">Adresa de livrare client utilizator (optional)</label>
+                <select class="form-control {{ $errors->has('DeliveryAddress_ID') ? ' is-invalid' : '' }}" name="DeliveryAddress_ID" id="DeliveryAddress_ID">
+                    @if ($deliveryAddresses != null)
+                        @foreach($deliveryAddresses as $item)
+                            @if ($item['AddressID'] == $order->DeliveryAddress_ID)
+                                <option value="{{$item['AddressID']}}" selected>{{$item['Address']}}</option>
+                            @else
+                                <option value="{{$item['AddressID']}}">{{$item['Address']}}</option>
+                            @endif
+                        @endforeach
+                    @else
+                        <option value="" selected>---- Alege adresa predefinita ---</option>
+                    @endif
+                    <option value="">---- Alege adresa predefinita ---</option>
+                </select>
+
+                @if($errors->has('DeliveryAddress_ID'))
+                <div class="invalid-feedback">
+                    <strong>{{ $errors->first('DeliveryAddress_ID') }}</strong>
                 </div>
                 @endif
             </div>
@@ -57,63 +79,124 @@
     </div>
 
     <h5 class="font-weight-bold" style="border-bottom: 2px solid #c5c0c0;">Date client (daca clientul nu are cont)</h6>
-    <div class="form-group">
-        <label for="Address" class="font-weight-bold">Adresa Completa Client</label>
-    <input type="text" class="form-control {{ $errors->has('Address') ? ' is-invalid' : '' }}" name="Address" id="Address" value="{{ $address->Address }}" placeholder="" maxlength="255" required="required" >
-        @if($errors->has('Address'))
-            <div class="invalid-feedback">
-                <strong>{{ $errors->first('Address') }}</strong>
+        @if ($address)
+        <div class="form-group">
+            <label for="Address" class="font-weight-bold">Adresa Completa Client</label>
+        <input type="text" class="form-control {{ $errors->has('Address') ? ' is-invalid' : '' }}" name="Address" id="Address" value="" placeholder="" maxlength="255" >
+            @if($errors->has('Address'))
+                <div class="invalid-feedback">
+                    <strong>{{ $errors->first('Address') }}</strong>
+                </div>
+            @endif
+        </div>
+
+        <div class="form-group">
+            <div class="form-row">
+                <div class="col">
+                    <label for="ZipCode" class="font-weight-bold">Cod Postal</label>
+                    <input type="text" class="form-control {{ $errors->has('ZipCode') ? ' is-invalid' : '' }}" name="ZipCode" id="ZipCode" value="" placeholder="" maxlength="255">
+                    @if($errors->has('ZipCode'))
+                        <div class="invalid-feedback">
+                            <strong>{{ $errors->first('ZipCode') }}</strong>
+                        </div>
+                    @endif
+                </div>
+
+                <div class="col">
+                    <label for="Telephone" class="font-weight-bold">Numar telefon</label>
+                    <input type="text" class="form-control {{ $errors->has('Telephone') ? ' is-invalid' : '' }}" name="Telephone" id="Telephone" value="" placeholder="" maxlength="255">
+                    @if($errors->has('Telephone'))
+                        <div class="invalid-feedback">
+                            <strong>{{ $errors->first('Telephone') }}</strong>
+                        </div>
+                    @endif
+                </div>
             </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-row">
+                <div class="col">
+                    <label for="Email" class="font-weight-bold">Email client</label>
+                    <input type="text" class="form-control {{ $errors->has('Email') ? ' is-invalid' : '' }}" name="Email" id="Email" value="" placeholder="" maxlength="255">
+                    @if($errors->has('Email'))
+                        <div class="invalid-feedback">
+                            <strong>{{ $errors->first('Email') }}</strong>
+                        </div>
+                    @endif
+                </div>
+
+                <div class="col">
+                    <label for="ContactName" class="font-weight-bold">Nume contact</label>
+                    <input type="text" class="form-control {{ $errors->has('ContactName') ? ' is-invalid' : '' }}" name="ContactName" id="ContactName" value="" placeholder="" maxlength="255" >
+                    @if($errors->has('ContactName'))
+                        <div class="invalid-feedback">
+                            <strong>{{ $errors->first('ContactName') }}</strong>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+        @else
+        <div class="form-group">
+            <label for="Address" class="font-weight-bold">Adresa Completa Client</label>
+        <input type="text" class="form-control {{ $errors->has('Address') ? ' is-invalid' : '' }}" name="Address" id="Address" value="" placeholder="" maxlength="255" >
+            @if($errors->has('Address'))
+                <div class="invalid-feedback">
+                    <strong>{{ $errors->first('Address') }}</strong>
+                </div>
+            @endif
+        </div>
+
+        <div class="form-group">
+            <div class="form-row">
+                <div class="col">
+                    <label for="ZipCode" class="font-weight-bold">Cod Postal</label>
+                    <input type="text" class="form-control {{ $errors->has('ZipCode') ? ' is-invalid' : '' }}" name="ZipCode" id="ZipCode" value="" placeholder="" maxlength="255" >
+                    @if($errors->has('ZipCode'))
+                        <div class="invalid-feedback">
+                            <strong>{{ $errors->first('ZipCode') }}</strong>
+                        </div>
+                    @endif
+                </div>
+
+                <div class="col">
+                    <label for="Telephone" class="font-weight-bold">Numar telefon</label>
+                    <input type="text" class="form-control {{ $errors->has('Telephone') ? ' is-invalid' : '' }}" name="Telephone" id="Telephone" value="" placeholder="" maxlength="255">
+                    @if($errors->has('Telephone'))
+                        <div class="invalid-feedback">
+                            <strong>{{ $errors->first('Telephone') }}</strong>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-row">
+                <div class="col">
+                    <label for="Email" class="font-weight-bold">Email client</label>
+                    <input type="text" class="form-control {{ $errors->has('Email') ? ' is-invalid' : '' }}" name="Email" id="Email" value="" placeholder="" maxlength="255">
+                    @if($errors->has('Email'))
+                        <div class="invalid-feedback">
+                            <strong>{{ $errors->first('Email') }}</strong>
+                        </div>
+                    @endif
+                </div>
+
+                <div class="col">
+                    <label for="ContactName" class="font-weight-bold">Nume contact</label>
+                    <input type="text" class="form-control {{ $errors->has('ContactName') ? ' is-invalid' : '' }}" name="ContactName" id="ContactName" value="" placeholder="" maxlength="255">
+                    @if($errors->has('ContactName'))
+                        <div class="invalid-feedback">
+                            <strong>{{ $errors->first('ContactName') }}</strong>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
         @endif
-    </div>
 
-    <div class="form-group">
-        <div class="form-row">
-            <div class="col">
-                <label for="ZipCode" class="font-weight-bold">Cod Postal</label>
-                <input type="text" class="form-control {{ $errors->has('ZipCode') ? ' is-invalid' : '' }}" name="ZipCode" id="ZipCode" value="{{ $address->ZipCode }}" placeholder="" maxlength="255" required="required" >
-                @if($errors->has('ZipCode'))
-                    <div class="invalid-feedback">
-                        <strong>{{ $errors->first('ZipCode') }}</strong>
-                    </div>
-                @endif
-            </div>
-
-            <div class="col">
-                <label for="Telephone" class="font-weight-bold">Numar telefon</label>
-                <input type="text" class="form-control {{ $errors->has('Telephone') ? ' is-invalid' : '' }}" name="Telephone" id="Telephone" value="{{ $address->Telephone }}" placeholder="" maxlength="255" required="required" >
-                @if($errors->has('Telephone'))
-                    <div class="invalid-feedback">
-                        <strong>{{ $errors->first('Telephone') }}</strong>
-                    </div>
-                @endif
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="form-row">
-            <div class="col">
-                <label for="Email" class="font-weight-bold">Email client</label>
-                <input type="text" class="form-control {{ $errors->has('Email') ? ' is-invalid' : '' }}" name="Email" id="Email" value="{{ $address->Email }}" placeholder="" maxlength="255" required="required" >
-                @if($errors->has('Email'))
-                    <div class="invalid-feedback">
-                        <strong>{{ $errors->first('Email') }}</strong>
-                    </div>
-                @endif
-            </div>
-
-            <div class="col">
-                <label for="ContactName" class="font-weight-bold">Nume contact</label>
-                <input type="text" class="form-control {{ $errors->has('ContactName') ? ' is-invalid' : '' }}" name="ContactName" id="ContactName" value="{{ $address->ContactName }}" placeholder="" maxlength="255" required="required" >
-                @if($errors->has('ContactName'))
-                    <div class="invalid-feedback">
-                        <strong>{{ $errors->first('ContactName') }}</strong>
-                    </div>
-                @endif
-            </div>
-        </div>
-    </div>
 
     <h6 class="font-weight-bold" style="border-bottom: 2px solid #c5c0c0;margin-bottom:10px;">Detalii Comanda</h6>
     <div class="form-group">

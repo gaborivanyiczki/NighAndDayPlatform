@@ -7,16 +7,10 @@
     <div class="slide-1 home-slider">
         <div>
             <div class="home text-left">
-                <img src="{{ URL::to('/') }}/images/home-banner/12.jpg" alt="" class="bg-img blur-up lazyload">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="slider-contain">
-                                <div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div align="center" class="embed-responsive embed-responsive-16by9">
+                    <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" class="embed-responsive-item">
+                        <source src="{{ URL::to('/') }}/video/pagina.mp4" type="video/mp4">
+                    </video>
                 </div>
             </div>
         </div>

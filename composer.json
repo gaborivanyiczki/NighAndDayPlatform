@@ -22,6 +22,7 @@
         "laravel/ui": "^2.0",
         "laravelcollective/html": "^6.1",
         "spatie/data-transfer-object": "^1.13",
+        "spatie/laravel-honeypot": "^2.2",
         "spatie/laravel-permission": "^3.11",
         "spatie/laravel-view-models": "^1.3",
         "te7a-houdini/laroute": "^2.0",

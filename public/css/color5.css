@@ -8353,7 +8353,6 @@ footer {
         .payment-box .payment-options li .radio-option label {
           position: relative;
           padding-left: 30px;
-          text-transform: capitalize;
           color: #6f6f6f;
           cursor: pointer;
           font-weight: 600;
@@ -8511,8 +8510,7 @@ footer {
     margin-top: 10px;
     margin-bottom: 15px; }
   .success-text p {
-    font-size: 18px;
-    text-transform: capitalize; }
+    font-size: 18px; }
   .success-text.order-fail i {
     color: #E8D056; }
 

@@ -54,6 +54,7 @@
                     <h5>Informatii Intrebare</h5>
                 </div>
                 <div class="card-body">
+                    <a href="{{ route('dashboard.faq') }}" type="button" class="btn btn-default" style="background-color:#0a7df3;color:white;margin-bottom: 20px;">Inapoi Lista Intrebari</a>
                     @include('forms.faq-create',['route'=>route('dashboard.faq.store'),'method'=>'POST'])
                 </div>
             </div>

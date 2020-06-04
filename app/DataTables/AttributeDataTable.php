@@ -78,7 +78,7 @@ class AttributeDataTable extends DataTable
                   ->width(60)
                   ->addClass('text-center'),
             Column::make('id')->title('ID Atribut')->width('20%'),
-            Column::make('AttributeGroup')->title('Grup Atribut Legatura')->width('25%'),
+            Column::make('AttributeGroup')->title('Grup Atribut Legatura')->width('25%')->searchable(false),
             Column::make('Name')->title('Nume atribut')->width('25%'),
             Column::make('Choosable')->title('Selectabil (pagina produs)')->width('20%'),
         ];

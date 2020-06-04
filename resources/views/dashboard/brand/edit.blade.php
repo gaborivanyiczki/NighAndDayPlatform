@@ -54,6 +54,7 @@
                     <h5>Informatii brand</h5>
                 </div>
                 <div class="card-body">
+                    <a href="{{ route('dashboard.brands') }}" type="button" class="btn btn-default" style="background-color:#0a7df3;color:white;margin-bottom: 20px;">Inapoi Lista Branduri</a>
                     @if ($model->LogoPath != null)
                         <div style="text-align:center;"><img src="{{ URL::to('/') }}/images/uploads/{!! $model->LogoPath !!}/{!! $model->LogoFile !!}" alt="" class="img-fluid blur-up lazyload" style="width:200px;height:auto;"></div>
                     @endif

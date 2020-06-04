@@ -20,7 +20,7 @@
                             @endrole
                             <li class="onhover-dropdown mobile-account" style="font-weight: bold;"><a href="{{ route('myaccount') }}" style="color: #18335B;font-weight:bold;"><i class="fa fa-user" aria-hidden="true"></i> Contul meu</a>
                                 <ul class="onhover-show-div" style="width: 200px;">
-                                    <lh><h6>Salut, {{ Auth::user()->firstname }} {{Auth::user()->lastname}}<h6></lh>
+                                    <li><h6>Salut, {{ Auth::user()->firstname }} {{Auth::user()->lastname}}<h6></li>
                                     <li class="divider"></li>
                                     <li><a href="{{ route('myaccount') }}" data-lng="ro">Informatii cont</a></li>
                                     <li><a href="{{ route('myaddresses') }}" data-lng="ro">Adrese personale</a></li>

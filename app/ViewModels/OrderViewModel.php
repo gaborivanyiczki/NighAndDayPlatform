@@ -16,6 +16,11 @@ class OrderViewModel extends ViewModel
     public $OrderTelephone;
     public $OrderEmail;
     public $OrderContactName;
+    public $OrderInvoiceAddress;
+    public $OrderInvoicePostalCode;
+    public $OrderInvoiceTelephone;
+    public $OrderInvoiceEmail;
+    public $OrderInvoiceContactName;
     public $OrderItems;
     public $OrderShipCharge;
     public $OrderStatus;
@@ -41,13 +46,34 @@ class OrderViewModel extends ViewModel
             $this->ClientEmail = $user->email;
         }
 
-        $orderAddress = OrderAddress::find($order->OrderAddress_ID);
+        $orderAddress = null;
+        $orderInvoiceAddress = null;
 
-        $this->OrderAddress = $orderAddress->Address;
-        $this->OrderPostalCode = $orderAddress->ZipCode;
-        $this->OrderTelephone = $orderAddress->Telephone;
-        $this->OrderEmail = $orderAddress->Email;
-        $this->OrderContactName = $orderAddress->ContactName;
+        if($order->OrderAddress_ID != null)
+        {
+            $address = OrderAddress::find($order->OrderAddress_ID);
+            $orderAddress = $address;
+            $orderInvoiceAddress = $address;
+        }
+        else
+        {
+            $orderAddress = UserAddress::find($order->DeliveryAddress_ID);
+            $orderInvoiceAddress = UserAddress::find($order->InvoiceAddress_ID);
+        }
+
+        //set delivery address
+        $this->OrderAddress = $orderAddress['Address'];
+        $this->OrderPostalCode = $orderAddress['ZipCode'];
+        $this->OrderTelephone = $orderAddress['Telephone'];
+        $this->OrderEmail = $orderAddress['Email'];
+        $this->OrderContactName = $orderAddress['ContactName'];
+        //set invoice address
+        $this->OrderInvoiceAddress = $orderInvoiceAddress['Address'];
+        $this->OrderInvoicePostalCode = $orderInvoiceAddress['ZipCode'];
+        $this->OrderInvoiceTelephone = $orderInvoiceAddress['Telephone'];
+        $this->OrderInvoiceEmail = $orderInvoiceAddress['Email'];
+        $this->OrderInvoiceContactName = $orderInvoiceAddress['ContactName'];
+        //set order details
         $this->OrderStatus = $order->OrderStatus;
         $this->ShipmentStatus = $order->ShipmentStatus;
         $this->PaymentType = $order->PaymentType;

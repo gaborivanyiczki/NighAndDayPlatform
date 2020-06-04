@@ -54,6 +54,7 @@
                     <h5>Informatii Brand</h5>
                 </div>
                 <div class="card-body">
+                    <a href="{{ route('dashboard.brands') }}" type="button" class="btn btn-default" style="background-color:#0a7df3;color:white;margin-bottom: 20px;">Inapoi Lista Branduri</a>
                     @include('forms.brand-create',['route'=>route('dashboard.brands.store'),'method'=>'POST'])
                 </div>
             </div>

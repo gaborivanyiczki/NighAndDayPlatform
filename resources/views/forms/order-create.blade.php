@@ -22,14 +22,26 @@
             </div>
 
             <div class="col">
-                <label for="UserAddress_ID" class="font-weight-bold">Adresa client utilizator (optional)</label>
-                <select class="form-control {{ $errors->has('UserAddress_ID') ? ' is-invalid' : '' }}" name="UserAddress_ID" id="UserAddress_ID">
+                <label for="InvoiceAddress_ID" class="font-weight-bold">Adresa de facturare client utilizator (optional)</label>
+                <select class="form-control {{ $errors->has('InvoiceAddress_ID') ? ' is-invalid' : '' }}" name="InvoiceAddress_ID" id="InvoiceAddress_ID">
                     <option value="" disabled selected>---- Alege adresa predefinita ---</option>
                 </select>
 
-                @if($errors->has('UserAddress_ID'))
+                @if($errors->has('InvoiceAddress_ID'))
                 <div class="invalid-feedback">
-                    <strong>{{ $errors->first('UserAddress_ID') }}</strong>
+                    <strong>{{ $errors->first('InvoiceAddress_ID') }}</strong>
+                </div>
+                @endif
+            </div>
+            <div class="col">
+                <label for="DeliveryAddress_ID" class="font-weight-bold">Adresa de livrare client utilizator (optional)</label>
+                <select class="form-control {{ $errors->has('DeliveryAddress_ID') ? ' is-invalid' : '' }}" name="DeliveryAddress_ID" id="DeliveryAddress_ID">
+                    <option value="" disabled selected>---- Alege adresa predefinita ---</option>
+                </select>
+
+                @if($errors->has('DeliveryAddress_ID'))
+                <div class="invalid-feedback">
+                    <strong>{{ $errors->first('DeliveryAddress_ID') }}</strong>
                 </div>
                 @endif
             </div>

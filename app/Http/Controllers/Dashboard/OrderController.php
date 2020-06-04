@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\CustomOrder;
+use App\DataTables\ConfiguratorOrderDataTable;
 use App\DataTables\OrderArchivedDataTable;
 use App\DataTables\OrderDataTable;
 use App\DataTables\OrderInvoiceDataTable;
@@ -18,6 +20,7 @@ use App\OrderAddress;
 use App\OrderItem;
 use App\PaymentType;
 use App\Repository\Eloquent\OrderAddressRepository;
+use App\Repository\Eloquent\UserAddressRepository;
 use App\ShipmentStatus;
 use App\UserAddress;
 use Illuminate\Support\Facades\Auth;
@@ -31,8 +34,9 @@ class OrderController extends Controller
     protected $usersRepo;
     protected $productsRepo;
     protected $orderAddressRepo;
+    protected $userAddressRepo;
 
-    public function __construct(UserRepository $userRepository, ProductsRepository $productsRepository, OrderRepository $orderRepository, OrderAddressRepository $orderAddressRepository)
+    public function __construct(UserRepository $userRepository, ProductsRepository $productsRepository, OrderRepository $orderRepository, OrderAddressRepository $orderAddressRepository, UserAddressRepository $userAddressRepository)
     {
         $this->middleware('auth');
         $this->middleware('role:administrator');
@@ -40,11 +44,17 @@ class OrderController extends Controller
         $this->productsRepo = $productsRepository;
         $this->ordersRepo = $orderRepository;
         $this->orderAddressRepo = $orderAddressRepository;
+        $this->userAddressRepo = $userAddressRepository;
     }
 
     public function index(OrderDataTable $dataTable)
     {
         return $dataTable->render('dashboard.order.index');
+    }
+
+    public function configurator(ConfiguratorOrderDataTable $dataTable)
+    {
+        return $dataTable->render('dashboard.order.configurator');
     }
 
     public function archived(OrderArchivedDataTable $dataTable)
@@ -65,6 +75,19 @@ class OrderController extends Controller
         return view('dashboard.order.show', ['model' => $model ]);
     }
 
+    public function configuratorOrderShow($id)
+    {
+        $order = CustomOrder::leftjoin('users', 'users.id', '=', 'User_ID')
+                            ->join('configurator_elements as ce', 'ce.id', '=', 'Sponge_ID')
+                            ->join('configurator_elements as ces', 'ces.id', '=', 'Cover_ID')
+                            ->where('custom_orders.id', $id)
+                            ->select(['custom_orders.id', 'custom_orders.lenght', 'custom_orders.width', 'custom_orders.quantity', 'custom_orders.observation','ce.Name as Sponge','ces.Name as Cover', 'users.Email'])
+                            ->first();
+
+
+        return view('dashboard.order.configuratorShow', ['model' => $order ]);
+    }
+
     public function create()
     {
         $users = $this->usersRepo->getActiveUsers();
@@ -83,7 +106,7 @@ class OrderController extends Controller
     public function store(Store $request)
     {
         $model=new Order();
-        if($request['UserAddress_ID'] == null)
+        if($request['InvoiceAddress_ID'] == null)
         {
             $model->OrderAddress_ID = $this->orderAddressRepo->storeAddress($request);
             $model->ShipCharge = $request['ShipCharge'];
@@ -96,8 +119,9 @@ class OrderController extends Controller
         }
         else
         {
-            $model->UserAddress_ID = $request['UserAddress_ID'];
-            $model->OrderAddress_ID = $this->orderAddressRepo->storeAddressByUserAddress($request['UserAddress_ID']);
+            $model->InvoiceAddress_ID = $request['InvoiceAddress_ID'];
+            $model->DeliveryAddress_ID = $request['DeliveryAddress_ID'];
+            //$model->OrderAddress_ID = $this->orderAddressRepo->storeAddressByUserAddress($request['UserAddress_ID']);
             $model->ShipCharge = $request['ShipCharge'];
             $model->OrderStatus_ID = $request['OrderStatus_ID'];
             $model->PaymentType_ID = $request['PaymentType_ID'];
@@ -149,21 +173,24 @@ class OrderController extends Controller
     {
         $order = $this->ordersRepo->findOrderById($id);
         $users = $this->usersRepo->getActiveUsers();
-        $userAddresses = null;
+        $invoiceAddresses = null;
+        $deliveryAddresses = null;
         $statuses = OrderStatus::select('id','Name')->get();
         $paymentTypes = PaymentType::select('id','Name')->get();
         $shipmentStatuses = ShipmentStatus::select('id','Name')->get();
         $orderAddress = OrderAddress::find($order->OrderAddress_ID);
 
-        if($order->UserAddress_ID != null)
+        if($order->User_ID != null)
         {
-            $userAddresses = UserAddress::where('User_ID', $order->User_ID)->select('id','Address')->get();
+            $invoiceAddresses = json_encode($this->userAddressRepo->getInvoiceAddresses($order->User_ID));
+            $deliveryAddresses = json_encode($this->userAddressRepo->getDeliveryAddresses($order->User_ID));
         }
 
         return view('dashboard.order.edit', [
             'order' => $order,
             'address' => $orderAddress,
-            'userAddresses' => $userAddresses,
+            'invoiceAddresses' => json_decode($invoiceAddresses, true),
+            'deliveryAddresses' => json_decode($deliveryAddresses, true),
             'users' => $users,
             'statuses' => $statuses,
             'paymentTypes' => $paymentTypes,
@@ -176,27 +203,22 @@ class OrderController extends Controller
         $orderId = $request->OrderID;
         $model = $this->ordersRepo->findOrderById($orderId);
 
-        if($request['UserAddress_ID'] != $model->UserAddress_ID)
+        if($request['InvoiceAddress_ID'] != $model->InvoiceAddress_ID || $request['DeliveryAddress_ID'] != $model->DeliveryAddress_ID)
         {
-            $orderAddress = OrderAddress::find($model->OrderAddress_ID);
-            if($request['UserAddress_ID'] == null)
+            if($request['InvoiceAddress_ID'] == null || $request['DeliveryAddress_ID'] == null)
             {
-                $model->UserAddress_ID = null;
-                $orderAddress->Address = $request['Address'];
-                $orderAddress->ZipCode = $request['ZipCode'];
-                $orderAddress->Telephone = $request['Telephone'];
-                $orderAddress->Email = $request['Email'];
-                $orderAddress->ContactName = $request['ContactName'];
+                $orderAddress = new OrderAddress();
+                $model->InvoiceAddress_ID = null;
+                $model->DeliveryAddress_ID = null;
+                $orderAddress->Address = $request['Address'] != null ? $request['Address'] : 'Not set';
+                $orderAddress->ZipCode = $request['ZipCode'] != null ? $request['ZipCode'] : 'Not set';
+                $orderAddress->Telephone = $request['Telephone'] != null ? $request['Telephone'] : 'Not set';
+                $orderAddress->Email = $request['Email'] != null ? $request['Email'] : 'Not set';
+                $orderAddress->ContactName = $request['ContactName'] != null ? $request['ContactName'] : 'Not set';
                 $orderAddress->save();
             }else{
-                $userAddress = UserAddress::find($request['UserAddress_ID']);
-                $model->UserAddress_ID = $userAddress->id;
-                $orderAddress->Address = $userAddress->Address;
-                $orderAddress->ZipCode = $userAddress->ZipCode;
-                $orderAddress->Telephone = $userAddress->Telephone;
-                $orderAddress->Email = $userAddress->Email;
-                $orderAddress->ContactName = $userAddress->ContactName;
-                $orderAddress->save();
+                $model->InvoiceAddress_ID = $request['InvoiceAddress_ID'];
+                $model->DeliveryAddress_ID = $request['DeliveryAddress_ID'];
             }
             $model->ShipCharge = $request['ShipCharge'];
             $model->OrderStatus_ID = $request['OrderStatus_ID'];
@@ -209,7 +231,6 @@ class OrderController extends Controller
         else
         {
             $model->User_ID = $request['User_ID'];
-            $model->UserAddress_ID = $request['UserAddress_ID'];
             $model->ShipCharge = $request['ShipCharge'];
             $model->OrderStatus_ID = $request['OrderStatus_ID'];
             $model->PaymentType_ID = $request['PaymentType_ID'];
@@ -284,6 +305,12 @@ class OrderController extends Controller
 
             $deliveryAddress = $orderAddress->ContactName . ' - '. $orderAddress->Address. ' - '. $orderAddress->Telephone;
         }
+        else
+        {
+            $orderAddress = UserAddress::find($order->DeliveryAddress_ID);
+
+            $deliveryAddress = $orderAddress->ContactName . ' - '. $orderAddress->Address. ' - '. $orderAddress->Telephone;
+        }
 
         if($order->User_ID != null)
         {
@@ -304,7 +331,10 @@ class OrderController extends Controller
 
         if($order->ShipCharge > 0)
         {
-            $invoice->addItem('Cost Livrare', number_format($order->ShipCharge, 2, '.', ',') , 1);
+            $divider = 1 + 19/100;
+            $priceBeforeVAT = number_format($order->ShipCharge / $divider, 2, '.', '');
+
+            $invoice->addItem('Cost Livrare', $priceBeforeVAT , 1);
         }
 
         if($invoiceAddress != null)

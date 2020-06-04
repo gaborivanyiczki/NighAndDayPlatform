@@ -54,10 +54,7 @@
 </header>
 <!-- header end -->
 
-    <main>
-        @yield('content')
-    </main>
-
+@yield('content')
 
 @include('partials.footer')
 

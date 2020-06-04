@@ -36,7 +36,7 @@
                     <h5>Vizualizare comanda</h5>
                 </div>
                 <div class="card-body">
-
+                <a href="{{ route('dashboard.orders') }}" type="button" class="btn btn-default" style="background-color:#0a7df3;color:white;margin-bottom: 20px;">Inapoi Lista Comenzi</a>
                 <form>
                     <h5 class="font-weight-bold" style="border-bottom: 2px solid #c5c0c0;">Date client cu cont activ</h6>
                     <div class="form-group">
@@ -52,7 +52,7 @@
                         </div>
                     </div>
 
-                    <h5 class="font-weight-bold" style="border-bottom: 2px solid #c5c0c0;">Date client</h6>
+                    <h5 class="font-weight-bold" style="border-bottom: 2px solid #c5c0c0;">Date de livrare</h6>
                     <div class="form-group">
                         <label for="Address" class="font-weight-bold">Adresa Completa Client</label>
                         <input type="text" class="form-control" name="Address" id="Address" value="{{ $model->OrderAddress != null ? $model->OrderAddress : 'Nu exista adresa' }}" readonly>
@@ -85,6 +85,40 @@
                             </div>
                         </div>
                     </div>
+
+                    <h5 class="font-weight-bold" style="border-bottom: 2px solid #c5c0c0;">Date de facturare</h6>
+                        <div class="form-group">
+                            <label for="Address" class="font-weight-bold">Adresa Completa Client</label>
+                            <input type="text" class="form-control" name="Address" id="Address" value="{{ $model->OrderInvoiceAddress != null ? $model->OrderInvoiceAddress : 'Nu exista adresa' }}" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col">
+                                    <label for="ZipCode" class="font-weight-bold">Cod Postal</label>
+                                    <input type="text" class="form-control" name="ZipCode" id="ZipCode" value="{{ $model->OrderInvoicePostalCode != null ? $model->OrderInvoicePostalCode : 'Nu exista cod postal' }}" readonly>
+                                </div>
+
+                                <div class="col">
+                                    <label for="Telephone" class="font-weight-bold">Numar telefon</label>
+                                    <input type="text" class="form-control" name="Telephone" id="Telephone" value="{{ $model->OrderInvoiceTelephone != null ? $model->OrderInvoiceTelephone : 'Nu exista nr de telefon' }}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col">
+                                    <label for="Email" class="font-weight-bold">Email client</label>
+                                    <input type="text" class="form-control" name="Email" id="Email" value="{{ $model->OrderInvoiceEmail != null ? $model->OrderInvoiceEmail : 'Nu exista email' }}" readonly>
+                                </div>
+
+                                <div class="col">
+                                    <label for="ContactName" class="font-weight-bold">Nume contact</label>
+                                    <input type="text" class="form-control" name="ContactName" id="ContactName" value="{{ $model->OrderInvoiceContactName != null ? $model->OrderInvoiceContactName : 'Nu exista nume setat' }}" readonly >
+                                </div>
+                            </div>
+                        </div>
 
                     <h5 class="font-weight-bold" style="border-bottom: 2px solid #c5c0c0;margin-bottom:20px;">Produse comandate</h6>
 

@@ -46,4 +46,29 @@ class HomeController extends Controller
     {
         return view('faq');
     }
+
+    public function cookiesPolicy()
+    {
+        return view('cookies-policy');
+    }
+
+    public function gdpr()
+    {
+        return view('gdpr');
+    }
+
+    public function paymentMethods()
+    {
+        return view('payment-methods');
+    }
+
+    public function delivery()
+    {
+        return view('delivery');
+    }
+
+    public function makeYourOwn()
+    {
+        return view('make-your-own');
+    }
 }

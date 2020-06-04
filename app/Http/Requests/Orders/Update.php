@@ -25,7 +25,8 @@ class Update extends FormRequest
     {
         return [
             'User_ID' => 'nullable|numeric',
-            'UserAddress_ID' => 'nullable|numeric',
+            'InvoiceAddress_ID' => 'nullable|numeric',
+            'DeliveryAddress_ID' => 'nullable|numeric',
             'Address' => 'nullable|max:255',
             'ZipCode' => 'nullable|max:50',
             'Telephone' => 'nullable|max:50',

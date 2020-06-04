@@ -37,6 +37,7 @@
                     <h5>Informatii Comanda</h5>
                 </div>
                 <div class="card-body">
+                    <a href="{{ route('dashboard.orders') }}" type="button" class="btn btn-default" style="background-color:#0a7df3;color:white;margin-bottom: 20px;">Inapoi Lista Comenzi</a>
                     @include('forms.order-create',['route'=>route('dashboard.orders.store'),'method'=>'POST'])
                 </div>
             </div>
@@ -144,7 +145,7 @@
                        user:_userId,
                    },
                    success: function(response) {
-                       var sel = $('#UserAddress_ID');
+                       var sel = $('#InvoiceAddress_ID');
                        sel.empty();
                        sel.append('<option value="" disabled selected>---- Alege Adresa ---</option>');
                        $.each(response,function(index,value)
@@ -152,9 +153,16 @@
                            sel.append('<option value="'+ value.id +'">'+ value.Address +'</option>');
                        });
 
+                       sel = $('#DeliveryAddress_ID');
+                       sel.empty();
+                       sel.append('<option value="" disabled selected>---- Alege Adresa ---</option>');
+                       $.each(response,function(index,value)
+                       {
+                           sel.append('<option value="'+ value.id +'">'+ value.Address +'</option>');
+                       });
                     }
                 });
-            });
+        });
     </script>
     <script>
         $(document).on('focusin', '#ShipCharge', function(){

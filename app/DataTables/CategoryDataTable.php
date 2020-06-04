@@ -88,7 +88,7 @@ class CategoryDataTable extends DataTable
                   ->width(60)
                   ->addClass('text-center'),
             Column::make('id')->title('ID Categorie')->width('15%'),
-            Column::make('Parent')->title('Categorie Parinte')->width('28%'),
+            Column::make('Parent')->title('Categorie Parinte')->width('28%')->searchable(false),
             Column::make('Name')->title('Denumire')->width('28%'),
             Column::make('Active')->title('Activ')->width('10%'),
             Column::make('New')->title('Marcat Nou')->width('10%'),

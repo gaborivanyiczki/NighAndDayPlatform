@@ -22,7 +22,7 @@ class AddressTypeRepository extends BaseRepository implements AddressTypeReposit
             $query->select('AddresType_ID')
             ->from('user_addresses')
             ->where('User_ID', '=', $userId);
-        })->select('address_types.id as AddressTypeCode','address_types.Name as AddressTypeName')->get()->toArray();
+        })->select('address_types.id as AddressTypeCode','address_types.Name as AddressTypeName','address_types.Type as AddressType')->get()->toArray();
     }
 
     public function isDefaultAddressType($addressType)

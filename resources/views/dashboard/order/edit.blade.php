@@ -36,6 +36,7 @@
                     <h5>Informatii Comanda</h5>
                 </div>
                 <div class="card-body">
+                    <a href="{{ route('dashboard.orders') }}" type="button" class="btn btn-default" style="background-color:#0a7df3;color:white;margin-bottom: 20px;">Inapoi Lista Comenzi</a>
                     @include('forms.order-edit',['route'=>route('dashboard.orders.update'),'method'=>'POST'])
                 </div>
             </div>

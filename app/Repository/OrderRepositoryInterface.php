@@ -12,4 +12,6 @@ interface OrderRepositoryInterface
     public function findOrderById($id);
 
     public function findOrderWithParticularColumnsById($id);
+
+    public function getUserOrders($userId);
 }

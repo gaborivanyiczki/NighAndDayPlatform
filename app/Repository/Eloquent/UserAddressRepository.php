@@ -32,6 +32,22 @@ class UserAddressRepository extends BaseRepository implements UserAddressReposit
                     ->get()->toArray();
     }
 
+    public function getInvoiceAddresses($userId)
+    {
+        return $this->model->where([['user_addresses.User_ID', $userId],['address_types.Type', 1]])
+                    ->join('address_types', 'address_types.id', '=', 'AddresType_ID')
+                    ->select('address_types.Name as AddressTypeName','Address','ZipCode','Telephone','ContactName', 'AddresType_ID as AddressType','user_addresses.id as AddressID')
+                    ->get()->toArray();
+    }
+
+    public function getDeliveryAddresses($userId)
+    {
+        return $this->model->where([['user_addresses.User_ID', $userId],['address_types.Type', 2]])
+                    ->join('address_types', 'address_types.id', '=', 'AddresType_ID')
+                    ->select('address_types.Name as AddressTypeName','Address','ZipCode','Telephone','ContactName', 'AddresType_ID as AddressType','user_addresses.id as AddressID')
+                    ->get()->toArray();
+    }
+
     public function getUserAddress($addressTypeId, $userId)
     {
         return $this->model->where([['User_ID', $userId], ['AddresType_ID', $addressTypeId]])

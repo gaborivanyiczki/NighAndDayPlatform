@@ -87,9 +87,9 @@ class OrderArchivedDataTable extends DataTable
                   ->width(60)
                   ->addClass('text-center'),
             Column::make('id')->title('ID Comanda')->width('10%'),
-            Column::make('UserEmail')->title('Email utilizator')->width('15%'),
-            Column::make('OrderStatus')->title('Status comanda')->width('15%'),
-            Column::make('PaymentType')->title('Tip plata')->width('15%'),
+            Column::make('UserEmail')->title('Email utilizator')->width('15%')->searchable(false),
+            Column::make('OrderStatus')->title('Status comanda')->width('15%')->searchable(false),
+            Column::make('PaymentType')->title('Tip plata')->width('15%')->searchable(false),
             Column::make('Total')->title('Total comanda')->width('10%'),
             Column::make('created_at')->title('Data comenzii')->width('20%'),
         ];

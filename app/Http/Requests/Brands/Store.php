@@ -25,6 +25,7 @@ class Store extends FormRequest
     {
         return [
             'ImageName' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'BannerName' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 			'Name' => 'required|max:255',
             'Slug' => 'required|unique:products,Slug|max:255',
             'Description' => 'nullable|string',

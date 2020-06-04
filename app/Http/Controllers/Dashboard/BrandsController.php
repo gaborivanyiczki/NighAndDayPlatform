@@ -50,8 +50,16 @@ class BrandsController extends Controller
             $imagePath = $request->file('ImageName');
             $imageName = date("Y-m-d-H-i-s") . '-' . $imagePath ->getClientOriginalName();
             $imagePath->move(config('global.brand_image_move_path'), $imageName);
-            $model->LogoFile = config('global.brand_path');
-            $model->ImageName= $imageName;
+            $model->LogoPath = config('global.brand_path');
+            $model->LogoFile = $imageName;
+        }
+
+        if ($request->hasFile('BannerName')) {
+            $imagePath = $request->file('BannerName');
+            $imageName = date("Y-m-d-H-i-s") . '-' . $imagePath ->getClientOriginalName();
+            $imagePath->move(config('global.brand_image_move_path'), $imageName);
+            $model->BannerPath = config('global.brand_path');
+            $model->BannerFile = $imageName;
         }
 
         $model->save();
@@ -78,7 +86,15 @@ class BrandsController extends Controller
             $imageName = date("Y-m-d-H-i-s") . '-' . $imagePath ->getClientOriginalName();
             $imagePath->move(config('global.brand_image_move_path'), $imageName);
             $brand->LogoPath = config('global.brand_path');
-            $brand->Logofile= $imageName;
+            $brand->LogoFile = $imageName;
+        }
+
+        if ($request->hasFile('BannerName')) {
+            $imagePath = $request->file('BannerName');
+            $imageName = date("Y-m-d-H-i-s") . '-' . $imagePath ->getClientOriginalName();
+            $imagePath->move(config('global.brand_image_move_path'), $imageName);
+            $brand->BannerPath = config('global.brand_path');
+            $brand->BannerFile = $imageName;
         }
 
         if ($brand->save())

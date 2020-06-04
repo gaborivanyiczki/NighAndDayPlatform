@@ -3,9 +3,19 @@
     <input type="hidden" name="_method" value="{{isset($method)?$method:'POST'}}"/>
 
     <div class="form-group">
-        <label>Adauga imagine</label>
+        <label>Adauga imagine widget</label>
         <input type="file" name="ImageName" class="form-control @error('ImageName') is-invalid @enderror">
         @error('ImageName')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+
+    <div class="form-group">
+        <label>Adauga banner (Brand Page)</label>
+        <input type="file" name="BannerName" class="form-control @error('BannerName') is-invalid @enderror">
+        @error('BannerName')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>

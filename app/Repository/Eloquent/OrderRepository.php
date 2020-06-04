@@ -51,6 +51,8 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
                             ->select('orders.id',
                                     'orders.User_ID',
                                     'orders.OrderAddress_ID',
+                                    'orders.DeliveryAddress_ID',
+                                    'orders.InvoiceAddress_ID',
                                     'orders.ShipCharge',
                                     'orders.TotalNet',
                                     'orders.Confirmed',
@@ -59,5 +61,20 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
                                     'shipment_statuses.Name as ShipmentStatus',
                                     'payment_types.Name as PaymentType')
                             ->first();
+    }
+
+    public function getUserOrders($userId)
+    {
+        return $this->model->leftjoin('order_statuses', 'order_statuses.id' ,'=', 'orders.OrderStatus_ID')
+                            ->leftjoin('shipment_statuses', 'shipment_statuses.id' ,'=', 'orders.ShipmentStatus_ID')
+                            ->leftjoin('payment_types', 'payment_types.id' ,'=', 'orders.PaymentType_ID')
+                            ->where([['orders.User_ID', $userId], ['orders.Archived', 0]])
+                            ->select('orders.id as OrderNumber',
+                                    'orders.TotalNet as Total',
+                                    'order_statuses.Name as OrderStatus',
+                                    'payment_types.Name as PaymentType',
+                                    'orders.created_at as OrderDate',
+                                    'orders.ShipCharge')
+                            ->get();
     }
 }

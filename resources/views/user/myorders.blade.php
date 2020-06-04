@@ -76,61 +76,47 @@
                 <div class="dashboard-right">
                     <div class="dashboard">
                         <div class="box-account box-info">
-                            <div class="box-head" style="margin-bottom: 8px;">
-                                <h2>Informatii cont</h2></div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="box">
-                                        <div class="box-title">
-                                            <h3>Informatii personale</h3><a href="#">Editeaza</a></div>
-                                        <div class="box-content">
-                                            <table class="table table-borderless">
-                                                <thead>
-                                                </thead>
-                                                <tbody>
-                                                  <tr>
-                                                    <td style="font-weight: 700;">Nume complet:</td>
-                                                    <td>Gabor Ivanyiczki</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td style="font-weight: 700;">Email implicit:</td>
-                                                    <td>xd.gaga@gmail.com</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td style="font-weight: 700;">Telefon implicit:</td>
-                                                    <td>0745789843</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td style="font-weight: 700;">Parola:</td>
-                                                    <td>******** <h6><a href="#">Schimba Parola</a></h6></td>
-                                                  </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                            <div class="box-head" style="margin-bottom: 8px;border-bottom: 2px solid;">
+                                <h2>Comenzile mele</h2></div>
+                                <div class="row">
+                                    <table class="table table-borderless">
+                                        <thead>
+                                        </thead>
+                                        <tbody>
+                                           @empty($userOrders)
+                                                <tr>
+                                                    <td>
+                                                        <h6>Nu exista comenzi.</h6>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                    <a href="{{ route('home') }}" type="button" class="btn btn-info"><i class="fa fa-shopping-cart"></i> Continua cumparaturile</a>
+                                                    </td>
+                                                </tr>
+                                           @else
+                                                @foreach ($userOrders as $order)
+                                                <tr>
+                                                    <td>
+                                                        <h5>Comanda nr. {!! $order['OrderNumber'] !!}</h5>
+                                                        <div class="alert alert-success" role="alert">
+                                                            <address><b>Plasat pe:</b> {!! $order['OrderDate'] !!}</address>
+                                                            <address><b>Total comanda:</b> {!! $order['Total'] !!} Lei</address>
+                                                            <address><b>Cost transport:</b> {!! $order['ShipCharge'] !!} Lei</address>
+                                                            <address><b>Metoda de plata:</b> {!! $order['PaymentType'] !!}</address>
+                                                            <address><b>Status comanda:</b> {!! $order['OrderStatus'] !!}</address>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{route('myorders.generateInvoice', $order['OrderNumber'])}}" type="button" class="btn btn-success" style="margin-top: 33px;"><i class="fa fa-files-o"></i> Descarca factura</a>
+                                                    </td>
+                                                   </tr>
+                                                @endforeach
+                                           @endempty
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="box">
-                                        <div class="box-title">
-                                            <h3>Abonari</h3><a href="#">Editeaza</a></div>
-                                        <div class="box-content">
-                                            <p>Nu exista abonari.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="box">
-                                    <div class="box-title">
-                                        <h3>Lista Adrese</h3><a href="#">Gestioneaza Adrese</a></div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <h6>Adresa de facturare implicita</h6><address>Nu aveti o adresa de facturare setata.<br></address></div>
-                                        <div class="col-sm-6">
-                                            <h6>Adresa de livrare implicita</h6><address>Nu aveti o adresa de livrare setata.<br></address></div>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>

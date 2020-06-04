@@ -96,15 +96,9 @@
                                                 <td>
                                                     <h6>{!! $item['VoucherCode'] !!}</h6>
                                                 </td>
-                                                @if($item['DiscountType'] == 1)
                                                 <td>
-                                                    <h6>{!! $item['Discount'] !!} % reducere</h6>
+                                                    <h6>{!! $item['Discount'] !!} {!! $item['Sign'] !!} reducere</h6>
                                                 </td>
-                                                @elseif($item->Discountype == 2)
-                                                <td>
-                                                    <h6>{!! $item['Discount'] !!} lei reducere</h6>
-                                                </td>
-                                                @endif
                                                 <td>
                                                     <h6>Valabilitate: {!! date('d-m-Y', strtotime($item['StartDate'])); !!} - {!! date('d-m-Y', strtotime($item['ExpiryDate'])); !!}</h6>
                                                 </td>
@@ -112,9 +106,13 @@
                                                 <td>
                                                     <h6>Status: <b>Folosit</b></h6>
                                                 </td>
-                                                @else
+                                                @elseif($item['StartDate'] < date('Y-m-d H:i:s') && $item['ExpiryDate'] > date('Y-m-d H:i:s') && $item['Active'])
                                                 <td>
                                                     <h6>Status: <b style="color:green;">Disponibil</b></h6>
+                                                </td>
+                                                @else
+                                                <td>
+                                                    <h6>Status: <b>Expirat / Dezactivat</b></h6>
                                                 </td>
                                                 @endif
                                             </tr>

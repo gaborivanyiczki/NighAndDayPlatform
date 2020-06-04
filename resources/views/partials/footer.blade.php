@@ -1,31 +1,6 @@
 
 <!-- footer -->
 <footer class="footer-light">
-    <div class="light-layout">
-        <div class="container">
-            <section class="small-section border-section border-top-0">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="subscribe">
-                            <div>
-                                <h4>Aboneaza-te la newsletter</h4>
-                                <p>Afli primul detalii despre lansarea produselor noi si ofertele curente.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <form action="https://pixelstrap.us19.list-manage.com/subscribe/post?u=5a128856334b598b395f1fc9b&amp;id=082f74cbda" class="form-inline subscribe-form auth-form needs-validation" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
-                              target="_blank">
-                            <div class="form-group mx-sm-3">
-                                <input type="text" class="form-control" name="EMAIL" id="mce-EMAIL" placeholder="Email" required="required">
-                            </div>
-                            <button type="submit" class="btn btn-solid" id="mc-submit">aboneaza-ma</button>
-                        </form>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
     <section class="section-b-space light-layout">
         <div class="container">
             <div class="row footer-theme partition-f">
@@ -54,11 +29,9 @@
                         </div>
                         <div class="footer-contant">
                             <ul>
-                                <li><a href="#">Modalitati de plata</a></li>
-                                <li><a href="#">Conditii retur</a></li>
-                                <li><a href="#">Garantie & Service</a></li>
-                                <li><a href="#">Informatii livrare</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li><a href="{{ route('paymentMethods') }}">Modalitati de plata</a></li>
+                                <li><a href="{{ route('delivery') }}">Informatii livrare</a></li>
+                                <li><a href="{{ route('contact') }}">Contact</a></li>
                             </ul>
                         </div>
                     </div>
@@ -70,9 +43,8 @@
                         </div>
                         <div class="footer-contant">
                             <ul>
-                                <li><a href="#">Termeni & conditii</a></li>
-                                <li><a href="#">Politica cookies</a></li>
-                                <li><a href="#">Protectia datelor cu caracter personal GDPR</a></li>
+                                <li><a href="{{ route('cookiesPolicy') }}">Politica cookies</a></li>
+                                <li><a href="{{ route('gdpr') }}">Protectia datelor cu caracter personal GDPR</a></li>
                                 <li><a href="https://anpc.ro/">ANPC</a></li>
                                 <li><a href="https://ec.europa.eu/consumers/odr/main/index.cfm">ODR</a></li>
                             </ul>
@@ -116,9 +88,6 @@
                             </li>
                             <li>
                                 <a href="#"><img src="{{ URL::to('/') }}/images/icon/paypal.png" alt=""></a>
-                            </li>
-                            <li>
-                                <a href="#"><img src="{{ URL::to('/') }}/images/icon/american-express.png" alt=""></a>
                             </li>
                             <li>
                                 <a href="#"><img src="{{ URL::to('/') }}/images/icon/discover.png" alt=""></a>

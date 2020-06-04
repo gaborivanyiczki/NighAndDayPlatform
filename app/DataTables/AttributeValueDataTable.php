@@ -78,7 +78,7 @@ class AttributeValueDataTable extends DataTable
                   ->width(60)
                   ->addClass('text-center'),
             Column::make('id')->title('ID Valoare')->width('10%'),
-            Column::make('Attribute')->title('Atribut legatura')->width('30%'),
+            Column::make('Attribute')->title('Atribut legatura')->width('30%')->searchable(false),
             Column::make('Value')->title('Valoare')->width('30%'),
             Column::make('created_at')->title('Data crearii')->width('20%'),
         ];

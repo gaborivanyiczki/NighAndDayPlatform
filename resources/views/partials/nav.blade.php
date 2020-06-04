@@ -1,4 +1,5 @@
- <div class="container">
+
+    <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="main-nav-center">
@@ -81,7 +82,7 @@
                                 <a href="{{ route('contact') }}">contact</a>
                             </li>
                             <li>
-                                <a href="#" style="color: #18335B;font-weight: bold;">make your own</a>
+                                <a href="{{ route('wizard.order') }}" style="color: #18335B;font-weight: bold;">make your own</a>
                             </li>
                         </ul>
                     </nav>

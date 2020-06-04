@@ -80,7 +80,7 @@ class VoucherDataTable extends DataTable
             Column::make('id')->title('ID Voucher')->width('10%'),
             Column::make('Code')->title('Cod Voucher')->width('20%'),
             Column::make('Discount')->width('15%'),
-            Column::make('VoucherType')->title('Tip discount')->width('10%'),
+            Column::make('VoucherType')->title('Tip discount')->width('10%')->searchable(false),
             Column::make('ExpiryDate')->title('Data Expirarii')->width('20%'),
             Column::make('Active')->title('Activ')->width('10%')
         ];

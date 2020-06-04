@@ -16,7 +16,8 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('User_ID')->unsigned()->nullable();
-            $table->bigInteger('UserAddress_ID')->unsigned()->nullable();
+            $table->bigInteger('InvoiceAddress_ID')->unsigned()->nullable();
+            $table->bigInteger('DeliveryAddress_ID')->unsigned()->nullable();
             $table->bigInteger('OrderAddress_ID')->unsigned()->nullable();
             $table->double('ShipCharge', 8, 2)->default(0);
             $table->bigInteger('OrderStatus_ID')->unsigned()->default(1);
@@ -34,11 +35,14 @@ class CreateOrdersTable extends Migration
             $table->foreign('User_ID')
             ->references('id')->on('users')
             ->onDelete('cascade');
-            $table->foreign('UserAddress_ID')
+            $table->foreign('InvoiceAddress_ID')
+            ->references('id')->on('user_addresses')
+            ->onDelete('cascade');
+            $table->foreign('DeliveryAddress_ID')
             ->references('id')->on('user_addresses')
             ->onDelete('cascade');
             $table->foreign('OrderAddress_ID')
-            ->references('id')->on('order_address')
+            ->references('id')->on('order_addresses')
             ->onDelete('cascade');
             $table->foreign('OrderStatus_ID')
             ->references('id')->on('order_statuses')
@@ -54,8 +58,6 @@ class CreateOrdersTable extends Migration
             ->onDelete('cascade');
 
         });
-
-        DB::update("ALTER TABLE orders AUTO_INCREMENT = 1000;")
     }
 
     /**

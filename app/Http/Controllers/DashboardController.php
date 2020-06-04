@@ -36,7 +36,7 @@ class DashboardController extends Controller
         $ordersTotal = Order::count();
         $clientsTotal = User::count();
         $firstDay = date('Y-m-01');
-        $currentDate = date("Y-m-d");
+        $currentDate = date("Y-m-d", time() + 86400);
         $totalIncome = Order::whereBetween('created_at', [$firstDay, $currentDate])->sum('TotalNet');
 
         $lastOrders = $this->orderRepo->getLastOrders();

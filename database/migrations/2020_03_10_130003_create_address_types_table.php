@@ -16,6 +16,7 @@ class CreateAddressTypesTable extends Migration
         Schema::create('address_types', function (Blueprint $table) {
             $table->id();
             $table->string('Name');
+            $table->integer('Type')->nullable();
             $table->boolean('Mandatory');
             $table->timestamps();
         });

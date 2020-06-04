@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Spatie\Honeypot\ProtectAgainstSpam;
+use Ycs77\LaravelWizard;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,15 +17,25 @@ use Illuminate\Support\Facades\Route;
 
 //Authentication
 Auth::routes();
-//////////////////      CUSTOM ROUTES   /////////////////////////////////////////
+
+//WIZARD
+Wizard::routes('/system/dashboard/products/create', 'ProductWizardController', 'wizard.product');
+Wizard::routes('/make-your-own', 'OrderWizardController', 'wizard.order');
+///////////////////////////  CUSTOM ROUTES   /////////////////////////////////////////
 //Home
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::get('/about-us', 'HomeController@aboutUs')->name('about');
 Route::get('/news', 'HomeController@news')->name('news');
 Route::get('/faq', 'HomeController@faq')->name('faq');
+Route::get('/cookies-policy', 'HomeController@cookiesPolicy')->name('cookiesPolicy');
+Route::get('/gdpr-policy', 'HomeController@gdpr')->name('gdpr');
+Route::get('/payment-methods', 'HomeController@paymentMethods')->name('paymentMethods');
+Route::get('/delivery', 'HomeController@delivery')->name('delivery');
+Route::get('/make-your-own', 'HomeController@makeYourOwn')->name('makeYourOwn');
+
 //Contact
-Route::post('contact-us', ['as'=>'contactus.store','uses'=>'ContactController@contactPost']);
+Route::post('contact-us', ['as'=>'contactus.store','uses'=>'ContactController@contactPost'])->middleware(ProtectAgainstSpam::class);
 //Product
 Route::get('/product/{slug}', 'ProductController@details')->name('productdetails');
 //Category
@@ -38,6 +50,11 @@ Route::get('/cart/get', 'CartController@getCartContent')->name('getcart');
 Route::get('/cart', 'CartController@cart')->name('cart');
 Route::get('/remove-from-cart', 'CartController@removeItemFromCart')->name('removefromcart');
 Route::get('/update-cart-qty', 'CartController@updateCartItemQuantity')->name('updatecartquantity');
+Route::get('/cart/checkout', 'CartController@checkout')->name('checkout');
+Route::post('/cart/finalizeOrder', 'CartController@finalizeOrder')->name('finalizeOrder');
+Route::post('/cart/applyVoucher', 'CartController@applyVoucher')->name('applyVoucher');
+Route::get('/order-success/{id}', 'CartController@orderSuccess')->name('orderSuccess');
+
 //UserManagement
 Route::get('/user/account', 'UserController@myaccount')->name('myaccount');
 Route::get('/user/addresses', 'UserController@myaddresses')->name('myaddresses');
@@ -49,13 +66,17 @@ Route::get('/user/settings', 'UserController@settings')->name('user.settings');
 Route::get('/user/subscriptions', 'UserController@mysubscriptions')->name('mysubscriptions');
 
 Route::post('/user/postUserAddress', 'UserController@postUserAddress')->name('user.add.adress');
+Route::post('/user/postUserAddressCheckout', 'UserController@postUserAddressCheckout')->name('user.add.adress.checkout');
 Route::post('/user/updateUserAddress', 'UserController@updateUserAddress')->name('user.edit.adress');
+Route::post('/user/updateUserAddressCheckout', 'UserController@updateUserAddressCheckout')->name('user.edit.adress.checkout');
 Route::post('/user/removeUserAddress', 'UserController@removeUserAddress')->name('removeUserAddress');
 Route::get('/user/getUserAddress', 'UserController@getUserAddress')->name('getUserAddress');
 
 Route::get('/user/getUserDetails', 'UserController@getUserDetails')->name('getUserDetails');
 Route::post('/user/updateUserDetails', 'UserController@updateUserDetails')->name('user.edit.details');
 Route::post('/user/resetPassword', 'UserController@resetPassword')->name('user.reset.password');
+
+Route::get('/user/generateInvoice/{id}', 'UserController@generateInvoice')->name('myorders.generateInvoice');
 
 
 //DASHBOARD
@@ -78,9 +99,6 @@ Route::get('/system/dashboard/products/deleteAttribute/{id}/{productId}', 'Dashb
 Route::post('/system/dashboard/products/updateProductAttribute', 'Dashboard\ProductController@updateProductAttribute')->name('dashboard.product.updateProductAttribute');
 Route::post('/system/dashboard/products/addProductImage', 'Dashboard\ProductController@addProductImage')->name('dashboard.product.addProductImage');
 Route::get('/system/dashboard/products/deleteImage/{filename}', 'Dashboard\ProductController@deleteImage')->name('dashboard.product.deleteImage');
-
-Wizard::routes('/system/dashboard/products/create', 'ProductWizardController', 'wizard.product');
-
 
 //DASHBOARD//ATTRIBUTES
 Route::get('/system/dashboard/attributes/get', 'Dashboard\AttributeController@getAttributes')->name('dashboard.attributes.get');
@@ -129,6 +147,8 @@ Route::get('/system/dashboard/brands/delete/{id}', 'Dashboard\BrandsController@d
 Route::get('/system/dashboard/orders/getProducts', 'Dashboard\OrderController@getProducts')->name('dashboard.orders.getProducts');
 Route::get('/system/dashboard/orders/getProductPrice', 'Dashboard\OrderController@getProductPrice')->name('dashboard.orders.getProductPrice');
 Route::get('/system/dashboard/orders', 'Dashboard\OrderController@index')->name('dashboard.orders');
+Route::get('/system/dashboard/orders/configurator', 'Dashboard\OrderController@configurator')->name('dashboard.orders.configurator');
+Route::get('/system/dashboard/orders/configurator/show/{id}', 'Dashboard\OrderController@configuratorOrderShow')->name('dashboard.orders.configurator.show');
 Route::get('/system/dashboard/orders/invoices', 'Dashboard\OrderController@invoices')->name('dashboard.orders.invoices');
 Route::get('/system/dashboard/orders/archived', 'Dashboard\OrderController@archived')->name('dashboard.orders.archived');
 Route::get('/system/dashboard/orders/create', 'Dashboard\OrderController@create')->name('dashboard.orders.create');
@@ -164,3 +184,5 @@ Route::post('/system/dashboard/faq/store', 'Dashboard\FaqController@store')->nam
 Route::get('/system/dashboard/faq/edit/{id}', 'Dashboard\FaqController@edit')->name('dashboard.faq.edit');
 Route::post('/system/dashboard/faq/update', 'Dashboard\FaqController@update')->name('dashboard.faq.update');
 Route::post('/system/dashboard/faq/delete', 'Dashboard\FaqController@destroy')->name('dashboard.faq.destroy');
+
+Wizard::routes('wizard/order', 'OrderWizardController', 'wizard.order');

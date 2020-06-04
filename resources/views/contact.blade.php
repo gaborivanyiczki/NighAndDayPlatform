@@ -94,6 +94,7 @@
                 <hr>
 
                 {!! Form::open(['route'=>'contactus.store', 'class' => 'theme-form']) !!}
+                @honeypot
                 <div class="form-row">
                     <div class="col-md-6 {{ $errors->has('firstname') ? 'has-error' : '' }}">
                         {!! Form::label('Nume:') !!}

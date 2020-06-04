@@ -20,7 +20,8 @@ class UserVouchersRepository extends BaseRepository implements UserVouchersRepos
     {
         return $this->model->where('User_ID', $userId)
                             ->join('vouchers', 'vouchers.id', '=', 'Voucher_ID')
-                            ->select('vouchers.Code as VoucherCode', 'vouchers.Discount', 'vouchers.DiscountType', 'vouchers.StartDate', 'vouchers.ExpiryDate', 'Used')
+                            ->join('voucher_types as vt', 'vt.id', '=', 'VoucherType_ID')
+                            ->select('vouchers.Code as VoucherCode', 'vouchers.Discount', 'vt.Sign', 'vouchers.StartDate', 'vouchers.ExpiryDate', 'Used', 'vouchers.Active')
                             ->get()->toArray();
     }
 }

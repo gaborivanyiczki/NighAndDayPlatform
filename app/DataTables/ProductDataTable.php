@@ -80,7 +80,7 @@ class ProductDataTable extends DataTable
             Column::make('id')->title('ID')->width('5%'),
             Column::make('Name')->title('Denumire')->width('20%'),
             Column::make('ProductCode')->title('Cod produs')->width('10%'),
-            Column::make('Category')->title('Categorie')->width('20%'),
+            Column::make('Category')->title('Categorie')->width('20%')->searchable(false),
             Column::make('Price')->title('Pret')->width('10%'),
             Column::make('DiscountPrice')->title('Pret redus')->width('10%'),
             Column::make('Quantity')->title('Cantitate stoc')->width('10%'),

@@ -32,7 +32,7 @@ class BrandsRepository extends BaseRepository implements BrandsRepositoryInterfa
     public function getBrandBySlug($slug)
     {
         return $this->model->where('Slug', $slug)
-                            ->select('Name','Slug','New','LogoPath as Path','LogoFile as Image')
+                            ->select('Name','Description','Slug','New','LogoPath as Path','LogoFile as Image', 'BannerPath', 'BannerFile')
                             ->first();
     }
 

@@ -54,6 +54,7 @@
                     <h5>Informatii Categorie</h5>
                 </div>
                 <div class="card-body">
+                    <a href="{{ route('dashboard.categories') }}" type="button" class="btn btn-default" style="background-color:#0a7df3;color:white;margin-bottom: 20px;">Inapoi Lista Categorii</a>
                     @include('forms.category-create',['route'=>route('dashboard.categories.store'),'method'=>'POST'])
                 </div>
             </div>

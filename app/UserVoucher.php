@@ -11,6 +11,8 @@ class UserVoucher extends Model
 
     protected $table = 'user_vouchers';
 
+    protected $fillable = ['User_ID', 'Voucher_ID', 'Used'];
+
     public function user()
     {
         return $this->belongsTo('App\User');

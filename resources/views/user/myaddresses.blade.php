@@ -92,7 +92,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <button type="button" class="btn btn-info"><i class="fa fa-plus"></i> Adauga Adresa</button>
+                                                    <button type="button" class="btn btn-info add-modal" data-target="#addUserAddress" data-toggle="modal"><i class="fa fa-plus"></i> Adauga Adresa</button>
                                                 </td>
                                             </tr>
                                        @else
@@ -115,7 +115,7 @@
                                             @if ($availableAddresses)
                                             <tr>
                                                 <td>
-                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addUserAddress"><i class="fa fa-plus"></i> Adauga Adresa</button>
+                                                    <button type="button" class="btn btn-info add-modal" data-toggle="modal" data-target="#addUserAddress"><i class="fa fa-plus"></i> Adauga Adresa</button>
                                                 </td>
                                             </tr>
                                             @endif
@@ -298,6 +298,10 @@
         });
     });
 
+    $(document).on('click','.add-modal',function(){
+        $('#addUserAddress').modal('show');
+    });
+
     $(document).on('click','.remove-address',function(){
         var _url = laroute.route('removeUserAddress');
         var addressType = $(this).attr('data-target');
@@ -308,6 +312,9 @@
             data:{
                 id:addressType,
                 '_token': '{{ csrf_token() }}',
+            },
+            success:function(response){
+                document.location.reload(true);
             }
         });
     });

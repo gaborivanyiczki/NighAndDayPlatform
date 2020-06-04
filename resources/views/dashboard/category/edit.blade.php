@@ -54,6 +54,7 @@
                     <h5>Informatii categorie</h5>
                 </div>
                 <div class="card-body">
+                    <a href="{{ route('dashboard.categories') }}" type="button" class="btn btn-default" style="background-color:#0a7df3;color:white;">Inapoi Lista Categorii</a>
                     <div style="text-align:center;"><img src="{{ URL::to('/') }}/images/uploads/{!! $model->ImagePath !!}/{!! $model->ImageName !!}" alt="" class="img-fluid blur-up lazyload" style="width:200px;height:auto;"></div>
                     @include('forms.category',['route'=>route('dashboard.categories.update'),'method'=>'POST'])
                 </div>

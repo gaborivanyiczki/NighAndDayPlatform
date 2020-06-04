@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Darryldecode\Cart\Cart;
 
 class LoginController extends Controller
 {
@@ -40,15 +41,35 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function authenticate(Request $request)
+    public function login(Request $request)
     {
         $credentials = $this->credentials($request);
         $remember = $request->has('remember') ? true : false;
+        $items = null;
+
+        if(!\Cart::isEmpty())
+        {
+            $items = \Cart::getContent()->toArray();
+        }
 
         if (Auth::attempt($credentials, $remember)) {
-            // Authentication passed...
-            return redirect()->intended('dashboard');
+            if($items != null)
+            {
+                $userId = Auth::id();
+                foreach($items as $item)
+                {
+                    \Cart::session($userId)->add($item);
+                }
+            }
+            return $this->authenticated($request);
+        }else{
+            return $this->sendFailedLoginResponse($request, 'auth.failed_status');
         }
+    }
+
+    public function authenticated(Request $request)
+    {
+        return redirect()->intended($this->redirectTo);
     }
 
     private function credentials(Request $request)

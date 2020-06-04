@@ -16,4 +16,8 @@ interface UserAddressRepositoryInterface
    public function updateUserAddress($userId, $parameters);
 
    public function removeUserAddress($addressTypeId, $userId);
+
+   public function getInvoiceAddresses($userId);
+
+   public function getDeliveryAddresses($userId);
 }
