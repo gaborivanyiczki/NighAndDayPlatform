@@ -150,7 +150,6 @@ class ProductsRepository extends BaseRepository implements ProductsRepositoryInt
                             ->where('Slug', $slug)
                             ->select('id', 'Name', 'Price', 'DiscountPrice', 'Slug')
                             ->first();
-
     }
 
     public function getProductNameById($id)
