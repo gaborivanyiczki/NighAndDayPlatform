@@ -199,7 +199,7 @@
 
 <script>
     $(document).ready(function() {
-        $('#FavoriteCheckBox').change(function() {
+        $('#FavoriteCheckbox').change(function() {
             if($(this).is(":checked")) {
                 $('#FavoriteCheckBoxInput').val(1);
             }else{

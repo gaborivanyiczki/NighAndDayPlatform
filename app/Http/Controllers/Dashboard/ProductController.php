@@ -151,6 +151,11 @@ class ProductController extends Controller
         $product = Product::find($request->ProductID);
         $product->fill($request->input());
 
+        if ($request['DiscountPrice'] != null)
+        {
+            $product['Discount'] = (($product->Price - $product->DiscountPrice)*100) / $product->Price;
+        }
+
         if ($product->save()) {
 
             if ($request->hasFile('ImageName')) {

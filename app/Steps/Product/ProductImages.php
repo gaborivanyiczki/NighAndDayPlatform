@@ -81,7 +81,6 @@ class ProductImages extends Step
     public function rules(Request $request)
     {
         return [
-            'filename' => 'required',
             'filename.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ];
     }

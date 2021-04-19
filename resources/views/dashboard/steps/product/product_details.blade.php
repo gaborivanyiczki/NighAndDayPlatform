@@ -196,7 +196,8 @@
                         <div class="form-group">
                             <h5 class="font-weight-bold" style="border-bottom: 2px solid #c5c0c0;">Setari Produs</h6>
                             <div class="pretty p-switch p-fill">
-                                    <input class="form-check-input {{ $errors->has('Active') ? ' is-invalid' : '' }}" type="checkbox" value="0"  name="Active" id="Active">
+                                <input type="hidden" name="Active" id="ActiveCheckboxInput" value="0">
+                                <input type="checkbox" id="ActiveCheckbox">
                                 <div class="state p-success">
                                     <label class="font-weight-bold">Produs Activ</label>
                                 </div>
@@ -207,7 +208,8 @@
                               @endif
                             </div>
                             <div class="pretty p-switch p-fill">
-                                    <input class="form-check-input {{ $errors->has('Favorite') ? ' is-invalid' : '' }}" type="checkbox" value="0"  name="Favorite" id="Favorite">
+                                <input type="hidden" name="Favorite" id="FavoriteCheckBoxInput" value="0">
+                                <input type="checkbox" id="FavoriteCheckbox">
                                 <div class="state p-success">
                                     <label class="font-weight-bold">Produs Favorit</label>
                                 </div>

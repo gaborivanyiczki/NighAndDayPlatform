@@ -74,4 +74,25 @@
             </div>
         </div>
     </div>
+
+<script>
+    $(document).ready(function() {
+        $('#FavoriteCheckbox').change(function() {
+            if($(this).is(":checked")) {
+                $('#FavoriteCheckBoxInput').val(1);
+            }else{
+                $('#FavoriteCheckBoxInput').val(0);
+            }
+        });
+    });
+    $(document).ready(function() {
+        $('#ActiveCheckbox').change(function() {
+            if($(this).is(":checked")) {
+                $('#ActiveCheckboxInput').val(1);
+            }else{
+                $('#ActiveCheckboxInput').val(0);
+            }
+        });
+    });
+</script>
 @endsection

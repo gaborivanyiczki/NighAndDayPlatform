@@ -163,7 +163,7 @@ class AttributeController extends Controller
         $model->CreatedUser = $currentUser;
         $model->save();
 
-        return redirect()->route('dashboard.attribute.values');
+        return redirect()->route('dashboard.attributes.values');
     }
 
     public function attributeValuesEdit($id)

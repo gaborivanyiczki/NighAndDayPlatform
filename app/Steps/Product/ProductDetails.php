@@ -65,6 +65,11 @@ class ProductDetails extends Step
         $currentUser = Auth::user()->email;
         $model->CreatedUser = $currentUser;
 
+        if ($request['DiscountPrice'] != null)
+        {
+            $model['Discount'] = (($model->Price - $model->DiscountPrice)*100) / $model->Price;
+        }
+
         if ($model->save()) {
             if ($request->hasFile('ImageName')) {
                 $imagePath = $request->file('ImageName');

@@ -21,6 +21,7 @@ Auth::routes();
 //WIZARD
 Wizard::routes('/system/dashboard/products/create', 'ProductWizardController', 'wizard.product');
 Wizard::routes('/make-your-own', 'OrderWizardController', 'wizard.order');
+//Wizard::routes('wizard/order', 'OrderWizardController', 'wizard.order');
 ///////////////////////////  CUSTOM ROUTES   /////////////////////////////////////////
 //Home
 Route::get('/', 'HomeController@index')->name('home');
@@ -184,5 +185,3 @@ Route::post('/system/dashboard/faq/store', 'Dashboard\FaqController@store')->nam
 Route::get('/system/dashboard/faq/edit/{id}', 'Dashboard\FaqController@edit')->name('dashboard.faq.edit');
 Route::post('/system/dashboard/faq/update', 'Dashboard\FaqController@update')->name('dashboard.faq.update');
 Route::post('/system/dashboard/faq/delete', 'Dashboard\FaqController@destroy')->name('dashboard.faq.destroy');
-
-Wizard::routes('wizard/order', 'OrderWizardController', 'wizard.order');

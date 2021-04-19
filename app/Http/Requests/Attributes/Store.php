@@ -27,7 +27,6 @@ class Store extends FormRequest
 			'Name' => 'required|max:255',
 			'Attribute_Group_ID' => 'nullable|numeric',
 			'Choosable' => 'required|boolean',
-			'Description' => 'required|max:255',
         ];
     }
 }
